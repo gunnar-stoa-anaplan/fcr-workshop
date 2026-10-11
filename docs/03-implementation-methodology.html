@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Implementation Methodology — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link active" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Implementation Methodology</h1>
+      <p class="subtitle">The 6-step FCR delivery approach and what to do (and not do) on a first engagement</p>
+      <div class="badge-row">
+        <span class="content-badge">Getting Started</span>
+        <span class="content-badge">20 min</span>
+      </div>
+    </div>
+    <div class="content-body">
+
+      <div class="tsd-banner">
+        <div class="tsd-step tsd-step-tell">
+          <span class="tsd-step-label">📖 Tell</span>
+          <span class="tsd-step-heading">The 6-Step Delivery Approach</span>
+          <span class="tsd-step-desc">Discovery through cutover — what happens in each phase and where implementations go wrong.</span>
+        </div>
+        <div class="tsd-step tsd-step-show">
+          <span class="tsd-step-label">👁 Show</span>
+          <span class="tsd-step-heading">Methodology Overview</span>
+          <span class="tsd-step-desc">A short walkthrough covers a sample project timeline and highlights the parallel run recommendation.</span>
+        </div>
+        <div class="tsd-step tsd-step-do">
+          <span class="tsd-step-label">✅ Do</span>
+          <span class="tsd-step-heading">No Hands-On This Section</span>
+          <span class="tsd-step-desc">Conceptual orientation. Take notes on the three failure areas — they will come up repeatedly during the labs.</span>
+        </div>
+      </div>
+
+      <div class="callout-important">
+        <span class="callout-label">🚨 First Implementation Warning</span>
+        <p>Work with Anaplan Professional Services on your first FCR engagement. This is not optional advice — it is the difference between a 4–6 week clean delivery and a 6-month struggle. FCR's consolidation rule setup, account tagging, and intercompany configuration are where implementations go wrong without experienced guidance. The Anaplan Professional Services team is available for scope discussions and approach planning at no charge during the sales cycle.</p>
+      </div>
+
+      <h2>The 6-Step FCR Delivery Approach</h2>
+
+      <div class="step">
+        <div class="step-badge">1</div>
+        <div class="step-content">
+          <h3>Discovery &amp; Requirements</h3>
+          <p>The most important phase. Deliverables:</p>
+          <ul>
+            <li>Requirements workbook completed — entity hierarchy, chart of accounts, consolidation methods, currency setup</li>
+            <li>Tenant type decision locked: 10-dimension (AMER/UK/Nordics), 11-dimension with Group (Europe), or 14-dimension IFRS accelerator</li>
+            <li>Group dimension decision documented and signed off — this cannot be changed after provisioning</li>
+            <li>Data source mapping: which GL systems feed which entities, which require account mapping</li>
+            <li>Historical data approach decided: load raw and let FCR consolidate, or load pre-consolidated data</li>
+            <li>Business Requirements Document (BRD) drafted and presented back to customer</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-badge">2</div>
+        <div class="step-content">
+          <h3>Configuration</h3>
+          <p>Build the FCR tenant based on confirmed requirements:</p>
+          <ul>
+            <li>Provision tenant (3–5 day lead time once all information is submitted)</li>
+            <li>Import dimensions: entity hierarchy, account dimension, custom dimensions</li>
+            <li>Configure ownership structure and consolidation methods</li>
+            <li>Set up consolidation rules: ARAP elimination, NCI, equity method, proportional method</li>
+            <li>Configure currency dimension and conversion parameters</li>
+            <li>Enable journals (feature flag + security setup)</li>
+            <li>Build integration: staging tables, member mappings, import definitions</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-badge">3</div>
+        <div class="step-content">
+          <h3>Data Load</h3>
+          <p>Load source data and validate the results:</p>
+          <ul>
+            <li>Open required periods</li>
+            <li>Run initial data load via staging tables and import definitions</li>
+            <li>Verify data loaded correctly — check entity counts, period totals, currency split</li>
+            <li>Two approaches for historical data: (a) load raw trial balances and let FCR consolidate; (b) load pre-consolidated data directly</li>
+            <li>Note: approach (a) is preferred for ongoing periods; approach (b) may be faster for historical setup</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-badge">4</div>
+        <div class="step-content">
+          <h3>Reconciliation &amp; Validation</h3>
+          <p>Verify that FCR's output matches the prior system:</p>
+          <ul>
+            <li>Run currency conversion and consolidation</li>
+            <li>Compare consolidated P&amp;L and balance sheet to prior system output</li>
+            <li>Investigate and resolve differences — common causes: consolidation rule gaps, account tagging errors, missing intercompany data</li>
+            <li>Run validation reports: Validations Open Period and Movement Validations</li>
+            <li>Document any known differences and get customer sign-off</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-badge">5</div>
+        <div class="step-content">
+          <h3>User Acceptance Testing (UAT)</h3>
+          <p>Customer-led validation of the configured system:</p>
+          <ul>
+            <li>Finance team runs UAT in the configured tenant</li>
+            <li>Test all consolidation methods, journal entry, intercompany matching</li>
+            <li>Test period initialization for a new period end-to-end</li>
+            <li>User training: finance team, controllers, system administrators</li>
+            <li>Sign-off on UAT results before proceeding to cutover</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-badge">6</div>
+        <div class="step-content">
+          <h3>Cutover</h3>
+          <p>Go-live with production data:</p>
+          <ul>
+            <li><strong>Parallel run strongly recommended</strong> — run both old and new systems simultaneously for at least one period before decommissioning the prior system</li>
+            <li>Final data load with sign-off balances</li>
+            <li>Production security configuration: user roles, data access, folder permissions</li>
+            <li>Handover documentation: configuration guide, admin procedures, period-end checklist</li>
+            <li>Hypercare period: Anaplan Professional Services on standby for first 1–2 live close cycles</li>
+          </ul>
+        </div>
+      </div>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/20-global-variables.jpg" alt="FCR period initialization workflow showing Global Variables, Open Periods, FX Rates, Copy Opening, and Validation steps" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 20:</span> FCR implementation: period initialization workflow overview — shows the full sequence from Global Variables through validation</figcaption>
+      </figure>
+
+      <h2>Where Implementations Go Wrong</h2>
+      <p>Based on experience across multiple FCR implementations, three areas account for the majority of project delays and escalations:</p>
+
+      <div class="callout-warning">
+        <span class="callout-label">⚠ Failure Area 1: Consolidation Rule Setup</span>
+        <p>FCR's tag-based consolidation rules are unlike any other consolidation system. Rules reference account tags — not hardcoded account IDs. A mistyped tag silently fails to fire. Missing rules result in incomplete eliminations that don't produce errors, just wrong numbers. Without guidance from someone who has done this before, it's easy to have a system that looks correct until you check the intercompany elimination detail.</p>
+      </div>
+
+      <div class="callout-warning">
+        <span class="callout-label">⚠ Failure Area 2: Account Dimension Configuration</span>
+        <p>The account dimension carries more configuration than any other dimension in FCR: tags, classification, operator, P_conversion, consolidation rule assignment, movement classification. Getting accounts wrong — especially tags — creates compounding errors across conversion, elimination, and cash flow. Get the account dimension fully configured and validated before loading any data.</p>
+      </div>
+
+      <div class="callout-warning">
+        <span class="callout-label">⚠ Failure Area 3: Different Approach, Same Experience</span>
+        <p>Consultants with experience in HFM, OneStream, or Cognos Controller often assume FCR works the same way. It doesn't. FCR's approach to eliminations, its DataView dimension concept, and its tag-based rules are genuinely different. Experience with other consolidation tools is valuable context — but it is not a substitute for understanding FCR's specific mechanisms. Approach it as a new tool, not a familiar one with different buttons.</p>
+      </div>
+
+      <h2>Historical Data Load: Two Approaches</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>Approach A — Load Raw, Let FCR Consolidate</h3>
+          <ul>
+            <li>Load each entity's trial balance as-is from source GL</li>
+            <li>FCR runs consolidation: currency conversion, eliminations, NCI</li>
+            <li><strong>Preferred for ongoing operations</strong></li>
+            <li>Takes longer to set up correctly — all rules must be complete before this works</li>
+            <li>Produces a clean audit trail of what came from the GL vs. what was calculated</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Approach B — Load Pre-Consolidated Data</h3>
+          <ul>
+            <li>Load already-consolidated historical data directly</li>
+            <li>FCR does not re-consolidate this data — it is loaded as-is</li>
+            <li>Faster for historical periods during cutover</li>
+            <li>Less useful for investigation and audit — no intercompany detail in the system</li>
+            <li>Not appropriate for live ongoing periods</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Provisioning Timeline</h2>
+      <p>FCR tenant provisioning takes approximately <strong>3–5 days</strong> once all required information is submitted. The provisioning request is generated in Salesforce after deal close, but requires Customer Success, the AE, and the partner to align on tenant type before it can be actioned.</p>
+
+      <div class="callout-important">
+        <span class="callout-label">🚨 Irreversible Decision</span>
+        <p>The tenant type — 10-dimension, 11-dimension with Group, or 14-dimension IFRS accelerator — cannot be changed after provisioning. Choosing the wrong type means starting over from scratch. This decision must be made with the customer before any provisioning request is submitted.</p>
+      </div>
+
+      <h2>Supporting Artifacts</h2>
+      <p>The following templates are available in the shared Supporting Templates folder distributed at the start of this workshop:</p>
+      <ul>
+        <li><strong>Requirements Workbook</strong> — Structured template for collecting metadata for each dimension (entity hierarchy, accounts, currencies, intercompany relationships)</li>
+        <li><strong>Business Requirements Document (BRD)</strong> — Sign-off document presented back to the customer after requirements gathering; defines scope and tenant type decision</li>
+        <li><strong>Example Project Plan</strong> — 6-phase timeline with typical durations and milestone checkpoints; adjust for customer complexity and data quality</li>
+      </ul>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./02-fcr-overview.html">← Previous</a>
+        <a class="prevnext-btn" href="./04-anaplan-way.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

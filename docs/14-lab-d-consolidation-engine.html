@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab D: Consolidation Engine — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link active" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Lab D: Consolidation Engine</h1>
+      <p class="subtitle">Currency conversion, journals, ARAP elimination, and consolidation method validation</p>
+      <div class="badge-row"><span class="content-badge">Consolidation Engine</span><span class="content-badge">Lab</span><span class="content-badge">60 min</span></div>
+    </div>
+    <div class="content-body">
+
+      <div class="callout-note">
+        <span class="callout-label">📋 Lab Overview</span>
+        <p>This lab brings together currency conversion, journals, and consolidation rules into one end-to-end exercise. You will configure GBP as a second reporting currency, post a reclassification journal, set up an ARAP intercompany elimination, validate consolidation methods (NCI/equity/proportional), and verify results in the consolidated reports.</p>
+        <p><strong>Period:</strong> 2024 P12 &nbsp;|&nbsp; <strong>Reference file:</strong> <code>2024-2025 conversionrates.xls</code> (exercise folder) &nbsp;|&nbsp; <strong>Validation entity:</strong> E13 Berlin</p>
+      </div>
+
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">D1</div>
+          <div class="mini-lab-title">Configure GBP as a Reporting Currency</div>
+          <div class="mini-lab-duration">15 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Add GBP as a second reporting currency, enable triangulation, enter exchange rates for 2024 P12, and run conversion.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Navigate to <strong>Maintain → Currency Dimension</strong>. Find the GBP member.</li>
+            <li><span class="mini-lab-step-num">2</span> Set the following attributes on GBP: <code>reporting = true</code>, <code>triangulate = true</code>, <code>rate_operator = Divide</code>.</li>
+            <li><span class="mini-lab-step-num">3</span> Verify that <code>all_currency</code> and <code>no_currency</code> members do <strong>NOT</strong> have rate operator attributes. Remove them if present.</li>
+            <li><span class="mini-lab-step-num">4</span> Navigate to <strong>Maintain → Foreign Exchange Global Rates</strong>.</li>
+            <li><span class="mini-lab-step-num">5</span> Verify USD base currency rates are set to <strong>1</strong> for both End Rate and Average Rate.</li>
+            <li><span class="mini-lab-step-num">6</span> Using the provided <code>2024-2025 conversionrates.xls</code> file, enter rates for <strong>2024 P12</strong> for EUR and GBP. Remember: the web form uses period (.) not comma (,) as the decimal separator.</li>
+            <li><span class="mini-lab-step-num">7</span> Navigate to <strong>Consolidation → Processes</strong> and run <strong>Run All</strong> for period <strong>2024 P12</strong>.</li>
+            <li><span class="mini-lab-step-num">8</span> Open <strong>Consolidated Financials by Entity</strong>. Filter to <strong>E13 Berlin</strong>. Drag the Currency dimension to columns.</li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          E13 Berlin shows values in all three currencies (EUR, USD, GBP) side-by-side. The Cash account should show approximately EUR ~190 and USD ~224. GBP values are visible in a third column.
+        </div>
+      </div>
+
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">D2</div>
+          <div class="mini-lab-title">Enable Journals and Post a Reclassification Entry</div>
+          <div class="mini-lab-duration">15 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Activate journal permissions, create a journal configuration, and post a reclassification journal entry from Cost of Sales to Accounts Payable.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Confirm with the facilitator that the <strong>Journals feature flag</strong> is enabled on your tenant. (Pre-enabled for this workshop via the Excel settings file.)</li>
+            <li><span class="mini-lab-step-num">2</span> Go to <strong>Security → Role Authorizations (3rd tab)</strong>. Enable <strong>ALL journal permissions</strong> for your role. Click Save.</li>
+            <li><span class="mini-lab-step-num">3</span> Verify the <strong>Journals</strong> module now appears in the left navigation. If not, refresh the browser.</li>
+            <li><span class="mini-lab-step-num">4</span> Navigate to <strong>Configure → General Configuration → Journal Configuration</strong>. Click <strong>+</strong>.</li>
+            <li><span class="mini-lab-step-num">5</span> Configure the journal: select your consolidation model; set Data View = Fixed value (Value); set Audit default query = Manual Journal; Audit default input = Reclassification; Date default input = Global Current Period.</li>
+            <li><span class="mini-lab-step-num">6</span> Set header dimensions: Entity, Intercompany, Audit, Period, Scenario. Set detail dimensions: Account, Movement, Amount. Save the configuration.</li>
+            <li><span class="mini-lab-step-num">7</span> Go to <strong>Journals</strong> module. Create a new journal entry with the following lines:</li>
+            <li><span class="mini-lab-step-num">8</span> <em>Debit line:</em> Account = Cost of Sales, Intercompany = 3RD, Movement = Closing, Amount = positive value.</li>
+            <li><span class="mini-lab-step-num">9</span> <em>Credit line:</em> Account = Accounts Payable, Intercompany = 3RD, Movement = Increase, Amount = negative value (same absolute value). Save and post.</li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          The journal is posted successfully. In <strong>Consolidated Financials by Audit</strong>, drill into the Contribution rollup and find the <strong>Reclass</strong> (Reclassification) audit column — your journal amounts appear against Cost of Sales and Accounts Payable.
+        </div>
+      </div>
+
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">D3</div>
+          <div class="mini-lab-title">Configure and Run ARAP Intercompany Elimination</div>
+          <div class="mini-lab-duration">20 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Set up the AR/AP intercompany elimination rule, configure intercompany matching and auto-booking, and validate the elimination in the consolidated reports.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> In the <strong>Account Dimension</strong>, verify the ARAP offset account exists under the Accounts Payable hierarchy. Tag it with the IC matching tag (<code>#ICMATCHAR</code>). Confirm the auto-booking account also exists (separate from the offset account).</li>
+            <li><span class="mini-lab-step-num">2</span> Go to <strong>Maintain → Consolidation Rules</strong>. Create a new rule named "ARAP Elimination". Select your consolidation model. Set <strong>Active = true</strong>.</li>
+            <li><span class="mini-lab-step-num">3</span> In the detail rows: add a row for the AR side (source = AR accounts via tag; target = ARAP_OFFSET; set appropriate repartition rule). Add a row for the AP side with sign reversed.</li>
+            <li><span class="mini-lab-step-num">4</span> Assign the consolidation rule to both AR and AP accounts via the <strong>Account Dimension → Consolidation attribute</strong>.</li>
+            <li><span class="mini-lab-step-num">5</span> Navigate to <strong>Maintain → Intercompany Matching</strong>. Add a header row. Add detail rows for AP (sign = –, type = Payable) and AR (sign = +).</li>
+            <li><span class="mini-lab-step-num">6</span> In the Booking section: add two auto-booking lines (debit and credit). Set the intercompany dimension to <strong>No Intercompany</strong>. Add the auto-booking account to the matching header with a <strong>minus sign</strong>. Click <strong>Save and Process</strong>.</li>
+            <li><span class="mini-lab-step-num">7</span> Run <strong>Run All</strong> (or Run Consolidation) for 2024 P12.</li>
+            <li><span class="mini-lab-step-num">8</span> Open <strong>Consolidated Financials by Audit</strong> → look for the IC Elimination audit column. Open the <strong>IC Matching Report</strong>.</li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          The IC Elimination audit column shows elimination entries in the Consolidated Financials by Audit report. The IC Matching report shows matched amounts between entities. Note: a known version issue may affect the IC Matching report display — your facilitator will show what the correct output should look like.
+        </div>
+      </div>
+
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">D4</div>
+          <div class="mini-lab-title">Validate NCI, Equity, and Proportional Method Rules</div>
+          <div class="mini-lab-duration">10 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Activate and validate the out-of-the-box consolidation rules for NCI, equity method, and proportional method. Verify results in the consolidated-by-audit report.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Open <strong>Maintain → Managed Ownership</strong>. Verify that the ownership percentages match the expected values for your workshop model entities.</li>
+            <li><span class="mini-lab-step-num">2</span> Go to <strong>Maintain → Consolidation Rules</strong>. Find the pre-configured NCI, equity method, and proportional method rules. Set <strong>Active = true</strong> on each.</li>
+            <li><span class="mini-lab-step-num">3</span> Review the NCI rule detail rows. Verify that NCI accounts (Retained Earnings Minority, Current Earnings Minority, Capital Minority, Dividends Minority, CTA Minority) are linked via the consolidation attribute in the Account dimension.</li>
+            <li><span class="mini-lab-step-num">4</span> Run <strong>Run All</strong> for 2024 P12.</li>
+            <li><span class="mini-lab-step-num">5</span> Open the <strong>Consolidated-by-Audit</strong> report. Look for the Shares audit column (equity/financial investment elimination entries) and NCI audit column.</li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          The Consolidated-by-Audit report shows entries in the Shares audit column for equity eliminations and in the NCI-related audit columns for minority interest postings. Ownership percentages match the managed ownership table.
+        </div>
+      </div>
+
+      <div class="callout-warn">
+        <span class="callout-label">⚠️ Common Issues in This Lab</span>
+        <ul>
+          <li><strong>Conversion results missing:</strong> Check P_conversion attribute on all accounts; verify GBP triangulate = true in currency dimension</li>
+          <li><strong>Wrong decimal separator:</strong> Web form uses period (.) not comma (,) for FX rates</li>
+          <li><strong>Journals module not visible:</strong> Save Security permissions first, then refresh browser</li>
+          <li><strong>IC Elimination not posting:</strong> Verify consolidation rule Active = true; verify tag names match exactly</li>
+          <li><strong>Balance sheet imbalance after ARAP:</strong> The auto-booking account may need to be added to the matching header with a minus sign — check the intercompany matching configuration</li>
+        </ul>
+      </div>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./13-consolidation-rules.html">← Previous</a>
+        <a class="prevnext-btn" href="./15-period-initialization.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

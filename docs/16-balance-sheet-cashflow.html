@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balance Sheet &amp; Cash Flow — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link active" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Balance Sheet &amp; Cash Flow</h1>
+      <p class="subtitle">Balance sheet continuity schedules, movement classifications, and cash flow calculation rules</p>
+      <div class="badge-row"><span class="content-badge">Period Management</span><span class="content-badge">25 min</span></div>
+    </div>
+    <div class="content-body">
+
+      <div class="tsd-banner">
+        <div class="tsd-step tsd-step-tell">
+          <span class="tsd-step-label">📖 Tell</span>
+          <span class="tsd-step-heading">Balance Sheet Continuity &amp; Cash Flow Architecture</span>
+          <span class="tsd-step-desc">How movement classifications, the movement dimension, and cash flow calculation rules work together to produce the cash flow statement.</span>
+        </div>
+        <div class="tsd-step tsd-step-show">
+          <span class="tsd-step-label">👁 Show</span>
+          <span class="tsd-step-heading">Movement Classifications &amp; Cash Flow Rules Demo</span>
+          <span class="tsd-step-desc">Live walkthrough: create movement classifications, assign to accounts, configure cash flow calculation rules, run calculation.</span>
+        </div>
+        <div class="tsd-step tsd-step-do">
+          <span class="tsd-step-label">✅ Do</span>
+          <span class="tsd-step-heading">Lab E — New Period + Cash Flow</span>
+          <span class="tsd-step-desc">Configure movement classifications, set up cash flow rules, run the calculation, and view the cash flow statement (page 17).</span>
+        </div>
+      </div>
+
+      <h2>Part 1: Balance Sheet Continuity Schedule</h2>
+      <p>The <strong>Balance Sheet Continuity Schedule</strong> is an input template that captures movement details on balance sheet accounts — the increases, decreases, acquisitions, and disposals that explain the change from opening to closing balance. This data is the primary input source for the cash flow calculation.</p>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>📋 What It Captures</h3>
+          <ul>
+            <li>Detailed movements on balance sheet accounts (e.g., capex additions, disposals, depreciation)</li>
+            <li>Values are entered in <strong>local currency</strong></li>
+            <li>Input amounts are <strong>year-to-date</strong></li>
+            <li>An audit member must be selected for each entry</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>⚠️ Key Constraint</h3>
+          <ul>
+            <li>Inputs require the <strong>Fluence Excel add-in</strong> — yellow editable cells in Excel</li>
+            <li>The add-in is <strong>not available on Mac</strong>; Mac users need a Windows VM</li>
+            <li>After cash flow completion, movements can be copied to the next period as part of period initialization</li>
+            <li>Running month-end rollover wipes all movement data — only run at start of process</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Movement Classifications</h2>
+      <p>Movement classifications are the link between balance sheet accounts and the movement dimension. Each account is assigned exactly one movement classification, which controls which movement dimension members (cash flows, non-cash items, opening, closing) are editable for that account in the continuity schedule.</p>
+
+      <div class="step"><div class="step-badge">1</div><div class="step-content">
+        <h3>Create Movement Classifications</h3>
+        <p>Navigate to <strong>Maintain → General Setup → Movement Classifications</strong>. Create at least three classifications for the workshop model:</p>
+        <ul>
+          <li><strong>Current BS</strong> — for current balance sheet accounts (e.g., receivables, payables)</li>
+          <li><strong>GPE</strong> — for gross property, plant &amp; equipment (depreciation/amortization treatment)</li>
+          <li><em>Additional as required by chart of accounts</em></li>
+        </ul>
+      </div></div>
+
+      <div class="step"><div class="step-badge">2</div><div class="step-content">
+        <h3>Configure Movement Member Flags</h3>
+        <p>Each classification has true/false flags for each movement dimension member category:</p>
+        <table>
+          <caption>Table 23: Movement Member Flags</caption>
+          <thead>
+            <tr><th>Flag</th><th>Setting</th><th>Effect</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Opening</td><td><strong>false</strong></td><td>Opening balance is not manually editable — calculated from prior period closing</td></tr>
+            <tr><td>Closing</td><td><strong>false</strong></td><td>Closing balance is not manually editable — calculated from movements</td></tr>
+            <tr><td>Intercompany</td><td><strong>false</strong></td><td>Intercompany movements not editable via continuity schedule</td></tr>
+            <tr><td>Total Cash</td><td><strong>true</strong></td><td>Makes child elements of Total Cash editable (not the parent itself)</td></tr>
+            <tr><td>Non-Cash</td><td><strong>true</strong></td><td>Makes child elements of Non-Cash editable (not the parent itself)</td></tr>
+          </tbody>
+        </table>
+      </div></div>
+
+      <div class="step"><div class="step-badge">3</div><div class="step-content">
+        <h3>Assign Classification to Accounts</h3>
+        <p>In the <strong>Accounts Dimension</strong>, single-click the target account (e.g., account 17117 for PP&amp;E). In the <strong>Attributes</strong> section, assign the movement classification.</p>
+        <p><strong>Important:</strong> Each account can have only <strong>one</strong> movement classification. If you need different cash flow treatment for different sub-accounts, create separate classifications and assign them individually.</p>
+      </div></div>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/23-movement-classification.jpg" alt="Movement Classification setup screen showing true/false flag parameters for opening, non-cash input, total cash, intercompany" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 23:</span> Movement Classification setup (Maintain → General Setup → Movement Classifications) — flag parameters control which movement members are editable</figcaption>
+      </figure>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/24-bs-continuity-schedule.jpg" alt="Balance Sheet Continuity Schedule showing yellow editable fields for movement values by account" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 24:</span> Balance Sheet Continuity input schedule — yellow fields are editable; accounts on left axis, movement member columns across the top</figcaption>
+      </figure>
+
+      <h2>The Movement Dimension</h2>
+      <p>The movement dimension (sometimes called the "flow dimension" in other consolidation tools) is central to how FCR calculates cash flow. It categorizes every balance sheet movement into a type — total cash, non-cash, opening, closing, intercompany — and the cash flow calculation rules pick up values from specific movement members to populate each cash flow statement line.</p>
+
+      <div class="callout-note">
+        <span class="callout-label">💡 Understanding Movement Dimension Members</span>
+        <p>When Total Cash = true on a movement classification, the <em>child members</em> under Total Cash become editable — not the Total Cash parent itself (which is a calculated rollup). The same applies to Non-Cash. Opening and closing are always derived by the system: opening is carried forward from the prior period, closing is the sum of opening plus all period movements.</p>
+      </div>
+
+      <h2>Part 2: Cash Flow Configuration</h2>
+      <p>The Cash Flow statement in FCR is generated through <strong>Cash Flow Calculation Rules</strong> — a header/detail structure (similar to consolidation rules) that maps GL balance sheet movements to cash flow statement lines.</p>
+
+      <h3>Cash Flow Account Hierarchy</h3>
+      <p>Cash flow accounts live within the <strong>accounts dimension</strong> as a distinct hierarchy, separate from the GL accounts. Each cash flow statement line (Operating: Cash from Operations, Investing: Capital Expenditures, etc.) has a corresponding account. The total cash flow parent account must carry the <strong>cash flow tag</strong> so reports know which accounts to include.</p>
+
+      <div class="callout-warn">
+        <span class="callout-label">⚠️ Always Append When Loading Cash Flow Accounts</span>
+        <p>If GL accounts are already loaded in the accounts dimension and you need to add the cash flow account hierarchy, always use <strong>Append</strong> mode in the import — never Overwrite. Overwriting will erase your existing GL accounts. If cash flow accounts were already loaded as part of a prior activity (e.g., from the Company ABC workbook), skip the import step entirely and go directly to configuring the calculation rules.</p>
+      </div>
+
+      <h3>Cash Flow Calculation Rule Structure</h3>
+      <p>Navigate to <strong>Maintain → Cash Flow Calculation Rules</strong> (or the equivalent Configure section). Each rule has:</p>
+
+      <table>
+        <caption>Table 24: Cash Flow Calculation Rule Structure</caption>
+        <thead>
+          <tr>
+            <th>Section</th>
+            <th>Field</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="3"><strong>Header Row</strong></td>
+            <td>Target cash flow account</td>
+            <td>The cash flow statement line this rule populates</td>
+          </tr>
+          <tr>
+            <td>Model type</td>
+            <td>The consolidation model</td>
+          </tr>
+          <tr>
+            <td>Active flag</td>
+            <td>Must be true for the rule to execute</td>
+          </tr>
+          <tr>
+            <td rowspan="5"><strong>Detail Rows</strong></td>
+            <td>Target movement</td>
+            <td>Which movement dimension member receives the cash flow value</td>
+          </tr>
+          <tr>
+            <td>Target audit</td>
+            <td>Audit member for the cash flow posting</td>
+          </tr>
+          <tr>
+            <td>Operator (+/–)</td>
+            <td>Whether to add or subtract this source's contribution</td>
+          </tr>
+          <tr>
+            <td>Source GL accounts</td>
+            <td>The balance sheet accounts whose movements feed this cash flow line</td>
+          </tr>
+          <tr>
+            <td>Source movement</td>
+            <td><strong>Critical:</strong> the movement dimension member to read from the source account (e.g., Total Cash, Total Non-Cash)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout-note">
+        <span class="callout-label">💡 Cash Flow Sign Logic</span>
+        <p>To determine whether a cash flow rule should add (+) or subtract (–), think in balance sheet debit/credit terms: if an asset <em>decreases</em> (e.g., receivables paid down), cash <em>comes in</em> → positive operator. If an expense increases, cash goes out → negative operator. Use the balance sheet movement direction to determine the cash flow sign — not accounting debit/credit logic.</p>
+        <p>The data is physically duplicated onto the cash flow accounts. You can still drill from a cash flow account back to the detailed GL account and audit member for traceability.</p>
+      </div>
+
+      <h3>Cash Flow Process Steps</h3>
+
+      <div class="step"><div class="step-badge">1</div><div class="step-content"><h3>Confirm Copy Opening Has Been Run</h3><p>Opening balances must be in the system before the cash flow calculation runs. Verify Copy Opening completed successfully for the current period.</p></div></div>
+      <div class="step"><div class="step-badge">2</div><div class="step-content"><h3>Configure Cash Flow Calculation Rules</h3><p>For each cash flow statement row (e.g., Profit Before Tax, Depreciation &amp; Amortization, Changes in Working Capital, Capex), create a header record and detail records referencing the appropriate source GL accounts and movement members.</p></div></div>
+      <div class="step"><div class="step-badge">3</div><div class="step-content"><h3>Run the Cash Flow Calculation</h3><p>Execute the cash flow calculation process from the Processes menu. This populates the cash flow account hierarchy with values derived from the GL balance sheet movements.</p></div></div>
+      <div class="step"><div class="step-badge">4</div><div class="step-content"><h3>View the Cash Flow Statement</h3><p>Navigate to the reporting module and open the <strong>Cash Flow Statement</strong> report. Verify each section shows the expected values. For debugging, drill from a cash flow line back to the source GL account and movement member.</p></div></div>
+
+      <h3>Cash Flow Adjustment Form</h3>
+      <p>For fine-tuning the cash flow without impacting balance sheet accounts, FCR provides a <strong>Cash Flow Adjustment Form</strong>. This is an Excel-based input form requiring the Fluence Excel add-in. It allows manual adjustments to specific cash flow lines — for example, reclassifying a payment to a different cash flow category — without creating journal entries that would affect the trial balance.</p>
+
+      <div class="callout-note">
+        <span class="callout-label">ℹ Mac Limitation</span>
+        <p>The Fluence Excel add-in is required for both the Balance Sheet Continuity Schedule and the Cash Flow Adjustment Form. The add-in is <strong>not available for Mac</strong>. Mac users must use a Windows VM to access these input forms. There are currently no known plans to add Mac support. Post-workshop, participants have approximately 5 weeks of tenant access to complete these activities on a PC.</p>
+      </div>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./15-period-initialization.html">← Previous</a>
+        <a class="prevnext-btn" href="./17-lab-e-new-period.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

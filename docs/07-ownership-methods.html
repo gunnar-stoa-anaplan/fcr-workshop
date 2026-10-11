@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ownership &amp; Consolidation Methods — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link active" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Ownership &amp; Consolidation Methods</h1>
+      <p class="subtitle">Entity hierarchy, direct ownership, the ultimate rate calculator, and consolidation method assignment</p>
+      <div class="badge-row"><span class="content-badge">Data Model &amp; Configuration</span><span class="content-badge">25 min</span></div>
+    </div>
+    <div class="content-body">
+
+      <div class="tsd-banner">
+        <div class="tsd-step tsd-step-tell">
+          <span class="tsd-step-label">📖 Tell</span>
+          <span class="tsd-step-heading">The Ownership Model</span>
+          <span class="tsd-step-desc">How entity hierarchy attributes, direct ownership percentages, and consolidation methods work together to drive consolidation calculations.</span>
+        </div>
+        <div class="tsd-step tsd-step-show">
+          <span class="tsd-step-label">👁 Show</span>
+          <span class="tsd-step-heading">Direct Ownership Table Demo</span>
+          <span class="tsd-step-desc">A short walkthrough demonstrates entering ownership percentages, date-bounding ownership changes, and running the Ultimate Rate Calculator.</span>
+        </div>
+        <div class="tsd-step tsd-step-do">
+          <span class="tsd-step-label">✅ Do</span>
+          <span class="tsd-step-heading">Lab B: Ownership Setup</span>
+          <span class="tsd-step-desc">Configure consolidation methods, enter all direct ownership percentages, run the Ultimate Rate Calculator, and verify method assignment.</span>
+        </div>
+      </div>
+
+      <!-- ENTITY HIERARCHY ATTRIBUTES -->
+      <h2>Entity Dimension — Key Attributes</h2>
+      <p>Beyond the basic hierarchy structure, each entity member in the Entity dimension has attributes that drive ownership and consolidation behaviour:</p>
+
+      <table>
+        <caption>Table 08: Entity Dimension Attributes</caption>
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Values</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Currency</strong></td>
+            <td>e.g., USD, EUR, GBP</td>
+            <td>The functional/local currency of this entity. Used as the base for currency translation.</td>
+          </tr>
+          <tr>
+            <td><strong>Entity Type</strong></td>
+            <td>Group or Entity</td>
+            <td><strong>Group</strong> type: this member appears in the Group dimension (enables subconsolidation). <strong>Entity</strong> type: this member is a legal entity that does NOT populate the Group dimension.</td>
+          </tr>
+          <tr>
+            <td><strong>Holding Company</strong></td>
+            <td>True / False</td>
+            <td>Marks the holding company within a subgroup. At least one entity per subgroup must have this flag set to true — required for consolidation calculations to run correctly.</td>
+          </tr>
+          <tr>
+            <td><strong>Source GL Audit Member</strong></td>
+            <td>Audit dimension member</td>
+            <td>Links this entity's loaded trial balance data to a specific Source GL audit member. Useful in multi-source environments (one audit member per ERP system).</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- TOTAL GROUP TAG - CRITICAL -->
+      <h2>The Total Group Tag — Critical Requirement</h2>
+
+      <div class="callout-warning">
+        <span class="callout-label">⚠️ Missing Total Group Tag — Silent Failure</span>
+        <p>The <code>Total Group</code> tag <strong>must exist on the top-level parent member</strong> in three dimensions: <strong>Entity</strong>, <strong>Company</strong>, and <strong>Group</strong>.</p>
+        <p>If this tag is missing from any of these dimensions, the Direct Ownership table will not show all required dimensions (Scenario, Entity, Intercompany) in its left-hand panel. Default reports and input forms also rely on this tag to function correctly.</p>
+        <p><strong>Symptom:</strong> You open Direct Ownership and the left panel only shows one dimension instead of three. <strong>Fix:</strong> Go back to the Entity, Company, or Group dimension and add the <code>Total Group</code> tag to the top-level hierarchy member in whichever dimension is missing it.</p>
+      </div>
+
+      <!-- DIRECT OWNERSHIP TABLE -->
+      <h2>Direct Ownership Table</h2>
+      <p>The Direct Ownership table is where you enter the legal ownership relationships between parent and child entities. Navigate to <strong>Maintain → Ownership → Direct Ownership</strong>.</p>
+
+      <p>Each row in the table represents one ownership relationship:</p>
+      <table>
+        <caption>Table 09: Direct Ownership Table</caption>
+        <thead>
+          <tr>
+            <th>Column</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Parent Entity</strong></td>
+            <td>The holding entity that owns the child</td>
+          </tr>
+          <tr>
+            <td><strong>Child Entity</strong></td>
+            <td>The entity being owned</td>
+          </tr>
+          <tr>
+            <td><strong>Ownership %</strong></td>
+            <td>Direct ownership percentage (0–100)</td>
+          </tr>
+          <tr>
+            <td><strong>Start Date</strong></td>
+            <td>Period from which this ownership percentage applies (e.g., 2020 P01)</td>
+          </tr>
+          <tr>
+            <td><strong>End Date</strong></td>
+            <td>Last period this ownership percentage applies (leave blank if still current)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Handling Ownership Changes Over Time</h3>
+      <p>When ownership percentages change (e.g., a divestiture), you do NOT overwrite the existing row. Instead, you <strong>add a new row</strong> and use start/end dates to bound each period of ownership:</p>
+
+      <div class="callout-note">
+        <span class="callout-label">📋 Example: Brussels Entity — 10% Divestiture</span>
+        <table>
+          <caption>Table 10: Handling Ownership Changes Over Time</caption>
+          <thead>
+            <tr><th>Parent</th><th>Child</th><th>%</th><th>Start</th><th>End</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Europe</td><td>Brussels</td><td>100%</td><td>2020 P01</td><td>2021 P05</td></tr>
+            <tr><td>Europe</td><td>Brussels</td><td>90%</td><td>2021 P06</td><td>(blank — still current)</td></tr>
+          </tbody>
+        </table>
+        <p>The first row covers the period when Europe owned Brussels at 100%. After the divestiture in May 2021, a new row is added from June 2021 at 90%. The system uses the date-bounded rows to apply the correct percentage in each period's consolidation run.</p>
+      </div>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/07-direct-ownership-table.jpg" alt="Direct Ownership table showing parent entity, child entity, ownership %, start date, end date columns with date-bounded rows" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 07:</span> Direct Ownership table (Maintain → Ownership) — ownership percentages with start/end dates enable historical ownership tracking</figcaption>
+      </figure>
+
+      <!-- ULTIMATE RATE CALCULATOR -->
+      <h2>Ultimate Rate Calculator</h2>
+      <p>Direct Ownership holds the <em>legal</em> ownership relationships. The <strong>Ultimate Rate Calculator</strong> reads all direct ownership entries and calculates the <em>effective</em> group-level ownership percentage, taking into account chains of ownership (e.g., Parent owns 80% of Sub A, Sub A owns 90% of Sub B → Parent's ultimate rate in Sub B = 72%).</p>
+
+      <p>To run it: navigate to <strong>Maintain → Ownership → Ultimate Rate Calculator</strong> → click <strong>Run</strong>.</p>
+
+      <p>After running, the <strong>Managed Ownership</strong> table is auto-populated with the calculated consolidation method for each entity:</p>
+      <ul>
+        <li>Entities where ultimate ownership &gt;50% → assigned <strong>Global</strong> method</li>
+        <li>Entities where ultimate ownership = 50% → assigned <strong>Proportional</strong> method</li>
+        <li>Entities where ultimate ownership is 20–50% → assigned <strong>Equity</strong> method</li>
+      </ul>
+
+      <div class="callout-note">
+        <span class="callout-label">💡 Why This Step is Essential</span>
+        <p>Consolidation rules depend on the Managed Ownership table to know which method applies to each entity. If you skip running the Ultimate Rate Calculator, or run it before Direct Ownership is complete, consolidation calculations will produce incorrect results. Always run the Ultimate Rate Calculator <em>after</em> all Direct Ownership entries are complete.</p>
+      </div>
+
+      <!-- CONSOLIDATION METHODS -->
+      <h2>Consolidation Methods</h2>
+      <p>Consolidation methods are configured in <strong>Maintain → Consolidation → Methods</strong>. The percentage ranges for each method are configurable to match the customer's accounting standards.</p>
+
+      <table>
+        <caption>Table 11: Consolidation Methods</caption>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Default Ownership Range</th>
+            <th>Treatment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Global</strong></td>
+            <td>&gt;50% to ≤100%</td>
+            <td>Full consolidation — 100% of the subsidiary's trial balance is included in the consolidated financials. NCI (non-controlling interest) entries are posted to eliminate the minority portion of equity.</td>
+          </tr>
+          <tr>
+            <td><strong>Proportional</strong></td>
+            <td>Exactly 50%</td>
+            <td>50% of the subsidiary's trial balance is included. The remaining 50% is backed out via consolidation rules. No NCI — both parties own equal shares.</td>
+          </tr>
+          <tr>
+            <td><strong>Equity</strong></td>
+            <td>&gt;20% to &lt;50%</td>
+            <td>The entire trial balance of the associate is eliminated. Only the group's share of net income is retained in the consolidated output (shown as "Income from Associates").</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout-note">
+        <span class="callout-label">ℹ️ Additional Custom Methods</span>
+        <p>The three standard methods cover most consolidation scenarios, but additional custom methods can be added to the Methods table if needed. Custom method logic requires collaboration with Anaplan — contact your Anaplan Professional Services team if a customer's structure falls outside these three options.</p>
+      </div>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/08-consolidation-methods.jpg" alt="Consolidation Methods configuration showing Global, Proportional, and Equity methods with configurable percentage ranges" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 08:</span> Consolidation Methods (Maintain → Consolidation → Methods) — Global, Proportional, Equity with configurable % ranges</figcaption>
+      </figure>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./06-lab-a-data-model.html">← Previous</a>
+        <a class="prevnext-btn" href="./08-lab-b-ownership.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

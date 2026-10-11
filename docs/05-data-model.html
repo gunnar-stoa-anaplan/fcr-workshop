@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Model — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link active" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Data Model</h1>
+      <p class="subtitle">FCR's dimensions, tenant types, and account configuration</p>
+      <div class="badge-row"><span class="content-badge">Data Model &amp; Configuration</span><span class="content-badge">30 min</span></div>
+    </div>
+    <div class="content-body">
+
+      <div class="tsd-banner">
+        <div class="tsd-step tsd-step-tell">
+          <span class="tsd-step-label">📖 Tell</span>
+          <span class="tsd-step-heading">Dimensions, Tenant Types &amp; Accounts</span>
+          <span class="tsd-step-desc">The 11 pre-defined dimensions, the three tenant models, and how the Account dimension drives most of your configuration work.</span>
+        </div>
+        <div class="tsd-step tsd-step-show">
+          <span class="tsd-step-label">👁 Show</span>
+          <span class="tsd-step-heading">Models Module Walkthrough</span>
+          <span class="tsd-step-desc">A short walkthrough covers the Dimensions tab, adds a custom dimension, and demonstrates the Save → Process workflow.</span>
+        </div>
+        <div class="tsd-step tsd-step-do">
+          <span class="tsd-step-label">✅ Do</span>
+          <span class="tsd-step-heading">Lab A: Data Model Setup</span>
+          <span class="tsd-step-desc">You'll configure the full data model on your own tenant — custom dimensions, entity hierarchy, account dimension, and currencies.</span>
+        </div>
+      </div>
+
+      <!-- TENANT TYPES -->
+      <h2>Tenant Types</h2>
+      <p>FCR tenants are provisioned in one of three configurations. The choice must be locked in <strong>before provisioning</strong> — it cannot be changed afterwards.</p>
+
+      <div class="callout-warning">
+        <span class="callout-label">🚫 Irreversible Decision</span>
+        <p>Choosing the wrong tenant type cannot be corrected by changing a setting. The tenant must be fully re-provisioned from scratch — which means re-doing all configuration. Have this conversation with the customer before any provisioning request is submitted.</p>
+      </div>
+
+      <table>
+        <caption>Table 05: Tenant Types</caption>
+        <thead>
+          <tr>
+            <th>Tenant Type</th>
+            <th>Dimensions</th>
+            <th>Geography / Use Case</th>
+            <th>Group Dimension?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>10-Dimension (Base)</strong></td>
+            <td>10</td>
+            <td>AMER, UK, Nordics</td>
+            <td>No — uses separate elimination entities per parent</td>
+          </tr>
+          <tr>
+            <td><strong>11-Dimension with Group</strong></td>
+            <td>11</td>
+            <td>Europe (this workshop)</td>
+            <td>Yes — eliminations posted to trading partner entities, sliced by common parent group</td>
+          </tr>
+          <tr>
+            <td><strong>14-Dimension IFRS Accelerator</strong></td>
+            <td>14</td>
+            <td>Central/Eastern Europe</td>
+            <td>Yes — extended IFRS-aligned model</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- THE 11 DIMENSIONS -->
+      <figure class="screenshot">
+        <img src="../img/screenshots/03-eleven-dimensions.jpg" alt="FCR data model showing all 11 pre-defined dimensions listed in the Dimensions tab" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 03:</span> FCR Dimensions tab — 11 pre-defined dimensions out-of-the-box; Type = Other dimensions can be added as needed</figcaption>
+      </figure>
+
+      <h2>The 11 Pre-Defined Dimensions</h2>
+      <p>This workshop uses the 11-dimension model. All dimensions below come out-of-the-box; custom dimensions can be added on top.</p>
+
+      <table>
+        <caption>Table 06: The 11 Pre-Defined Dimensions</caption>
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Entity</strong></td>
+            <td>Legal entities and group hierarchy. The primary structural dimension — drives the Intercompany and Group dimensions.</td>
+          </tr>
+          <tr>
+            <td><strong>Company</strong></td>
+            <td>Flat view of entities for reporting; auto-synchronized from the Entity dimension.</td>
+          </tr>
+          <tr>
+            <td><strong>Intercompany</strong></td>
+            <td>Identifies the counterparty in intercompany transactions. Auto-generated from the Entity dimension.</td>
+          </tr>
+          <tr>
+            <td><strong>Group</strong></td>
+            <td>(11-dim only) Defines which group-level subconsolidation an elimination belongs to. Auto-generated from Entity Type = Group members.</td>
+          </tr>
+          <tr>
+            <td><strong>Account</strong></td>
+            <td>Chart of accounts. The most configuration-intensive dimension — holds tags, classification, conversion rules, and consolidation rule assignments.</td>
+          </tr>
+          <tr>
+            <td><strong>Scenario</strong></td>
+            <td>Actuals, Budget, Forecast, and constant-currency variants. Controls which version of data is being viewed or calculated.</td>
+          </tr>
+          <tr>
+            <td><strong>Period / Date</strong></td>
+            <td>Calendar periods (e.g., 2024 P12). Data can only be loaded to periods that are open in the Open Periods table.</td>
+          </tr>
+          <tr>
+            <td><strong>Audit</strong></td>
+            <td>Segregates data by source type. Source GL holds loaded trial balance data; Manual Journal children hold journal entries; calculated results get their own audit members.</td>
+          </tr>
+          <tr>
+            <td><strong>DataView</strong></td>
+            <td>Separates data by processing stage: Value (raw input), Conversion (currency translated), Consolidation (consolidated output). <strong>Not additive</strong> — each member is a distinct view.</td>
+          </tr>
+          <tr>
+            <td><strong>Movement</strong></td>
+            <td>Tracks balance sheet continuity (opening, closing, variation). Enables CTA calculation and cash flow automation.</td>
+          </tr>
+          <tr>
+            <td><strong>Custom (Other)</strong></td>
+            <td>Any additional dimensions your model needs (e.g., Cost Center, Product). Only the "Other" type can be added multiple times. See Custom Dimensions section below.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- DIMENSION DEEP DIVES -->
+      <h2>Key Dimension Deep Dives</h2>
+
+      <h3>Audit Dimension</h3>
+      <p>The Audit dimension segregates data by its origin. This is how FCR keeps raw input data separate from calculated results and manual adjustments.</p>
+      <ul>
+        <li><strong>Source GL</strong> — The child audit member where trial balance data is loaded. You can create multiple Source GL members for multi-source environments (e.g., one per ERP system).</li>
+        <li><strong>Manual Journal</strong> — Parent member. Its children (Reclass, Interco Adjustment, Other Manual, Manual Interco Adjustment) are where journal entries are posted.</li>
+        <li><strong>Calculated audit members</strong> — Consolidation calculation results (eliminations, NCI, equity method entries) are stored in their own audit members, keeping them separate from input data.</li>
+      </ul>
+      <div class="callout-note">
+        <span class="callout-label">💡 Why this matters</span>
+        <p>Because Source GL is a separate audit member, you can always see raw loaded data alongside adjustments and consolidation calculations — side by side, in the same report — without them interfering with each other.</p>
+      </div>
+
+      <h3>DataView Dimension</h3>
+      <p>DataView has three members that represent distinct stages of data processing:</p>
+      <ul>
+        <li><strong>Value</strong> — Raw data as loaded from source GL systems.</li>
+        <li><strong>Conversion</strong> — Data after currency translation has been applied.</li>
+        <li><strong>Consolidation</strong> — Final consolidated output after all consolidation rules have run.</li>
+      </ul>
+      <div class="callout-warning">
+        <span class="callout-label">⚠️ DataView is NOT additive</span>
+        <p>Unlike most dimensions, DataView members do not roll up. Each member represents a completely separate stage of data. You select one member at a time to see that view. Adding Value + Conversion + Consolidation together produces meaningless numbers.</p>
+      </div>
+
+      <h3>Movement Dimension</h3>
+      <p>The Movement dimension is what makes FCR's balance sheet continuity and cash flow automation possible. Every account that has balance sheet behavior (opening balance → changes → closing balance) is tracked through movement members:</p>
+      <ul>
+        <li><strong>Opening Balance</strong> — Carried forward from the prior period's closing balance via the Copy Opening process.</li>
+        <li><strong>Closing Balance</strong> — The end-of-period balance; what typically appears in a balance sheet report.</li>
+        <li><strong>Variation</strong> — Period-over-period movement. Used to calculate CTA (Currency Translation Adjustment) for each account.</li>
+        <li><strong>Cash flow members</strong> — Specific movement members drive the automated cash flow statement generation.</li>
+      </ul>
+
+      <!-- ACCOUNT DIMENSION -->
+      <h2>Account Dimension — Attributes Reference</h2>
+      <p>The Account dimension carries more configuration than any other dimension. Every account attribute you set here drives behaviour in currency conversion, consolidation rules, and reporting.</p>
+
+      <table>
+        <caption>Table 07: Account Dimension Attributes</caption>
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>What It Controls</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Name</strong></td>
+            <td>The account <em>ID / code</em> — not a display label. Must be unique. No spaces. This is what rules, mappings, and integrations reference.</td>
+          </tr>
+          <tr>
+            <td><strong>Caption</strong></td>
+            <td>The <em>display label</em> shown in reports and forms. Can contain spaces and full descriptions.</td>
+          </tr>
+          <tr>
+            <td><strong>Tags</strong></td>
+            <td>Prefixed with <code>#</code>. Referenced by consolidation rules and matching rules. The most powerful mechanism for making rules reusable. See the Tags section below.</td>
+          </tr>
+          <tr>
+            <td><strong>Classification</strong></td>
+            <td>Asset, Liability, Equity, Revenue, or Expense. Drives sign behaviour and report positioning.</td>
+          </tr>
+          <tr>
+            <td><strong>Operator</strong></td>
+            <td><code>+</code> or <code>–</code>. Controls whether the account's balance adds to or subtracts from its parent in the hierarchy.</td>
+          </tr>
+          <tr>
+            <td><strong>P_conversion</strong></td>
+            <td>Which currency conversion rule applies to this account (e.g., End Rate for balance sheet, Average for income statement, Historical for equity). If blank, the account will not convert.</td>
+          </tr>
+          <tr>
+            <td><strong>Consolidation rule</strong></td>
+            <td>Links this account to a consolidation rule (e.g., ARAP elimination, NCI). This is how rules know which accounts to process.</td>
+          </tr>
+          <tr>
+            <td><strong>Movement Classification</strong></td>
+            <td>Controls how the account participates in the cash flow statement and balance sheet continuity. Accounts with no movement classification are treated as flow (P&amp;L) accounts.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/04-account-dim-attributes.jpg" alt="Account dimension attributes — showing Name, Caption, Tags, P_conversion, Classification, Operator, and Consolidation rule columns" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 04:</span> Account dimension attributes — the core configuration table for FCR implementation (Name, Caption, Tags, P_conversion, Classification, Consolidation rule)</figcaption>
+      </figure>
+
+      <!-- TAGS -->
+      <h2>Tags — The Most Important Configuration Mechanism</h2>
+      <p>Tags are the glue between dimension members and consolidation rules. Instead of hardcoding an account ID into a rule, you tag the account and reference the tag in the rule. This makes rules portable across customers.</p>
+
+      <ul>
+        <li>Tags are prefixed with <code>#</code> (e.g., <code>#ICMATCHAR</code>, <code>#REVENUE_TOTAL</code>)</li>
+        <li>Multiple tags can be assigned to one account, separated by spaces or commas</li>
+        <li>Tags can be applied across any dimension — Account, Entity, Movement, Audit, etc.</li>
+        <li>Rules reference tags instead of hardcoded IDs — one rule works across every customer using that tagging convention</li>
+      </ul>
+
+      <div class="callout-warning">
+        <span class="callout-label">⚠️ Tags Have No Validation — Silent Failures</span>
+        <p>There is no spell-check or lookup when entering tags. If you mistype <code>#ICMATCHAR</code> as <code>#ICMATCHR</code>, the system will not warn you. The rule will silently fail to fire. <strong>Double-check every tag name, every time.</strong> This is one of the most common causes of incorrect consolidation results on first implementations.</p>
+      </div>
+
+      <!-- CUSTOM DIMENSIONS -->
+      <h2>Custom Dimensions (Type: Other)</h2>
+      <p>You can add any number of custom dimensions of type "Other" (Cost Center, Product, Legal Entity Class, etc.). Each "Other" dimension is independent — unlike the standard dimension types, you can add multiple.</p>
+
+      <h3>After Creating a Custom Dimension:</h3>
+      <ol>
+        <li><strong>Add elements</strong> — Import or manually enter the dimension members</li>
+        <li><strong>Set Default Reporting Member</strong> — Used by default reports when this dimension is not otherwise filtered. Should be the "Total" parent member.</li>
+        <li><strong>Set Default Input Member</strong> — Used by default input forms. Must be a <em>leaf-level</em> member.</li>
+        <li><strong>Add to the Model</strong> — Navigate to Models → Model tab → click the Consolidation model → click the + button → select your dimension</li>
+        <li><strong>Save → Process</strong></li>
+      </ol>
+
+      <div class="callout-warning">
+        <span class="callout-label">⚠️ Don't Forget to Add to the Model</span>
+        <p>Creating a dimension in the Dimensions tab does <strong>not</strong> automatically add it to the data model. Until you complete step 4 (Models → Model tab → +), the dimension exists but does not participate in data storage, calculations, or reports. This is a very common oversight.</p>
+      </div>
+
+      <div class="callout-warning">
+        <span class="callout-label">⚠️ Default Members Must Be Set After Importing Elements</span>
+        <p>When you first create a custom dimension, there are no members to choose — so you can't set the defaults yet. After importing or entering elements, <strong>go back</strong> and set both Default Reporting Member and Default Input Member. Forgetting this causes errors when opening reports or input forms.</p>
+      </div>
+
+      <!-- SAVE AND PROCESS -->
+      <figure class="screenshot">
+        <img src="../img/screenshots/06-save-process-icons.jpg" alt="Dimensions toolbar showing cloud-down (export), cloud-up (import), diskette (save), and two-gears (process) icons" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 06:</span> Dimensions toolbar icons: export (cloud+down), import (cloud+up), Save (diskette), Process (two gears) — always Save then Process after metadata changes</figcaption>
+      </figure>
+
+      <h2>Save → Process — The Two-Step Rule</h2>
+      <p>After <strong>every</strong> metadata change in FCR — adding a dimension, updating an account attribute, importing elements — you must perform both steps in sequence:</p>
+
+      <div class="callout-note">
+        <span class="callout-label">🔄 Required After Every Metadata Change</span>
+        <p><strong>Step 1 — Save</strong> (diskette icon): Writes your changes to the database.<br>
+        <strong>Step 2 — Process</strong> (two gears icon): Propagates changes throughout the model — updates auto-generated dimensions (Intercompany, Group), rebuilds dimension-level aggregations, and validates the model structure.<br><br>
+        <em>Saving without Processing means your changes are incomplete. Intercompany and Group dimensions will not reflect entity hierarchy changes until you Process.</em></p>
+      </div>
+
+      <!-- IMPORT/EXPORT -->
+      <h2>Importing &amp; Exporting Dimensions</h2>
+      <p>Dimensions are loaded using the cloud icons in the Dimensions tab toolbar:</p>
+      <ul>
+        <li>☁️↓ <strong>Export</strong> (cloud + down arrow) — Downloads dimension to a file</li>
+        <li>☁️↑ <strong>Import</strong> (cloud + up arrow) — Uploads from a file</li>
+        <li>💾 <strong>Save</strong> (diskette) — Saves changes</li>
+        <li>⚙️⚙️ <strong>Process</strong> (two gears) — Propagates changes to the full model</li>
+      </ul>
+
+      <p>Import has two modes:</p>
+      <ul>
+        <li><strong>Append</strong> — Adds new elements only; leaves existing elements untouched. Use this for incremental updates <em>after</em> data has been loaded.</li>
+        <li><strong>Replace</strong> — Overwrites the dimension entirely. Safe during initial build; dangerous once data is loaded.</li>
+      </ul>
+
+      <div class="callout-warning">
+        <span class="callout-label">⚠️ Replace After Data Load = Broken Links</span>
+        <p>If you Replace a dimension after trial balance data has been loaded, you break the link between dimension members and their data. Always include the internal <strong>Key</strong> column when exporting and re-importing a dimension that has associated data. And prefer Append over Replace for updates once you're live.</p>
+      </div>
+
+      <p>Additional rules for import files:</p>
+      <ul>
+        <li><strong>isLeaf</strong> — Must be set correctly for each row (true for leaf/base elements, false for parent members). Incorrect values cause import errors.</li>
+        <li><strong>Keys</strong> — Must be included in import files when data is already loaded. Always export with keys first, then re-import with keys.</li>
+      </ul>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/05-dimensions-tab-add.jpg" alt="FCR Dimensions tab — showing the add (+) button and slide-out panel for creating a new dimension with Type, Default Reporting Member, Default Input Member" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 05:</span> FCR Dimensions tab — adding a new dimension; note Default Reporting Member and Default Input Member fields (easy to miss)</figcaption>
+      </figure>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./04-anaplan-way.html">← Previous</a>
+        <a class="prevnext-btn" href="./06-lab-a-data-model.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anaplan Way for Applications — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link active" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Anaplan Way for Applications</h1>
+      <p class="subtitle">The six-phase delivery methodology and what happens in each phase</p>
+      <div class="badge-row"><span class="content-badge">Getting Started</span><span class="content-badge">15 min</span></div>
+    </div>
+    <div class="content-body">
+
+      <div class="tsd-banner">
+        <div class="tsd-step tsd-step-tell">
+          <span class="tsd-step-label">📖 Tell</span>
+          <span class="tsd-step-heading">The 6-Phase Delivery Methodology</span>
+          <span class="tsd-step-desc">The six phases of FCR delivery and what belongs in each phase.</span>
+        </div>
+        <div class="tsd-step tsd-step-show">
+          <span class="tsd-step-label">👁 Show</span>
+          <span class="tsd-step-heading">Phase Walkthrough</span>
+          <span class="tsd-step-desc">A short walkthrough covers each phase with examples from real FCR engagements.</span>
+        </div>
+        <div class="tsd-step tsd-step-do">
+          <span class="tsd-step-label">✅ Do</span>
+          <span class="tsd-step-heading">Phase Mapping</span>
+          <span class="tsd-step-desc">Map a customer's engagement to the correct delivery phase and identify the critical decision points.</span>
+        </div>
+      </div>
+
+      <h2>The Six-Phase FCR Delivery Methodology</h2>
+      <p>FCR delivery follows Anaplan's standard App delivery phases, adapted for the consolidation-specific configuration workflow. Understanding the phases helps you set correct expectations with customers and know which activities belong where.</p>
+
+      <div class="callout-note">
+        <span class="callout-label">📚 Reference Document</span>
+        <p><strong>The Anaplan Way for Applications Methodology</strong> — Complete methodology for delivering structured application implementations. Available on Anaplan Seismic for partner access.</p>
+      </div>
+
+      <div class="step"><div class="step-badge">1</div><div class="step-content"><h3>Pre-Project</h3><p>The engagement prep phase. Deliverables include:</p>
+        <ul>
+          <li>Requirements discovery with the customer — entity hierarchy, chart of accounts, consolidation methods, currencies</li>
+          <li>Requirements workbook completed (entity, account, ownership, integration details)</li>
+          <li>Tenant type decision locked: 10-dim, 11-dim with Group, or 14-dim IFRS accelerator</li>
+          <li>Group dimension decision documented and signed off — irreversible after provisioning</li>
+          <li>Data availability confirmed: which GL systems, which entities, which need account mapping</li>
+          <li>Tenant provisioning request submitted (3–5 day lead time)</li>
+        </ul>
+      </div></div>
+
+      <div class="step"><div class="step-badge">2</div><div class="step-content"><h3>Configuration</h3><p>Build the FCR tenant based on confirmed requirements:</p>
+        <ul>
+          <li>Import and configure all dimensions: entity hierarchy, account dimension, custom dimensions</li>
+          <li>Configure ownership structure, consolidation methods, and ultimate rate calculator</li>
+          <li>Set up consolidation rules: ARAP elimination, NCI, equity method, intercompany matching</li>
+          <li>Configure currency dimension and assign P_conversion parameters to accounts</li>
+          <li>Enable journals feature flag; configure journal security and definitions</li>
+          <li>Build data integration: staging tables, member mappings, import definitions, clear data settings</li>
+        </ul>
+      </div></div>
+
+      <div class="step"><div class="step-badge">3</div><div class="step-content"><h3>Data Load &amp; Reconciliation</h3><p>Load source data and validate the consolidation output:</p>
+        <ul>
+          <li>Open required periods; load trial balances from all source GL systems</li>
+          <li>Run currency conversion and consolidation (Run All)</li>
+          <li>Compare consolidated statements to prior system output period-by-period</li>
+          <li>Run validation reports: Validations Open Period and Movement Validations</li>
+          <li>Investigate and resolve differences — document known and accepted variances</li>
+        </ul>
+      </div></div>
+
+      <div class="step"><div class="step-badge">4</div><div class="step-content"><h3>User Acceptance Testing</h3><p>Customer-led validation of the configured system:</p>
+        <ul>
+          <li>Finance team and controllers run UAT in the configured tenant</li>
+          <li>Test all consolidation methods, journal entry, intercompany matching, period initialization</li>
+          <li>User training: finance team, controllers, system administrators</li>
+          <li>UAT sign-off before cutover</li>
+          <li>Identify and resolve any outstanding gaps</li>
+        </ul>
+      </div></div>
+
+      <div class="step"><div class="step-badge">5</div><div class="step-content"><h3>Parallel Run</h3><p>Operate old and new systems simultaneously for at least one close cycle:</p>
+        <ul>
+          <li><strong>Strongly recommended</strong> — run both systems for at least one month-end period</li>
+          <li>Finance team produces consolidated statements in both systems and compares</li>
+          <li>Identifies any remaining configuration gaps under real operating conditions</li>
+          <li>Builds user confidence before decommissioning the prior system</li>
+          <li>Document final reconciliation sign-off</li>
+        </ul>
+      </div></div>
+
+      <div class="step"><div class="step-badge">6</div><div class="step-content"><h3>Cutover &amp; Hypercare</h3><p>Go-live and initial production support:</p>
+        <ul>
+          <li>Final data load with production sign-off balances</li>
+          <li>Production security configuration: user roles, data access, folder permissions</li>
+          <li>Handover documentation: configuration guide, admin procedures, period-end checklist</li>
+          <li>Hypercare: Anaplan Professional Services on standby for first 1–2 live close cycles</li>
+          <li>Knowledge transfer to internal super-users / center of excellence</li>
+        </ul>
+      </div></div>
+
+      <div class="callout-note">
+        <span class="callout-label">ℹ FCR-Specific Phase Notes</span>
+        <p>The tenant type decision and group dimension decision in Phase 1 are critical and irreversible. Unlike IFP where Session Zero can be re-run, FCR provisioning decisions cannot be changed after the tenant is created. These must be locked before any provisioning request is submitted. A missed decision here = a full re-provisioning and re-implementation.</p>
+      </div>
+
+      <h2>Two Customer Types</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>🌱 Greenfield FCR</h3>
+          <ul>
+            <li>No existing consolidation tool; first-ever automated group consolidation</li>
+            <li>Chart of accounts may need significant cleanup for FCR requirements</li>
+            <li>Data quality work is often the largest project component</li>
+            <li>Opportunity to build a clean, tag-consistent account structure from the start</li>
+            <li><strong>Risk:</strong> Customer may not fully understand what consolidation requires until they see it</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>🔁 Migration from Legacy System</h3>
+          <ul>
+            <li>Migrating from HFM, Cognos Controller, OneStream, or similar</li>
+            <li>Historical consolidated data must be loaded or recreated</li>
+            <li>Customer has existing consolidation knowledge — but FCR will feel different</li>
+            <li>Parallel run is essential to validate parity with prior system</li>
+            <li><strong>Risk:</strong> Customer expects FCR to work exactly like the old system; manage expectations on approach differences</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Map a Customer to the Right Phase</h2>
+      <div class="callout-do">
+        <span class="callout-label">✅ Phase Mapping Exercise</span>
+        <p>Think of a customer project — real or hypothetical. Which phase would they be in right now? What decisions should have been locked before this session? What is the next deliverable? Jot down your answers, or talk them through with a colleague.</p>
+      </div>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./03-implementation-methodology.html">← Previous</a>
+        <a class="prevnext-btn" href="./05-data-model.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

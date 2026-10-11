@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab E: New Period + Cash Flow — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link active" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Lab E: New Period + Cash Flow</h1>
+      <p class="subtitle">Initialize 2025 P1 &amp; P2, load trial balances, configure movement classifications, run cash flow</p>
+      <div class="badge-row"><span class="content-badge">Period Management</span><span class="content-badge">Lab</span><span class="content-badge">60 min</span></div>
+    </div>
+    <div class="content-body">
+
+      <div class="callout-note">
+        <span class="callout-label">📋 Lab Overview</span>
+        <p>This lab walks through the complete month-end and new-year initialization workflow for 2025. You will open two new periods, enter exchange rates (including account-level rate overrides), roll opening balances from 2024 P12, load new trial balance data, run consolidation, validate results, and configure the cash flow calculation.</p>
+        <p><strong>Periods:</strong> 2025 P1 and 2025 P2 &nbsp;|&nbsp; <strong>Source files:</strong> "Initialize New Period" folder &nbsp;|&nbsp; <strong>Entities with new data:</strong> London, Paris</p>
+      </div>
+
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">E1</div>
+          <div class="mini-lab-title">Update Global Variables and Open New Periods</div>
+          <div class="mini-lab-duration">5 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Set the system's current period to 2025 P1 and open both 2025 P1 and 2025 P2 for data loading.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Navigate to <strong>Configure → Global Variables</strong>.</li>
+            <li><span class="mini-lab-step-num">2</span> Update <strong>Current Year</strong> to <code>2025</code> and <strong>Current Period</strong> to <code>P1</code>. Save.</li>
+            <li><span class="mini-lab-step-num">3</span> Navigate to <strong>Configure → Open Periods</strong>.</li>
+            <li><span class="mini-lab-step-num">4</span> Add a new row for <strong>2025 P1</strong> (click + or duplicate an existing row and update the year/period values).</li>
+            <li><span class="mini-lab-step-num">5</span> Add a second row for <strong>2025 P2</strong>. Both periods should now appear in the table.</li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          The Open Periods table shows rows for 2025 P1 and 2025 P2. Global Variables shows Current Year = 2025, Current Period = P1. Report date defaults now show 2025 P1 in journal date fields.
+        </div>
+      </div>
+
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">E2</div>
+          <div class="mini-lab-title">Enter Exchange Rates for 2025 P1 and P2</div>
+          <div class="mini-lab-duration">10 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Enter standard FX rates for the new periods, then configure account-level rate overrides for London entities.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Navigate to <strong>Maintain → Foreign Exchange Global Rates</strong>.</li>
+            <li><span class="mini-lab-step-num">2</span> Enter End Rate and Average Rate for EUR and GBP for periods <strong>2025 P1</strong> and <strong>2025 P2</strong>. Use the rates in the "Initialize New Period" folder file. Remember: decimal separator is a period (.) not a comma.</li>
+            <li><span class="mini-lab-step-num">3</span> For account-level rate overrides: navigate to <strong>Maintain → Override Rates</strong>.</li>
+            <li><span class="mini-lab-step-num">4</span> <em>If the + (Add) button is not visible:</em> go to <strong>Security settings → set Consolidation → All</strong>. Return to Override Rates. The + button should now appear.</li>
+            <li><span class="mini-lab-step-num">5</span> Add override rate entries for <strong>London</strong> entity, accounts <strong>3000</strong> and <strong>3100</strong> (GBP→USD):
+              <ul>
+                <li>Entity: London</li>
+                <li>Date: (fill in the period date)</li>
+                <li>Scenario: Actuals</li>
+                <li>Account: 3000 → Rate: 0.75</li>
+                <li>Account: 3100 → Rate: 0.74</li>
+                <li>Leave Cost Center, Audit, Product fields <strong>empty</strong></li>
+              </ul>
+            </li>
+            <li><span class="mini-lab-step-num">6</span> Save the override rates. Note: the Date field is mandatory — leaving it blank will prevent processing.</li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          Standard FX rates appear in the Foreign Exchange Global Rates form for 2025 P1 and P2. Two override rate entries appear for London entity (accounts 3000 and 3100) with rates 0.75 and 0.74 respectively.
+        </div>
+      </div>
+
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">E3</div>
+          <div class="mini-lab-title">Run Copy Opening and Load Trial Balances</div>
+          <div class="mini-lab-duration">10 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Roll 2024 P12 closing balances forward as 2025 P1 opening balances, then load 2025 P1 trial balance data for London and Paris.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Navigate to <strong>Consolidation → Processes</strong>.</li>
+            <li><span class="mini-lab-step-num">2</span> Run <strong>Copy Opening</strong> for period <strong>2025 P1</strong>. This copies 2024 P12 closing balances as 2025 P1 opening balances.</li>
+            <li><span class="mini-lab-step-num">3</span> Wait for Copy Opening to complete successfully before proceeding.</li>
+            <li><span class="mini-lab-step-num">4</span> Load 2025 P1 trial balance data for <strong>London</strong> using the file from the "Initialize New Period" exercise folder. Use the same import definition as prior data loads.</li>
+            <li><span class="mini-lab-step-num">5</span> Load 2025 P1 trial balance data for <strong>Paris</strong> entity.</li>
+            <li><span class="mini-lab-step-num">6</span> Run <strong>Run All</strong> for period <strong>2025 P1</strong>.</li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          Copy Opening completes without errors. London and Paris 2025 P1 trial balance data is visible in the system. Run All completes for 2025 P1.
+        </div>
+      </div>
+
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">E4</div>
+          <div class="mini-lab-title">Run Validation Reports</div>
+          <div class="mini-lab-duration">5 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Verify opening balance integrity and movement validity using the two standard validation reports.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Navigate to the <strong>Reporting</strong> module. Find and run the <strong>Validations Open Period</strong> report for 2025 P1.</li>
+            <li><span class="mini-lab-step-num">2</span> Review results: green checkmarks indicate opening balances are correctly rolled forward. Red X's indicate discrepancies that must be investigated before close.</li>
+            <li><span class="mini-lab-step-num">3</span> Run the <strong>Movement Validations</strong> report for 2025 P1.</li>
+            <li><span class="mini-lab-step-num">4</span> Review results: some red X's on a first run are expected if balance sheet continuity data has not yet been entered. Document which checks are failing and why.</li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          You have reviewed both validation reports. The Validations Open Period report shows green checkmarks for entities with correctly rolled-forward opening balances. Movement Validations may show some red X's — this is expected on first run and indicates where balance sheet continuity data is needed.
+        </div>
+      </div>
+
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">E5</div>
+          <div class="mini-lab-title">Configure Movement Classifications and Cash Flow Rules</div>
+          <div class="mini-lab-duration">20 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Create movement classifications, assign them to balance sheet accounts, configure cash flow calculation rules, run the calculation, and view the cash flow statement.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Navigate to <strong>Maintain → General Setup → Movement Classifications</strong>. Click + to create a new classification.</li>
+            <li><span class="mini-lab-step-num">2</span> Create classification <strong>"Current BS"</strong>: set Opening = false, Closing = false, Intercompany = false, Total Cash = true, Non-Cash = true. Save.</li>
+            <li><span class="mini-lab-step-num">3</span> Create classification <strong>"GPE"</strong> (for PP&amp;E with depreciation/amortization): configure flags as appropriate for this account type. Save.</li>
+            <li><span class="mini-lab-step-num">4</span> Navigate to the <strong>Accounts Dimension</strong>. Single-click account <strong>17117</strong> (PP&amp;E account). In the Attributes section, assign the <strong>GPE</strong> movement classification.</li>
+            <li><span class="mini-lab-step-num">5</span> Assign the <strong>Current BS</strong> classification to appropriate current balance sheet accounts (receivables, payables, etc.).</li>
+            <li><span class="mini-lab-step-num">6</span> Check whether cash flow accounts already exist in the Accounts Dimension (from the Company ABC workbook activity). If yes, skip the import step and go to step 7. If no, import the cash flow account hierarchy file using <strong>Append</strong> mode.</li>
+            <li><span class="mini-lab-step-num">7</span> Navigate to cash flow calculation rules. For each cash flow statement row, create a header record (target cash flow account, model, Active = true) and detail records (target movement, target audit, operator +/–, source GL accounts, source movement member).</li>
+            <li><span class="mini-lab-step-num">8</span> Run the <strong>Cash Flow Calculation</strong> process from the Processes menu.</li>
+            <li><span class="mini-lab-step-num">9</span> Navigate to the Reporting module and open the <strong>Cash Flow Statement</strong> report for 2025 P1. Review the populated lines by operating, investing, and financing activity.</li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          Movement classifications exist and are assigned to at least two balance sheet accounts. Cash flow calculation rules are configured for the key cash flow statement lines. The Cash Flow Statement report shows populated values for 2025 P1. You can drill from a cash flow line to the underlying GL account and movement dimension member.
+        </div>
+      </div>
+
+      <div class="callout-note">
+        <span class="callout-label">ℹ Post-Workshop: Balance Sheet Continuity Input</span>
+        <p>Entering actual movement detail values in the Balance Sheet Continuity Schedule requires the <strong>Fluence Excel add-in</strong>, which was not installed on all workshop machines. If you are on a PC with the add-in installed (or using a Windows VM), you can access the continuity schedule and enter movement values (yellow editable fields in Excel). Your workshop tenant remains accessible for approximately <strong>5 weeks</strong> after the workshop — use this time to explore this feature with real data.</p>
+      </div>
+
+      <div class="callout-warn">
+        <span class="callout-label">⚠️ Common Issues in This Lab</span>
+        <ul>
+          <li><strong>Override Rates + button not visible:</strong> Go to Security → set Consolidation = All, then return to Override Rates</li>
+          <li><strong>Rate entry not processing:</strong> Ensure the Date field is filled in — leaving it blank prevents the rate from being saved</li>
+          <li><strong>Copy Opening fails:</strong> Verify the target period is listed in Configure Open Periods before running Copy Opening</li>
+          <li><strong>Validation report red X's:</strong> First run red X's on Movement Validations are expected — they indicate missing balance sheet continuity entries, not system errors</li>
+          <li><strong>Cash flow accounts disappeared after import:</strong> You used Overwrite instead of Append — reload GL accounts from the source file using Append mode</li>
+          <li><strong>Cash flow statement shows zeros:</strong> Verify Copy Opening was run and that source movement members in the calculation rules match the members populated by the balance sheet continuity data</li>
+        </ul>
+      </div>
+
+      <h2>Lab E: Summary of What You've Built</h2>
+      <p>By completing Lab E you have executed the full monthly close cycle in FCR from first principles:</p>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>✅ Period Initialization</h3>
+          <ul>
+            <li>Updated Global Variables to 2025 P1</li>
+            <li>Opened 2025 P1 and P2 in Configure Open Periods</li>
+            <li>Entered standard FX rates for new periods</li>
+            <li>Configured account-level rate overrides for London</li>
+            <li>Ran Copy Opening to roll forward balances</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>✅ Data &amp; Consolidation</h3>
+          <ul>
+            <li>Loaded 2025 P1 trial balances for London and Paris</li>
+            <li>Ran full consolidation (Run All)</li>
+            <li>Validated opening balances (Validations Open Period report)</li>
+            <li>Checked movement integrity (Movement Validations report)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="two-col" style="margin-top:1rem;">
+        <div class="card">
+          <h3>✅ Cash Flow Configuration</h3>
+          <ul>
+            <li>Created movement classifications (Current BS, GPE)</li>
+            <li>Assigned classifications to balance sheet accounts</li>
+            <li>Configured cash flow calculation rules</li>
+            <li>Ran cash flow calculation</li>
+            <li>Reviewed cash flow statement in reporting</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>🔜 Next: Advanced Topics</h3>
+          <ul>
+            <li>Security configuration (users, roles, model security, workflow)</li>
+            <li>Narrative Reporting</li>
+            <li>Full security activity available in your tenant for 5 weeks post-workshop</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./16-balance-sheet-cashflow.html">← Previous</a>
+        <a class="prevnext-btn" href="./18-security.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

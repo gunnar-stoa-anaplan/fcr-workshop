@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab C: Load Trial Balance Data — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link active" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Lab C: Load Trial Balance Data</h1>
+      <p class="subtitle">Create staging tables, configure mappings and import definitions, open periods, and validate</p>
+      <div class="badge-row"><span class="content-badge">Data Model &amp; Configuration</span><span class="content-badge">45 min</span></div>
+    </div>
+    <div class="content-body">
+
+      <div class="callout-note">
+        <span class="callout-label">🎯 Lab Objective</span>
+        <p>By the end of this lab, trial balance data from two source GL systems will be loaded into FCR and visible in the Consolidated Financials report. You will have built the complete integration pipeline: open period → staging tables → member mappings → import definitions → workflow → data load.</p>
+      </div>
+
+      <div class="callout-note">
+        <span class="callout-label">📁 Lab Files</span>
+        <p>This lab uses two trial balance source files from the <strong>Files to Share → Data Integration</strong> folder:
+          <ul>
+            <li><strong>Source 1</strong> — Rest-of-world entities (standard chart of accounts, direct name matching)</li>
+            <li><strong>Source 2</strong> — CAM entities (Central American entities with a different chart of accounts — requires account mapping)</li>
+          </ul>
+        </p>
+      </div>
+
+      <!-- MINI-LAB 1 -->
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">1</div>
+          <div class="mini-lab-title">Open Periods</div>
+          <div class="mini-lab-duration">5 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Open the target period so data can be loaded to it. FCR periods are closed by default — you must explicitly open each period before any data load.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Navigate to <strong>Maintain → General Configuration → Open Periods</strong></li>
+            <li><span class="mini-lab-step-num">2</span> Click the <strong>+</strong> button to add a new row</li>
+            <li><span class="mini-lab-step-num">3</span> Add period <strong>2024 P12</strong></li>
+            <li><span class="mini-lab-step-num">4</span> If your workshop requires additional historical periods, add them now as well</li>
+            <li><span class="mini-lab-step-num">5</span> Click <strong>Save</strong></li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          <strong>2024 P12</strong> is visible in the Open Periods table and the page saves without errors.
+        </div>
+      </div>
+
+      <!-- MINI-LAB 2 -->
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">2</div>
+          <div class="mini-lab-title">Create Staging Tables</div>
+          <div class="mini-lab-duration">10 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Create two staging tables — one for each GL source — with columns that exactly match the trial balance file structures.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Navigate to the <strong>Integration module</strong></li>
+            <li><span class="mini-lab-step-num">2</span> Create the first staging table (Source 1 — rest-of-world):
+              <ul>
+                <li>Click <strong>New</strong> → enter a descriptive name (e.g., <code>TB_Source1</code>)</li>
+                <li>Add column: <strong>Entity</strong> → type: <strong>VARCHAR</strong></li>
+                <li>Add column: <strong>Account</strong> → type: <strong>VARCHAR</strong></li>
+                <li>Add column: <strong>Period</strong> → type: <strong>VARCHAR</strong> (format: YYYY PNN, e.g., 2024 P12)</li>
+                <li>Add column: <strong>Amount</strong> → type: <strong>FLOAT</strong></li>
+                <li>Add column: <strong>Intercompany</strong> → type: <strong>VARCHAR</strong></li>
+              </ul>
+            </li>
+            <li><span class="mini-lab-step-num">3</span> Save the staging table</li>
+            <li><span class="mini-lab-step-num">4</span> Create a second staging table (Source 2 — CAM entities):
+              <ul>
+                <li>Use the same structure as Source 1 (same column names and types)</li>
+                <li>Name it clearly (e.g., <code>TB_Source2_CAM</code>)</li>
+              </ul>
+            </li>
+            <li><span class="mini-lab-step-num">5</span> Save</li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          Two staging tables exist in the Integration module — one for Source 1 and one for Source 2. Each has 5 columns with the correct VARCHAR/FLOAT types.
+        </div>
+      </div>
+
+      <!-- MINI-LAB 3 -->
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">3</div>
+          <div class="mini-lab-title">Create Member Mappings</div>
+          <div class="mini-lab-duration">10 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Import the account mapping for CAM entities — they use a different chart of accounts than the FCR model. Source 1 entities use direct name matching and don't require a mapping table.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> In the <strong>Integration module</strong>, navigate to the <strong>Mappings</strong> section</li>
+            <li><span class="mini-lab-step-num">2</span> Click <strong>New</strong> → create a new mapping table named (e.g., <code>CAM_Account_Map</code>)</li>
+            <li><span class="mini-lab-step-num">3</span> Click the import icon → upload the provided CAM account mapping file</li>
+            <li><span class="mini-lab-step-num">4</span> After import, review the mapping table and locate:
+              <ul>
+                <li>An example of a <strong>Range mapping</strong> (e.g., source accounts 1000–1099 → Account X)</li>
+                <li>An example of a <strong>Wildcard mapping</strong> (e.g., source pattern <code>4*</code> → Revenue account)</li>
+              </ul>
+            </li>
+            <li><span class="mini-lab-step-num">5</span> Save</li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          The CAM account mapping table is loaded and you can identify at least one Range mapping and one Wildcard mapping in the table.
+        </div>
+      </div>
+
+      <!-- MINI-LAB 4 -->
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">4</div>
+          <div class="mini-lab-title">Configure Import Definitions</div>
+          <div class="mini-lab-duration">15 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Create import definitions for both GL sources, specifying how each column maps to FCR dimensions and configuring Clear Data Settings to prevent data accumulation on re-runs.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> In the Integration module, click <strong>New Import Definition</strong> → name it <code>Import_Source1</code></li>
+            <li><span class="mini-lab-step-num">2</span> Select staging table: <strong>TB_Source1</strong></li>
+            <li><span class="mini-lab-step-num">3</span> Configure field mappings:
+              <ul>
+                <li><strong>Scenario:</strong> Fixed → <em>Actuals</em></li>
+                <li><strong>DataView:</strong> Fixed → <em>Value</em></li>
+                <li><strong>Audit:</strong> Fixed → <em>Source GL</em></li>
+                <li><strong>Entity:</strong> Match Name</li>
+                <li><strong>Period:</strong> Match Name</li>
+                <li><strong>Account:</strong> Match Name</li>
+                <li><strong>Intercompany:</strong> Match Name</li>
+              </ul>
+            </li>
+            <li><span class="mini-lab-step-num">4</span> Configure <strong>Clear Data Settings</strong>:
+              <ul>
+                <li>Select: <strong>Staging Unique Values</strong></li>
+                <li>Dimensions to key on: <strong>Audit</strong> + <strong>Period</strong></li>
+              </ul>
+            </li>
+            <li><span class="mini-lab-step-num">5</span> Save the import definition</li>
+            <li><span class="mini-lab-step-num">6</span> Create a second import definition: <code>Import_Source2_CAM</code></li>
+            <li><span class="mini-lab-step-num">7</span> Select staging table: <strong>TB_Source2_CAM</strong></li>
+            <li><span class="mini-lab-step-num">8</span> Configure field mappings — same as Source 1 except:
+              <ul>
+                <li><strong>Account:</strong> Map → select <em>CAM_Account_Map</em></li>
+                <li><strong>Amount:</strong> Enable <strong>flip credit sign</strong> (sign reversal for credit accounts on inbound load)</li>
+              </ul>
+            </li>
+            <li><span class="mini-lab-step-num">9</span> Set the same <strong>Clear Data Settings</strong> (Staging Unique Values, Audit + Period)</li>
+            <li><span class="mini-lab-step-num">10</span> Save both import definitions</li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          Both import definitions are saved. Source 1 uses Match Name for Account; Source 2 uses the CAM mapping table with sign flip. Both have Clear Data Settings configured.
+        </div>
+      </div>
+
+      <!-- MINI-LAB 5 -->
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">5</div>
+          <div class="mini-lab-title">Create Workflow and Load Data</div>
+          <div class="mini-lab-duration">10 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Build a reusable workflow that runs both import definitions in parallel, then run it and validate data in the Consolidated Financials report.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Navigate to <strong>Explorer</strong> → find or create a <strong>Workshop</strong> folder → right-click → <strong>New Folder</strong> → name it <code>Processes</code></li>
+            <li><span class="mini-lab-step-num">2</span> Right-click the <strong>Processes</strong> folder → click <strong>New Process</strong> (note: NOT from the Workflow menu) → name it <code>Load Trial Balance</code></li>
+            <li><span class="mini-lab-step-num">3</span> In the workflow canvas, drag a <strong>Data Input</strong> task onto the canvas → connect it from the <strong>Start</strong> button → configure it to run <em>Import_Source1</em></li>
+            <li><span class="mini-lab-step-num">4</span> Drag a second <strong>Data Input</strong> task → connect it from the <strong>Start</strong> button (parallel to the first) → configure it to run <em>Import_Source2_CAM</em></li>
+            <li><span class="mini-lab-step-num">5</span> Save the workflow</li>
+            <li><span class="mini-lab-step-num">6</span> Click <strong>Run</strong> to execute the workflow</li>
+            <li><span class="mini-lab-step-num">7</span> Monitor the task progress in the Workflow module — both Data Input tasks should complete successfully</li>
+            <li><span class="mini-lab-step-num">8</span> Navigate to the <strong>Consolidated Financials</strong> report (or any default report) → verify data appears for both source systems</li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          Both Data Input tasks complete without errors and data is visible in the Consolidated Financials report for period 2024 P12. You should see figures from both Source 1 (rest-of-world) and Source 2 (CAM) entities.
+        </div>
+      </div>
+
+      <!-- COMPLETION CHECKLIST -->
+      <h2>Lab C Completion Checklist</h2>
+      <ul class="checklist">
+        <li>Period 2024 P12 added to Open Periods table</li>
+        <li>Staging table <code>TB_Source1</code> created with correct VARCHAR/FLOAT columns</li>
+        <li>Staging table <code>TB_Source2_CAM</code> created with same structure</li>
+        <li>CAM account mapping table imported (with Range and Wildcard examples visible)</li>
+        <li>Import definition <code>Import_Source1</code> configured (Match Name for Account)</li>
+        <li>Import definition <code>Import_Source2_CAM</code> configured (Map for Account + sign flip)</li>
+        <li>Clear Data Settings configured on both definitions (Staging Unique Values)</li>
+        <li>Workflow <code>Load Trial Balance</code> created with two parallel Data Input tasks</li>
+        <li>Workflow run successfully — no errors</li>
+        <li>Data visible in Consolidated Financials report for 2024 P12</li>
+      </ul>
+
+      <!-- COMMON ISSUES -->
+      <div class="callout-warning">
+        <span class="callout-label">🔧 Common Issues &amp; Fixes</span>
+        <dl>
+          <dt>Data doubles on re-run</dt>
+          <dd>Clear Data Settings was not configured on the import definition. Edit the import definition, set Clear Data Settings to Staging Unique Values (Audit + Period), save, and re-run. The old doubled data may need to be cleared manually first.</dd>
+
+          <dt>Import fails with "column not found" error</dt>
+          <dd>The column names in your source file don't exactly match the staging table column names — this comparison is case-sensitive. Open both the source file and the staging table definition and verify each column name character by character.</dd>
+
+          <dt>Consolidated Financials shows no data after the workflow ran successfully</dt>
+          <dd>The period is likely not open. Go to Maintain → General Configuration → Open Periods and verify 2024 P12 is in the table. Then re-run the workflow.</dd>
+
+          <dt>CAM entity amounts look wrong (too high, wrong sign)</dt>
+          <dd>Check the <strong>sign flip</strong> setting on the Source 2 import definition. CAM credit accounts need sign reversal on inbound load. If the sign flip is missing or applied incorrectly, P&amp;L and balance sheet figures will be inverted.</dd>
+
+          <dt>Workflow created from Workflow menu instead of Explorer</dt>
+          <dd>Workflows (Processes) must be created from the Explorer folder structure — right-click on the Processes folder → New Process. Creating from the Workflow menu does not work the same way and is a common confusion point.</dd>
+        </dl>
+      </div>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./09-data-integration.html">← Previous</a>
+        <a class="prevnext-btn" href="./11-currency-conversion.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

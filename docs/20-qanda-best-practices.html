@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q&amp;A &amp; Best Practices — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link active" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Q&amp;A &amp; Best Practices</h1>
+      <p class="subtitle">Real questions from the London workshop, plus best practices from the partner roundtable</p>
+      <div class="badge-row"><span class="content-badge">Reference</span><span class="content-badge">Read</span></div>
+    </div>
+    <div class="content-body">
+
+      <p>These questions and answers were captured during the FCR Delivery Partner Workshop, London, April 21–23, 2026. Best practices from the partner roundtable are included at the end.</p>
+
+      <!-- Data Model & Configuration -->
+      <h2>Data Model &amp; Configuration</h2>
+
+      <div class="qa-item">
+        <div class="question">Q: What are the top 3 areas where mistakes are most likely on a first FCR implementation without experienced help?</div>
+        <div class="answer">1) Consolidation setup — the rules will be new and unfamiliar. 2) Account dimension configuration — the bulk of configuration happens here (tags, rule associations, attribute settings). 3) Understanding that the approach and methodology differ from other consolidation tools, even if you have consolidation experience. The key challenge is adapting to a different paradigm, not a lack of effort.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: If you accidentally provision the wrong tenant type, can you switch to the correct one?</div>
+        <div class="answer">No. Tenant types (10-dimension, 11-dimension with Group, 14-dimension IFRS accelerator) are fundamentally different in their structure. You cannot convert one to another. You must start the provisioning process over from scratch. This is why the conversation about which type is needed must happen with the customer before provisioning begins — it is an irreversible decision.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: What is the provisioning turnaround time once all required information is submitted?</div>
+        <div class="answer">Approximately 3–5 business days once all required information is submitted. Past delays have been caused by communication gaps between customer, partner, and the provisioning team. Submit the request with all fields complete to avoid back-and-forth.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Can you have two Entity-type dimensions (e.g., for matrix consolidation)?</div>
+        <div class="answer">No. Each standard dimension type (Entity, Intercompany, Group, Audit, DataView, Movement, etc.) can only appear once in a model. Only "Other" type dimensions can be added multiple times. Matrix consolidation support is on the roadmap — expected to be in customers' hands by end of 2026 — likely implemented via two "Other" type dimensions with mirroring behavior.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Is there a risk or performance issue from adding too many custom dimensions?</div>
+        <div class="answer">Adding 2–4 custom dimensions has no meaningful performance impact. The practical concern is user complexity — more dimensions means more selections users must make when entering data. This can be mitigated with views that auto-select default members for less-relevant dimensions. Best practice: only add dimensions you actually need for consolidation. Don't try to use FCR as a planning tool.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Can hierarchies be "ragged" (leaf-level members at different depth levels)?</div>
+        <div class="answer">Yes. FCR accommodates ragged hierarchies without issues.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Why do we set the number of levels in a dimension?</div>
+        <div class="answer">Historically, the number of levels had to be set accurately because Anaplan Excel (AXL/NFL) used it to know how many levels to render in a report — exceeding the setting caused errors. This is now automated and auto-adapts, so you won't experience that error anymore in current versions.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Can dimension imports/exports be automated (e.g., refresh from ERP monthly)?</div>
+        <div class="answer">Yes — via ADO (preferred for FPC combined SKU customers, as it's included), flat files triggered by a workflow, or the REST API. Other ETL tools (Boomi, Fileworks, etc.) also work but won't have the same tight workflow integration that ADO provides. S3/data lake connections are also possible via API.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: With the DataView dimension — does it mean when looking at reported data you always look at the "Value" member, and for consolidated data you look at "Consolidation"?</div>
+        <div class="answer">Yes, correct. The DataView dimension is not additive — each member represents a distinct stage or type of data, and you select one at a time to see that view. "Value" = raw loaded data, "Conversion" = currency-translated data, "Consolidation" = consolidation calculation results. These do not roll up together.</div>
+      </div>
+
+      <!-- Ownership & Consolidation Methods -->
+      <h2>Ownership &amp; Consolidation Methods</h2>
+
+      <div class="qa-item">
+        <div class="question">Q: If an entity's ownership percentage changes mid-year (e.g., a partial divestiture), how is that handled?</div>
+        <div class="answer">By date-bounding rows in the Direct Ownership table. You add a new row for the same parent-child relationship with the new ownership percentage and a new start date. The prior row gets an end date. The Ultimate Rate Calculator reads the dates and applies the correct percentage for each period. You do not overwrite the original row.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: What happens in the Direct Ownership table if I can't see the Entity or Intercompany dimensions in the left-hand panel?</div>
+        <div class="answer">This means the "Total Group" tag is missing from one of your key dimensions — most commonly the Company or Intercompany dimension. The Total Group tag must exist in the Entity, Company, AND Group dimensions for default reports and input forms to function. Check all three and run Save → Process after adding the missing tag.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Is the decision to use the Group dimension (11-dimension model) vs. not use it really irreversible?</div>
+        <div class="answer">Yes. The group dimension vs. non-group dimension configurations are fundamentally different in how intercompany eliminations are structured. Changing this after implementation would require re-provisioning from scratch. In Europe, the best practice is to use the Group dimension. Get the client to explicitly sign off on this decision at project kickoff before any configuration begins.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Is it possible for a front-end user to create their own repartition formulas for consolidation methods?</div>
+        <div class="answer">No. Repartition formulas are managed by Anaplan. The available formulas (100%, ownership%, 1–ownership% for minority, etc.) are pre-set. If a needed formula doesn't exist in your tenant, submit a ticket to Anaplan. It is technically possible for Anaplan staff to create new formulas, but not for end users or partners.</div>
+      </div>
+
+      <!-- Data Integration -->
+      <h2>Data Integration</h2>
+
+      <div class="qa-item">
+        <div class="question">Q: If a mapping range covers accounts 1000–1099, but account 1005 needs to map to a different target — how do you handle overlapping mapping rules?</div>
+        <div class="answer">Use two separate range rules that exclude 1005: one for 1000–1004 and one for 1006–1099, both mapping to the first target; plus an exact match rule for 1005 to its different target. The system will flag an error if two rules overlap or conflict. Configure the rules carefully to avoid overlap.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: What happens if you re-run a data import without configuring Clear Data Settings?</div>
+        <div class="answer">The default behavior is additive — data accumulates. If you load a trial balance and then re-load it without clearing first, you will have doubled (or tripled, etc.) amounts in the system. Always configure Clear Data Settings in every import definition before the first data load. The most common setting for trial balance imports is "Staging Unique Values" scoped to the period dimension.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Why does the period need to be "opened" before data can be loaded — isn't that backwards from how other consolidation systems work?</div>
+        <div class="answer">Yes, it is the opposite of most consolidation systems. In FCR, periods start closed and you explicitly open them by adding rows to the Configure Open Periods table. Closing a period means removing its row. This is intentional — it gives the implementation team explicit control. Warn participants during training: this is a common gotcha that causes confusion on the first data load.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Is loading data via S3 / data lake possible?</div>
+        <div class="answer">Yes. API-based options can connect to data lakes, and this can be triggered via a workflow. ADO (Anaplan Data Operations) is the preferred method for FPC combined SKU customers and has the tightest workflow integration.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: How often do you go into the workflow builder to edit parameters after initial setup?</div>
+        <div class="answer">Only when building or changing the workflow structure. Once built and deployed, end users just click Run (or the workflow triggers on a schedule). Ongoing interaction is at the task/user level, not the design level. Think of it like deploying a process — you build it once and let it run.</div>
+      </div>
+
+      <!-- Currency Conversion -->
+      <h2>Currency Conversion</h2>
+
+      <div class="qa-item">
+        <div class="question">Q: If you forget to set the P_conversion property on a new account, what happens?</div>
+        <div class="answer">You can still load data to that account and it won't cause an error. But the account will not convert — data stays in local currency only. There is no warning; the data simply doesn't appear in reporting currencies. Always check the P_conversion attribute when adding new accounts to the chart of accounts.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Why would you use the divisory rate vs. the multiplicative rate?</div>
+        <div class="answer">It's pure preference — both produce the same result using the inverse rate. Some historical customers entered rates one way, others the other. There is no technical reason to prefer one over the other; choose whichever convention your client's finance team is most familiar with and be consistent across the implementation.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: What is a 7-step troubleshooting checklist for conversion issues?</div>
+        <div class="answer">1) Do I have currency translation rates entered for this period? 2) Is the reporting currency set (reporting = true, triangulate = true)? 3) Did I assign the correct P_conversion property to all accounts? 4) Are the conversion rules active? 5) Did I add a new movement member that needs to be included in the conversion rule? 6) Is any account using the "historical" conversion type (check equity accounts)? 7) Are year-to-date balances zero when they should have values?</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Do the "all_currency" and "no_currency" members in the currency dimension need rate operator attributes?</div>
+        <div class="answer">No. Rate operator attributes should NOT be placed on the all_currency or no_currency members. These are system rollup members and adding rate operators to them can cause unexpected behavior. Only set rate operators on actual reporting and functional currencies.</div>
+      </div>
+
+      <!-- Journals -->
+      <h2>Journals</h2>
+
+      <div class="qa-item">
+        <div class="question">Q: Why is the default query value for the audit dimension set to "Manual Journal" (a parent member) rather than a leaf member?</div>
+        <div class="answer">Setting a parent as the default query limits which audit members users can select when creating a journal entry. By setting "Manual Journal" (the parent), users can only post to its 4 children: Reclass, Interco Adjustment, Other Manual, and Manual Interco Adjustment. This prevents accidental journal entries to Source GL, Proportional Method, or Equity Method audit members — which should never be written to directly.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: What is the difference between "default query value" and "default input value" in journal configuration?</div>
+        <div class="answer">"Default query value" filters and limits what is available to select — it restricts the list. "Default input value" pre-selects a value when creating a new journal, but the user can change it. Use query defaults to enforce data quality; use input defaults to reduce friction for common entries.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Can you change the journal header/detail configuration after journals have been entered?</div>
+        <div class="answer">Technically the system allows it, but once journals exist, changing the header/detail flag for any dimension can cause data loss or errors on existing journal entries. Best practice: design and lock the journal configuration before go-live, and do not change it after journals have been posted.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Does the Journals feature come enabled by default in a new FCR tenant?</div>
+        <div class="answer">No. Journals requires a feature flag to be enabled at the tenant level — it is NOT in the web form settings and must be activated via the Excel settings file. For brand-new tenants, this may require a support ticket to Anaplan. Once the flag is enabled, you must also enable all journal permissions in Security → Role Authorizations before the Journals module appears in the navigation.</div>
+      </div>
+
+      <!-- Consolidation Rules & Intercompany -->
+      <h2>Consolidation Rules &amp; Intercompany</h2>
+
+      <div class="qa-item">
+        <div class="question">Q: Does the Active flag on a consolidation rule interact with workflow (e.g., auto-activate/deactivate based on period)?</div>
+        <div class="answer">No. The Active flag is a simple true/false: the rule runs or it doesn't. To control which data gets processed conditionally, filter by model, audit, timeframe, or scenario within the rule configuration rather than toggling the active flag. You can also use Start/End dates on rules to control which periods they apply to — useful for go-live scenarios where you don't want old periods processed.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: What does the "Special Events" flag on a consolidation rule do?</div>
+        <div class="answer">Special Events overrides the normal account-based scope of a consolidation rule and makes it apply to ALL balance sheet and P&amp;L accounts. It is used for equity method processing. Use it only for equity method rules — applying Special Events to other rule types will cause unintended eliminations across the entire chart of accounts.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: When would you need parent entity members in the intercompany dimension?</div>
+        <div class="answer">You don't technically need them for consolidation logic. They are only useful for report navigation and filtering — making it easier for users to find entities in a large flat list. In an entity structure with 500 entities, having parent groupings in the IC dimension significantly improves usability. There is no functional impact on consolidation calculations either way.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Does the intercompany matching report work correctly in the current version?</div>
+        <div class="answer">As of the April 2026 workshop, there was a known bug in the recently released version that caused unexpected results in the intercompany matching report. The facilitator confirmed: once the matching configuration is complete, that exercise is functionally done — the report output may not look correct in this release but will be fixed. Check the current release notes before each workshop delivery.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: The "Elimination Dimension" and "Elimination Entity" fields appear in the consolidation rule configuration — what do they do?</div>
+        <div class="answer">Nothing. These fields exist in the UI but have no functional logic behind them. Skip them during configuration. The same applies to the "Text rule" and "Source other dimensions" fields — they are present but unused.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: What are the two ways to handle equity method (20–50% owned) subsidiaries in consolidation rules?</div>
+        <div class="answer">Option 1: Post a manual journal entry for the subsidiary's net income — simpler but manual. Option 2: Use consolidation rules with the "Special Event" flag to automatically eliminate the entire trial balance of the subsidiary and post only one line (the net income amount). The Special Event approach is cleaner, more automated, and is the recommended method for production implementations.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: What is the auto-booking account, and how does it differ from the offset account?</div>
+        <div class="answer">The offset account is where intercompany differences are parked temporarily after elimination runs. The auto-booking account is where unmatched intercompany differences are reclassified after the auto-booking run. They must be separate accounts. The auto-booking account must also be added back into the matching header configuration with a minus sign — if this second step is missed, the auto-booking will not zero out the difference correctly.</div>
+      </div>
+
+      <!-- Period Management -->
+      <h2>Period Management</h2>
+
+      <div class="qa-item">
+        <div class="question">Q: Can you have multiple periods open at the same time in FCR?</div>
+        <div class="answer">Yes. You can have multiple periods open simultaneously by adding multiple rows to the Configure Open Periods table. Closing a period means deleting its row from that table. It is common during busy close periods to have the current period and one or two prior periods open simultaneously.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Do you need to create a new workflow for each new period, or can you reuse the existing one?</div>
+        <div class="answer">You can reuse the existing workflow. The period date typically comes from the file being loaded (or from the Global Current Period variable) rather than being hardcoded in the workflow. Update the Global Variables to the new period and rerun the existing workflow. Avoid creating a new workflow for every period — that creates unnecessary maintenance overhead.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: What is the purpose of the "Copy Opening" step and when must it run?</div>
+        <div class="answer">Copy Opening rolls prior period closing balances to the opening balances of the new period. It must run after the new period has been added to Configure Open Periods and before any trial balance data is loaded for the new period. Running Copy Opening before the period is open will fail. This is one of the first steps in the period initialization sequence.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: What happens if you run the month-end rollover in the middle of the cash flow process?</div>
+        <div class="answer">Running the month-end rollover replaces ALL balance sheet continuity movement data. You must only run it at the very start of the cash flow process for a new period — never mid-process. If run mid-process, all previously entered balance sheet continuity data for the period will be wiped and must be re-entered.</div>
+      </div>
+
+      <!-- Balance Sheet & Cash Flow -->
+      <h2>Balance Sheet &amp; Cash Flow</h2>
+
+      <div class="qa-item">
+        <div class="question">Q: What is the difference between the balance sheet continuity schedule and the cash flow adjustment?</div>
+        <div class="answer">The balance sheet continuity schedule captures detailed movements on balance sheet accounts (opening, increases, decreases, closing) and this data feeds directly into the cash flow calculation. The cash flow adjustment is a separate Excel-based input form for fine-tuning the cash flow after the calculation runs — it does not impact the balance sheet. The two are complementary but serve different purposes.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Are cash flow calculation rules literally copying movement data to the cash flow accounts — so the values are physically stored there?</div>
+        <div class="answer">Yes. The data is duplicated and physically stored on the cash flow accounts. This is intentional. However, you can still drill from a cash flow account back to the detailed GL account and audit member, so full traceability is maintained.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: How do I figure out whether to add or subtract in a cash flow calculation rule?</div>
+        <div class="answer">Think in terms of balance sheet debit/credit logic. If clients pay down receivables, receivables (an asset) decrease — a decrease in an asset means cash comes in (positive inflow). For expenses, cash goes out (negative). The sign in the cash flow rule reflects the balance sheet movement logic: asset decrease = positive cash flow, liability increase = positive cash flow.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: If I already loaded cash flow accounts as part of an earlier activity, do I need to re-upload them?</div>
+        <div class="answer">No. If the cash flow accounts already exist in your accounts dimension, skip the import step and go directly to configuring the calculation rules. If you do need to import cash flow accounts, always use Append mode — never Replace if GL accounts are already loaded, as Replace will overwrite your existing chart of accounts.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Is there any plan to make the Fluence Excel add-in available on Mac?</div>
+        <div class="answer">Not currently. As of the April 2026 workshop, no Mac plan was known. Mac users must use a Windows VM to access Excel-based input forms (balance sheet continuity schedule, cash flow adjustments, FX rate overrides). This should be communicated to participants at the start of any workshop with Mac users.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: Does Disclosure Management (Narrative Reporting) come included with FCR?</div>
+        <div class="answer">A version of Disclosure Management comes with FCR for reporting against FCR data itself. A separate/additional license is required only if you want to report against data sources other than FCR (e.g., TM1, Power BI, HR systems). Always verify licensing details with your Anaplan Account Executive before scoping.</div>
+      </div>
+
+      <!-- Security -->
+      <h2>Security</h2>
+
+      <div class="qa-item">
+        <div class="question">Q: To enter FX rate overrides, how do you get the + (add) button to appear in the Override Rates web form?</div>
+        <div class="answer">You must go to Security → Role Authorizations → set the "Consolidation" permission to "All." Once that is set, the + button appears in the Override Rates screen. This is new behavior as of the version released during the April 2026 workshop — the facilitator discovered it live during the session. If a user reports that the + button is missing, check their Consolidation security setting first.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: What happens if a user is not assigned any workflow role (Owner, Supervisor, or Contributor)?</div>
+        <div class="answer">They cannot see the workflow at all. This is by design — workflow security in FCR is exclusive. A user must have at least one of the three workflow roles assigned to even know the workflow exists. This is different from most systems where users can see workflows but cannot interact with them.</div>
+      </div>
+
+      <!-- Best Practices -->
+      <h2>Best Practices — Partner Roundtable</h2>
+      <p>The following best practices were shared during the partner roundtable discussion. Contributors: <strong>Yousef</strong> (experienced FCR implementer, ~5 projects), <strong>Dirk</strong> (Spain implementation lead), and <strong>Matteo</strong> (Anaplan Professional Services).</p>
+
+      <h3>Yousef — Tagging, IFRS Starter Kit, and First Implementations</h3>
+
+      <div class="qa-item">
+        <div class="question">Best Practice: Tagging is the most important thing to understand in FCR</div>
+        <div class="answer">By using tags on accounts, you can drive rules, templates, and reports without modifying the account structure. This is the key to a scalable implementation. Tags allow the same consolidation rules to be reused across customers — as long as your tagging methodology is consistent, you can import rules from one client engagement and apply them to the next with minimal adjustment.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Best Practice: Start with the IFRS Starter Kit as the foundation</div>
+        <div class="answer">For the last two projects, Yousef used the IFRS Starter Kit as the starting point. It provides a strong foundation with pre-configured tags, rules, and templates. The recommended approach: start with the IFRS Starter Kit, then layer local GAAP requirements on top. Even for non-IFRS customers, the kit's tagging structure and rule architecture serve as valuable reference material.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Best Practice: BES (Business Expert Support) is invaluable for first implementations</div>
+        <div class="answer">BES can help guide you through the solution and flag product updates. Especially recommended for first FCR implementations. The support team has deep knowledge of edge cases and product behavior that isn't always documented. Use them proactively rather than waiting until you're stuck.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Best Practice: Partners should build their own internal starter kits</div>
+        <div class="answer">Building an internal starter kit serves two purposes: it gives your team deep, hands-on familiarity with the tool, and it creates a repeatable go-to-market asset. Localizing for your region (Spanish, Belgian, German regulation) is especially valuable — Anaplan cannot build every country/GAAP variant without partners who have that knowledge. Your starter kit becomes your competitive differentiator.</div>
+      </div>
+
+      <h3>Dirk — Spain Implementation: Lessons Learned</h3>
+
+      <div class="qa-item">
+        <div class="question">Best Practice: Schedule weekly stand-ups with Anaplan Professional Services during the project</div>
+        <div class="answer">On the Spain project (~10 entities), weekly (sometimes daily during intense phases) 50-minute stand-ups with the Anaplan team were critical. They kept the project on track, provided a sounding board for decisions, and prevented time lost investigating issues in isolation. Anaplan Professional Services support during the sales cycle and early delivery is free of charge — use it.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Best Practice: Export the demo application chart of accounts and use it as a reference</div>
+        <div class="answer">The demo application in the provisioned tenant is one of the most valuable resources for new implementers. Export the demo chart of accounts with tags and consolidation rules to Excel. Use this export as a reference template when building the real client configuration — it shows field requirements, tag conventions, and example intercompany elimination structures that are not fully documented elsewhere.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Best Practice: A typo in a tag causes silent, one-sided eliminations</div>
+        <div class="answer">Dirk encountered a case on the Spain project where an intercompany elimination only worked on one side because of a tag typo. The system accepts any free text as a tag — there is no validation, no red box, no error. Best practice: after configuring your chart of accounts with all tags, export it to Excel and cross-check every tag against the tags referenced in your consolidation rules. This is your only protection against silent tag failures.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Best Practice: A clean 10-entity implementation with good data quality takes 4–6 weeks</div>
+        <div class="answer">Based on the Spain engagement (~10 entities, one extra dimension — Cost Center), a straightforward implementation should take 4–6 weeks. The project took longer because of data quality issues in client source files. Set clear data quality requirements upfront and build time for data reconciliation into the project plan. Data quality is the leading cause of FCR project delays.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Best Practice: The standard financial statement reports are sufficient for implementation validation</div>
+        <div class="answer">The out-of-the-box consolidated financial statement reports (by entity, by audit member) are enough to validate consolidation, conversion, and intercompany elimination during implementation. Clients may eventually want custom reports, but use the standard ones for testing — they cover the key validation points and save time during the build phase.</div>
+      </div>
+
+      <h3>Matteo — IFRS Starter Kit, Tenant Selection, and Tag Validation</h3>
+
+      <div class="qa-item">
+        <div class="question">Best Practice: Understand what the IFRS Starter Kit is — and is not</div>
+        <div class="answer">The IFRS Starter Kit is a starting point, not a permanently upgradeable app. Once deployed and customized, it becomes a standalone configuration. Standard global folder reports are dimension-agnostic and will always work. Starter Kit reports are pre-configured for specific dimensions and tags — if you change a dimension name or add a dimension after deploying the kit, you need to review all affected reports and forms. Treat it as a configurable template, not an auto-updating application.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Best Practice: Choose the right tenant type based on the client's reporting structure</div>
+        <div class="answer">The 11-dimension model (with Group dimension) is the European best practice and supports complex elimination structures. The 14-dimension IFRS accelerator is suited for Central/Eastern Europe with more dimensions pre-built. The 10-dimension model is standard for AMER, UK, and Nordics without a Group dimension. Have this conversation with the client before any configuration begins — the decision is irreversible. If in doubt about which to choose, involve Anaplan Professional Services in the decision.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Best Practice: Tag validation is a known gap — plan around it</div>
+        <div class="answer">Tags are free-text with zero validation. A tag manager or validation feature is on Anaplan's foreseen roadmap but is not actively planned as of April 2026. Do not count on it being available soon. The current best practice: export the full chart of accounts with tags after configuration, use it as your source of truth when writing rules, and have someone cross-check all tags before go-live. Even Matteo made a tag typo during the workshop — it happens to everyone.</div>
+      </div>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./19-narrative-reporting.html">← Previous</a>
+        <a class="prevnext-btn" href="./21-facilitator-guide.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

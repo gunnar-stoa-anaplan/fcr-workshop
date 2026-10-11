@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Narrative Reporting — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link active" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Narrative Reporting</h1>
+      <p class="subtitle">Disclosure management, use cases, inverse design, and how it compares to Workiva</p>
+      <div class="badge-row"><span class="content-badge">Advanced Topics</span><span class="content-badge">20 min</span></div>
+    </div>
+    <div class="content-body">
+
+      <!-- TSD Banner -->
+      <div class="tsd-banner">
+        <div class="tsd-item tsd-tell">
+          <div class="tsd-label">Tell</div>
+          <div class="tsd-text">What Narrative Reporting is, its positioning in the Anaplan Finance suite, and where it fits in the financial close process</div>
+        </div>
+        <div class="tsd-item tsd-show">
+          <div class="tsd-label">Show</div>
+          <div class="tsd-text">Live demo of a board pack report — section structure, data connections, workflow status, and version control</div>
+        </div>
+        <div class="tsd-item tsd-do">
+          <div class="tsd-label">Do</div>
+          <div class="tsd-text">No hands-on activity — reference and awareness session. Rapid deployment (5–10 days) means partners can explore independently.</div>
+        </div>
+      </div>
+
+      <!-- What it is -->
+      <h2>What Is Narrative Reporting?</h2>
+      <p>Narrative Reporting (also called Disclosure Management) is a <strong>separate Anaplan product</strong> — it is not included in the standard FCR license. It is an add-on designed for the <em>last mile</em> of financial close: the creation, review, and sign-off of board packs, annual reports, press releases, and statutory filings.</p>
+
+      <p>Key positioning facts:</p>
+      <ul>
+        <li>Built on <strong>Microsoft Word and PowerPoint</strong> — not Google tools, which is seen as a major advantage with finance teams already using Microsoft 365</li>
+        <li>Direct competitor to <strong>Workiva</strong></li>
+        <li>Can connect to FCR, Anaplan planning models, TM1, Power BI, and HR systems — not limited to FCR data</li>
+        <li>Anaplan <strong>does not typically provide implementation services</strong> for Narrative Reporting — partners and customers deploy it themselves</li>
+        <li>Deployment timeline: as little as <strong>5–10 days</strong> using Inverse Design on existing documents</li>
+      </ul>
+
+      <div class="callout callout-info">
+        <strong>💡 Goldman Sachs Reference Case</strong>
+        <p>Goldman Sachs is replacing Workiva with Anaplan Narrative Reporting for approximately <strong>10,000 reports</strong>. Key reasons cited: preference for Microsoft tools (Word/PowerPoint over web-native), and per-user pricing vs. per-report pricing which makes large-scale rollout more economical.</p>
+      </div>
+
+      <!-- Inverse Design -->
+      <h2>Inverse Design — The Key Differentiator</h2>
+      <p>Unlike traditional reporting tools where you define the layout first and then populate it with data, Narrative Reporting uses <strong>Inverse Design</strong>:</p>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <div class="concept-icon">📄</div>
+          <div class="concept-title">Traditional Approach</div>
+          <div class="concept-desc">Define template layout → Map data to sections → Publish. Changing the layout requires rework of all data mappings.</div>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">🔄</div>
+          <div class="concept-title">Inverse Design (Narrative Reporting)</div>
+          <div class="concept-desc">Upload your <em>existing</em> Word or PowerPoint document → system automatically creates section structure → connect data sources to each section. Up and running in 5–10 days.</div>
+        </div>
+      </div>
+
+      <p>The design is driven by the data model and document structure, not a blank-canvas layout. This dramatically reduces time-to-value, especially for organizations that already have established report templates.</p>
+
+      <!-- Key Capabilities -->
+      <h2>Key Capabilities</h2>
+
+      <table class="data-table">
+        <caption>Table 28: Narrative Reporting — Key Capabilities</caption>
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Report / Story Types</strong></td>
+            <td>Board packs, annual reports, press releases, management reports, ESG reports, regulatory filings</td>
+          </tr>
+          <tr>
+            <td><strong>Microsoft Integration</strong></td>
+            <td>Excel and Word/PowerPoint add-ins for connecting live data to document sections via named ranges</td>
+          </tr>
+          <tr>
+            <td><strong>Multi-User Collaboration</strong></td>
+            <td>Multiple authors can work on different sections simultaneously; section-level ownership model</td>
+          </tr>
+          <tr>
+            <td><strong>Workflow</strong></td>
+            <td>Built-in preparer → reviewer → approver workflow with status tracking per section</td>
+          </tr>
+          <tr>
+            <td><strong>Version Control</strong></td>
+            <td>Full document version history with compare and track-changes functionality</td>
+          </tr>
+          <tr>
+            <td><strong>Audit Trail &amp; Sign-Off</strong></td>
+            <td>Every action logged; sign-off tracking for compliance and external audit support</td>
+          </tr>
+          <tr>
+            <td><strong>Data Change Alerts</strong></td>
+            <td>Icon flags sections impacted when underlying FCR numbers change; report owner controls when to refresh</td>
+          </tr>
+          <tr>
+            <td><strong>Period Reuse</strong></td>
+            <td>Anaplan Excel data source files can use an input worksheet to drive the time period — update once, all sections refresh</td>
+          </tr>
+          <tr>
+            <td><strong>AI Narrative Writing</strong></td>
+            <td>AI integration to automate narrative text generation — "soon to release" as of the April 2026 workshop</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="screenshot-placeholder">
+        <div class="ss-icon">📸</div>
+        <div class="ss-label">Narrative Reporting — Board Pack Story/Report Example</div>
+        <div class="ss-desc">Screenshot pending</div>
+      </div>
+
+      <!-- FCR Integration -->
+      <h2>FCR + Narrative Reporting Integration</h2>
+      <p>FCR provides the consolidated numbers. Narrative Reporting pulls those numbers into the report without manual copy-paste:</p>
+      <ol>
+        <li>FCR runs the consolidation and produces finalized consolidated financials</li>
+        <li>An <strong>Anaplan Excel data source file</strong> (stored in the cloud) connects to FCR data via named ranges</li>
+        <li>The Word/PowerPoint report document links to those named ranges in the data source file</li>
+        <li>When FCR numbers update (e.g., a late journal entry), the data source file refreshes and flags affected sections in the report — the report owner decides when to accept the refresh</li>
+      </ol>
+      <p>This eliminates the most error-prone step in reporting: manually copying numbers from a consolidation system into a Word document. Changes in FCR flow through automatically, with full control over when the published document reflects them.</p>
+
+      <!-- Workiva Comparison -->
+      <h2>Narrative Reporting vs. Workiva</h2>
+
+      <table class="data-table">
+        <caption>Table 29: Narrative Reporting vs. Workiva</caption>
+        <thead>
+          <tr>
+            <th>Criterion</th>
+            <th>Anaplan Narrative Reporting</th>
+            <th>Workiva</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Platform</strong></td>
+            <td>Anaplan-native; same platform as FCR and planning</td>
+            <td>Standalone SaaS product, purpose-built for financial reporting</td>
+          </tr>
+          <tr>
+            <td><strong>Interface</strong></td>
+            <td>Microsoft Word &amp; PowerPoint (familiar to finance teams)</td>
+            <td>Web-native editor; different from Office tools</td>
+          </tr>
+          <tr>
+            <td><strong>IT Integration</strong></td>
+            <td>Simpler — same Anaplan platform, same SSO, same data model</td>
+            <td>Separate platform integration required</td>
+          </tr>
+          <tr>
+            <td><strong>XBRL / ESEF / SEC Tagging</strong></td>
+            <td>Not supported — handled by external parties (Big 4, etc.)</td>
+            <td>Purpose-built for XBRL/ESEF tagging; strong regulatory filing support</td>
+          </tr>
+          <tr>
+            <td><strong>Maturity</strong></td>
+            <td>Newer product; rapidly growing adoption</td>
+            <td>Mature, established; wider market penetration</td>
+          </tr>
+          <tr>
+            <td><strong>Pricing</strong></td>
+            <td>Per-user; typically more economical at scale</td>
+            <td>Per-report pricing model at larger scale</td>
+          </tr>
+          <tr>
+            <td><strong>Best For</strong></td>
+            <td>Board packs, management reports, internal and investor communications</td>
+            <td>Public companies with SEC filing or complex regulatory requirements</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-info">
+        <strong>📌 Partner Guidance: Which to Recommend?</strong>
+        <ul>
+          <li>Use <strong>Narrative Reporting</strong> for board/management packs, internal reporting, and organizations already on the Anaplan platform</li>
+          <li>Recommend <strong>Workiva</strong> if the customer has SEC filing requirements, mandatory XBRL/ESEF tagging, or is a public company with complex regulatory obligations</li>
+          <li>Some large customers use <strong>both</strong> — Narrative Reporting for management reporting, Workiva for statutory/regulatory submissions</li>
+        </ul>
+      </div>
+
+      <!-- Licensing Note -->
+      <h2>Licensing Note</h2>
+      <div class="callout callout-warning">
+        <strong>⚠️ Separate SKU Required</strong>
+        <p>Narrative Reporting requires a <strong>separate license SKU</strong> — it is not included in the standard FCR or FPC license. Always confirm with your Anaplan Account Executive before scoping Narrative Reporting into an implementation proposal. Scoping it without confirming licensing can create commercial surprises late in a deal.</p>
+        <p>Verify whether a <strong>separate Narrative Reporting tenant</strong> needs to be provisioned — it is provisioned differently from the FCR consolidation tenant and may require additional lead time.</p>
+      </div>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./18-security.html">← Previous</a>
+        <a class="prevnext-btn" href="./20-qanda-best-practices.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

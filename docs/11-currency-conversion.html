@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currency Conversion — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link active" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Currency Conversion</h1>
+      <p class="subtitle">Triangulation, conversion parameters, FX rate entry, and troubleshooting</p>
+      <div class="badge-row"><span class="content-badge">Consolidation Engine</span><span class="content-badge">25 min</span></div>
+    </div>
+    <div class="content-body">
+
+      <div class="tsd-banner">
+        <div class="tsd-step tsd-step-tell">
+          <span class="tsd-step-label">📖 Tell</span>
+          <span class="tsd-step-heading">How FCR Handles Multi-Currency</span>
+          <span class="tsd-step-desc">Triangulation architecture, conversion parameter types, and the role of the base currency.</span>
+        </div>
+        <div class="tsd-step tsd-step-show">
+          <span class="tsd-step-label">👁 Show</span>
+          <span class="tsd-step-heading">FX Rates Web Form Demo</span>
+          <span class="tsd-step-desc">Live walkthrough of Maintain → Foreign Exchange Global Rates, entering period rates, and running a conversion.</span>
+        </div>
+        <div class="tsd-step tsd-step-do">
+          <span class="tsd-step-label">✅ Do</span>
+          <span class="tsd-step-heading">Lab D — Consolidation Engine</span>
+          <span class="tsd-step-desc">Configure GBP as a second reporting currency, enter FX rates, and validate conversion results (page 14).</span>
+        </div>
+      </div>
+
+      <h2>Triangulation: The Core Architecture</h2>
+      <p>FCR uses a <strong>triangulation model</strong> for all currency translation. Every conversion in the system routes through a single <strong>base currency</strong> — you never convert directly from one foreign currency to another. This ensures mathematical consistency across any currency combination in your consolidation.</p>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>🏦 Base Currency Rules</h3>
+          <ul>
+            <li>Exactly <strong>one</strong> base currency per tenant (typically USD)</li>
+            <li>Base currency rate is always <strong>1</strong> — never enters the rate table</li>
+            <li>Set <code>base_currency = true</code> on this dimension member</li>
+            <li>All other currencies are measured against the base</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>🔄 How Triangulation Works</h3>
+          <ul>
+            <li>EUR → USD is direct (EUR is local, USD is base)</li>
+            <li>GBP → EUR goes: GBP → USD → EUR</li>
+            <li>Every path routes through the base currency</li>
+            <li>No direct cross-rates needed — the base handles all conversions</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Currency Dimension Settings</h2>
+      <p>The currency dimension has several critical attributes that control how each currency member participates in conversion. Get these right before entering any rates.</p>
+
+      <table>
+        <caption>Table 16: Currency Dimension Settings</caption>
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Setting</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>base_currency</code></td>
+            <td><strong>true</strong> on base only (e.g., USD)</td>
+            <td>Marks the single base; rate = 1, always</td>
+          </tr>
+          <tr>
+            <td><code>reporting</code></td>
+            <td><strong>true</strong> on currencies you want to report in</td>
+            <td>Makes the currency available in consolidated reports</td>
+          </tr>
+          <tr>
+            <td><code>triangulate</code></td>
+            <td><strong>true</strong> on non-base reporting currencies</td>
+            <td>Enables the triangulation path through the base</td>
+          </tr>
+          <tr>
+            <td><code>rate_operator</code></td>
+            <td>Divide (divisory) or Multiply</td>
+            <td>How the rate is applied; same result, inverse format</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout-warn">
+        <span class="callout-label">⚠️ Special Members — Do NOT Assign Rate Operators</span>
+        <p>The <code>#all_currency</code> rollup member and <code>no_currency</code> member must <strong>never</strong> have rate operator attributes assigned. These are system members used for rollups and unassigned data — adding rate operators here will cause incorrect conversion behavior across the entire model.</p>
+      </div>
+
+      <h2>Divisory vs. Multiplicative Rates</h2>
+      <p>FCR supports two rate entry conventions. The math produces identical results — the choice is purely customer preference or historical convention.</p>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>÷ Divisory Rate (Divide)</h3>
+          <ul>
+            <li>Enter the rate as: <strong>1 / exchange rate</strong></li>
+            <li>EUR to USD at 1.10: enter <strong>0.9091</strong> (1/1.10)</li>
+            <li>GBP to USD at 1.25: enter <strong>0.80</strong> (1/1.25)</li>
+            <li>Common in European implementations</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>× Multiplicative Rate (Multiply)</h3>
+          <ul>
+            <li>Enter the rate as the direct exchange rate</li>
+            <li>EUR to USD at 1.10: enter <strong>1.10</strong></li>
+            <li>GBP to USD at 1.25: enter <strong>1.25</strong></li>
+            <li>More intuitive for most finance teams</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>P_conversion — Per-Account Conversion Rule</h2>
+      <p>The <code>P_conversion</code> attribute in the Account dimension is the most important setting in the entire currency module. It controls which conversion rule applies to each account. Assign it carefully — missing accounts will load data but silently fail to convert.</p>
+
+      <table>
+        <caption>Table 17: Per-Account Conversion Rules (P_conversion)</caption>
+        <thead>
+          <tr>
+            <th>Conversion Type</th>
+            <th>Applied To</th>
+            <th>Rate Used</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>End Rate</strong></td>
+            <td>Balance sheet accounts (assets, liabilities)</td>
+            <td>Closing rate at period end</td>
+            <td>References <code>#closing</code> tag on FX rate accounts</td>
+          </tr>
+          <tr>
+            <td><strong>Average Rate</strong></td>
+            <td>P&amp;L accounts (revenue, expenses)</td>
+            <td>Period average rate</td>
+            <td>References <code>#average</code> tag on FX rate accounts</td>
+          </tr>
+          <tr>
+            <td><strong>Historical</strong></td>
+            <td>Equity accounts</td>
+            <td>Rate at date of original transaction</td>
+            <td>Requires a populated historical rate table</td>
+          </tr>
+          <tr>
+            <td><strong>Current Year Net Income</strong></td>
+            <td>Net income account</td>
+            <td>Special treatment — derived from P&amp;L conversion</td>
+            <td>One specific account only; do not apply to multiple</td>
+          </tr>
+          <tr>
+            <td><strong>CTA</strong></td>
+            <td>Cumulative Translation Adjustment account</td>
+            <td>N/A — this is a <em>target</em> account</td>
+            <td><strong>Do NOT assign P_conversion</strong> — CTA is calculated, not sourced</td>
+          </tr>
+          <tr>
+            <td><strong>NGI (Net Group Income)</strong></td>
+            <td>Net Group Income account</td>
+            <td>N/A — this is a <em>target</em> account</td>
+            <td><strong>Do NOT assign P_conversion</strong> — NGI is calculated, not sourced</td>
+          </tr>
+          <tr>
+            <td><strong>No Conversion</strong></td>
+            <td>Cash flow accounts</td>
+            <td>None — amounts stay in local currency</td>
+            <td>Cash flow is calculated separately; no direct conversion needed</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/12-account-p-conversion.jpg" alt="Account dimension showing P_conversion column populated for different account types: End Rate, Average Rate, Historical, CTA (blank)" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 12:</span> Account dimension P_conversion attribute — each account type gets the correct conversion rule (End Rate for BS, Average for P&L, blank for CTA/NGI)</figcaption>
+      </figure>
+
+      <h2>Conversion Rule Structure</h2>
+      <p>FCR ships with out-of-the-box conversion rules for each conversion type. In most implementations you do not need to create new rules — your primary task is assigning the correct <code>P_conversion</code> attribute to accounts.</p>
+
+      <div class="step">
+        <div class="step-badge">How</div>
+        <div class="step-content">
+          <h3>Source → Target Data View Flow</h3>
+          <p>Each conversion rule defines:</p>
+          <ul>
+            <li><strong>Source Data View:</strong> The <em>Value</em> data view (local currency amounts loaded from source GL)</li>
+            <li><strong>Target Data View:</strong> The <em>Conversion</em> data view (translated amounts in reporting currency)</li>
+            <li><strong>Rate Type Reference:</strong> Rules reference the <code>#closing</code> or <code>#average</code> tag on FX rate accounts to pull the appropriate rate</li>
+            <li><strong>Active Flag:</strong> Must be <code>true</code> for the rule to execute during Run All</li>
+          </ul>
+          <p>If you add a new movement member to the chart of accounts, check whether it is included in <code>total_cash_variation</code> or <code>total_non_cash_variation</code>. If not, the conversion rule source may need to be manually updated to include it.</p>
+        </div>
+      </div>
+
+      <h2>CTA Calculation Methods</h2>
+      <p>The Cumulative Translation Adjustment account absorbs the exchange difference that arises when assets/liabilities are translated at closing rate but equity accounts use historical rates. FCR offers two methods:</p>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>📊 Current Method</h3>
+          <ul>
+            <li>CTA is calculated and posted <strong>directly in the balance sheet</strong></li>
+            <li>CTA appears as a standalone equity line item</li>
+            <li>Most common approach for IFRS-compliant reporting</li>
+            <li>Standard out-of-the-box FCR configuration</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>📈 Integrated Method</h3>
+          <ul>
+            <li>CTA flows through the <strong>income statement</strong></li>
+            <li>Included within current earnings in the balance sheet</li>
+            <li>Used when translation differences are treated as income/expense</li>
+            <li>Less common; requires specific rule configuration</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Entering FX Rates — Foreign Exchange Global Rates</h2>
+      <p>Rate entry has moved to a web form in this version of FCR. No more Excel-based rate files for the main rate table.</p>
+
+      <div class="step"><div class="step-badge">1</div><div class="step-content"><h3>Navigate to the Rate Form</h3><p>Go to <strong>Maintain → Foreign Exchange Global Rates</strong>. This is the new web form for the current release — previously this was done via an Excel import file.</p></div></div>
+      <div class="step"><div class="step-badge">2</div><div class="step-content"><h3>USD Base Rate (Always 1)</h3><p>The base currency (USD) must have a rate of <strong>1</strong> entered for both End Rate and Average Rate fields. This should already be set; verify before entering other rates.</p></div></div>
+      <div class="step"><div class="step-badge">3</div><div class="step-content"><h3>Enter Period Rates for Reporting Currencies</h3><p>For each reporting currency and each open period, enter the End Rate (closing rate) and Average Rate. Use the reference file <code>2024-2025 conversionrates.xls</code> provided in the exercise folder as your rate source.</p></div></div>
+      <div class="step"><div class="step-badge">4</div><div class="step-content"><h3>Decimal Separator — Watch the Format</h3><p>The web form uses a <strong>period (.)</strong> as the decimal separator. If you are copying from Excel, Excel may use a <strong>comma (,)</strong> depending on regional settings. Entering 0,8091 instead of 0.8091 will result in a wrong rate with no error message.</p></div></div>
+      <div class="step"><div class="step-badge">5</div><div class="step-content"><h3>Divisory Rate Example</h3><p>For GBP at a rate of 1.25 USD/GBP (divisory/divide setting): enter <strong>0.80</strong> (= 1 ÷ 1.25). For EUR at 1.10 USD/EUR: enter <strong>0.9091</strong>. The system divides the local currency amount by this rate to produce the USD equivalent.</p></div></div>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/13-fx-rates-webform.jpg" alt="Foreign Exchange Global Rates web form — USD base rate = 1, EUR and GBP entry fields for 2024 P12" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 13:</span> FX Global Rates web form (Maintain → Foreign Exchange) — new web-based interface; USD = 1 (base); enter divisory rates for other currencies</figcaption>
+      </figure>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/14-berlin-currency-columns.jpg" alt="Consolidated Financials by Entity showing Berlin entity with EUR and USD currency columns side by side" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 14:</span> Validation: Consolidated Financials by Entity — drag Currency dimension to columns; Berlin (E13) should show EUR ~190 and USD ~224 for the cash account</figcaption>
+      </figure>
+
+      <h2>Currency Conversion Troubleshooting Checklist</h2>
+      <p>If conversion results look wrong — zero values, unchanged local amounts, or a balance sheet that doesn't balance — work through this checklist in order before escalating.</p>
+
+      <ol class="checklist">
+        <li>
+          <strong>Do I have currency translation rates entered for the period?</strong><br>
+          Go to Maintain → Foreign Exchange Global Rates. Verify rates exist for the period you ran. Missing rates = no conversion.
+        </li>
+        <li>
+          <strong>Is the reporting currency set correctly?</strong><br>
+          Check the currency dimension: <code>reporting = true</code> and <code>triangulate = true</code> must be set on each non-base reporting currency. If <code>reporting</code> is false, results won't appear in consolidated reports.
+        </li>
+        <li>
+          <strong>Did I assign the correct P_conversion property to all accounts?</strong><br>
+          Open the Account dimension and inspect the <code>P_conversion</code> column. Every account that should convert needs a value. Accounts with a missing <code>P_conversion</code> will load data but not convert — no error is shown.
+        </li>
+        <li>
+          <strong>Are the conversion rules active?</strong><br>
+          Go to Maintain → Conversion Rules. Check that the <code>Active</code> flag is set to <code>true</code> on all relevant rules. Inactive rules are silently skipped.
+        </li>
+        <li>
+          <strong>Did I add a new movement member?</strong><br>
+          If you added a movement dimension member after initial configuration, check whether it is included in the conversion rule's source definition (e.g., within <code>total_cash_variation</code> or <code>total_non_cash_variation</code>). New movement members may need to be explicitly included.
+        </li>
+        <li>
+          <strong>Is the conversion type Historical?</strong><br>
+          Historical conversion requires a separate historical rate table to be populated with rates at the date of original transactions. If this table is empty, Historical accounts will show zero or incorrect values.
+        </li>
+        <li>
+          <strong>Are year-to-date opening balances zero on a brand-new tenant?</strong><br>
+          On a fresh tenant or the first period ever loaded, opening YTD balances are zero. This is expected — not a conversion error. Load your first period's trial balance and run again.
+        </li>
+      </ol>
+
+      <div class="callout-note">
+        <span class="callout-label">💡 Validation Tip</span>
+        <p>After running conversion, open the <strong>Consolidated Financials by Entity</strong> report and filter to a single entity (e.g., E13 Berlin). Drag the Currency dimension to columns. You should see EUR values, USD values, and GBP values side-by-side. For Berlin, expected cash account values are approximately EUR ~190 and USD ~224. If any column shows zero, use the checklist above starting from item 1.</p>
+      </div>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./10-lab-c-trial-balance.html">← Previous</a>
+        <a class="prevnext-btn" href="./12-journals.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

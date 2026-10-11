@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consolidation Rules &amp; Intercompany — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link active" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Consolidation Rules &amp; Intercompany</h1>
+      <p class="subtitle">Elimination rules, NCI, equity method, intercompany matching, and auto-booking</p>
+      <div class="badge-row"><span class="content-badge">Consolidation Engine</span><span class="content-badge">35 min</span></div>
+    </div>
+    <div class="content-body">
+
+      <div class="tsd-banner">
+        <div class="tsd-step tsd-step-tell">
+          <span class="tsd-step-label">📖 Tell</span>
+          <span class="tsd-step-heading">Rule Architecture &amp; Consolidation Methods</span>
+          <span class="tsd-step-desc">Header and detail structure, tags, repartition rules, and how each consolidation method applies.</span>
+        </div>
+        <div class="tsd-step tsd-step-show">
+          <span class="tsd-step-label">👁 Show</span>
+          <span class="tsd-step-heading">ARAP Elimination Walkthrough</span>
+          <span class="tsd-step-desc">Live demo of configuring an intercompany AR/AP elimination rule end-to-end.</span>
+        </div>
+        <div class="tsd-step tsd-step-do">
+          <span class="tsd-step-label">✅ Do</span>
+          <span class="tsd-step-heading">Lab D — Consolidation Engine</span>
+          <span class="tsd-step-desc">Configure ARAP elimination, NCI rules, and run consolidation to validate results (page 14).</span>
+        </div>
+      </div>
+
+      <h2>Consolidation Rule Architecture</h2>
+      <p>Consolidation rules are the automated elimination engine in FCR. Each rule has a <strong>header</strong> that defines the scope and behavior, and one or more <strong>detail rows</strong> that define the actual posting entries.</p>
+
+      <h3>Header Fields</h3>
+      <table>
+        <caption>Table 20: Consolidation Rule — Header Fields</caption>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Purpose</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td>Identifies the rule</td>
+            <td>Use descriptive names (e.g., "ARAP Elimination", "NCI Retained Earnings")</td>
+          </tr>
+          <tr>
+            <td>Parent consolidation</td>
+            <td>Groups related rules</td>
+            <td>E.g., all equity rules under an "Equity" parent group</td>
+          </tr>
+          <tr>
+            <td>Account (dimension attribute)</td>
+            <td>Links accounts to this rule via the account dimension's <em>consolidation</em> attribute</td>
+            <td>The primary scoping mechanism; most rules use this rather than source account overrides</td>
+          </tr>
+          <tr>
+            <td>Model</td>
+            <td>Limits rule to a specific consolidation model</td>
+            <td>Most customers have one model; can be used to create model-specific rules</td>
+          </tr>
+          <tr>
+            <td>Source audit</td>
+            <td>Filters input data to specific audit members</td>
+            <td>Leave blank to process all audit members</td>
+          </tr>
+          <tr>
+            <td>Target audit</td>
+            <td>Where elimination postings land</td>
+            <td>E.g., "IC Elimination" audit member</td>
+          </tr>
+          <tr>
+            <td>Source / Target data view</td>
+            <td>Optional filter to specific data views</td>
+            <td>Can filter to "Value" or "Conversion" data views</td>
+          </tr>
+          <tr>
+            <td>Special events</td>
+            <td>Bypasses account-based rule scope</td>
+            <td><strong>Applies to ALL balance sheet + P&amp;L accounts</strong> — use only for equity method processing</td>
+          </tr>
+          <tr>
+            <td>Active</td>
+            <td>true/false toggle</td>
+            <td>Inactive rules are silently skipped during consolidation — common oversight!</td>
+          </tr>
+          <tr>
+            <td>Start / End date</td>
+            <td>Restricts rule to specific periods</td>
+            <td>Useful for controlling when a rule takes effect (e.g., go-live period)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout-warn">
+        <span class="callout-label">⚠️ Fields That Do Nothing</span>
+        <p>The <strong>Elimination Dimension</strong>, <strong>Elimination Entity</strong>, <strong>Text rule</strong>, and <strong>Source other dimensions</strong> fields currently have no functional logic. Do not spend time configuring them — they are placeholders. Future releases may activate these fields.</p>
+      </div>
+
+      <h3>Detail Row Fields</h3>
+      <table>
+        <caption>Table 21: Consolidation Rule — Detail Row Fields</caption>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Purpose</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Source accounts</td>
+            <td>Optional override of the account-level rule link</td>
+            <td>Usually blank; source comes from account dimension consolidation attribute</td>
+          </tr>
+          <tr>
+            <td>Movements (source)</td>
+            <td>Optional movement filter</td>
+            <td>E.g., specify "closing" to only process the closing movement</td>
+          </tr>
+          <tr>
+            <td>Target account</td>
+            <td>Where the elimination posts</td>
+            <td>Typically an offset account (e.g., ARAP_OFFSET)</td>
+          </tr>
+          <tr>
+            <td>Target movement</td>
+            <td>Movement dimension member for the posted entry</td>
+            <td>Usually the same as source movement</td>
+          </tr>
+          <tr>
+            <td>Source timeframe</td>
+            <td>YTD or MTD</td>
+            <td>EMEA typically uses YTD average; North America often uses MTD</td>
+          </tr>
+          <tr>
+            <td>Sign</td>
+            <td>+ = keep source sign; – = flip sign</td>
+            <td>This is NOT debit/credit — it controls whether the amount is reversed</td>
+          </tr>
+          <tr>
+            <td>Force closing</td>
+            <td>Auto-calculates closing movement when running on individual movements</td>
+            <td>Useful when rules run on variation movements</td>
+          </tr>
+          <tr>
+            <td>Intercompany total leaf</td>
+            <td>Auto-calculates the total leaf intercompany member</td>
+            <td>Simplifies intercompany rules</td>
+          </tr>
+          <tr>
+            <td>Swap equity account</td>
+            <td>Equity method: swaps equity accounts to financial investment in associates</td>
+            <td>Equity method only</td>
+          </tr>
+          <tr>
+            <td>Repartition / Repartition type</td>
+            <td>Links to repartition rules defining the ownership-based formula</td>
+            <td>Controls how 100%, group%, and minority% splits are applied</td>
+          </tr>
+          <tr>
+            <td>Invert</td>
+            <td>Posts in the trading partner entity based on source entity value</td>
+            <td>Used in equity methods and financial investment eliminations</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Using Tags in Consolidation Rules</h2>
+      <p>Tags (prefixed with <code>#</code>) allow consolidation rules to reference accounts by label rather than hardcoded IDs. This makes rules portable across customers — the same rule works on any customer's chart of accounts as long as the tag names match.</p>
+
+      <div class="callout-warn">
+        <span class="callout-label">⚠️ No Tag Validation — Typos Silently Fail</span>
+        <p>When entering tags in consolidation rules, the system does <strong>not</strong> validate the tag name against any existing account tags. A mistyped tag (e.g., <code>#ICMATCH</code> instead of <code>#ICMATCHAR</code>) will silently produce no matches, and the rule will appear to run successfully but post nothing. Always double-check tag names against the account dimension.</p>
+      </div>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/17-consolidation-rule-header.jpg" alt="Consolidation rule header fields showing Parent Consolidation, Model, Source/Target Audit, Special Events, Active flag" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 17:</span> Consolidation rule header fields — Parent Consolidation, Source/Target Audit, Special Events, Active flag, Start/End date</figcaption>
+      </figure>
+
+      <h2>Repartition Rules</h2>
+      <p>Repartition rules define the entity-level formulas that control how consolidation methods split amounts between the group share and minority interest. They are pre-configured during provisioning and referenced in consolidation rule detail rows.</p>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>Available Formula Types</h3>
+          <ul>
+            <li><strong>100%</strong> — take the full amount (global method)</li>
+            <li><strong>Own%</strong> — take only the ownership percentage</li>
+            <li><strong>1 – Own%</strong> — take the minority share (inverse of ownership)</li>
+            <li><strong>Proportional%</strong> — 50/50 split for proportional method</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Important Constraints</h3>
+          <ul>
+            <li>Formulas are managed by <strong>Anaplan</strong> — front-end users cannot create new formulas</li>
+            <li>If a needed formula doesn't exist, submit a ticket to Anaplan support</li>
+            <li>Repartition rules are configured at the direct ownership → managed ownership level</li>
+            <li>Pre-configured at provisioning; rarely need additions</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Consolidation Methods</h2>
+
+      <h3>Global Method (Full Consolidation)</h3>
+      <p>Used for majority-owned subsidiaries (>50%). The full 100% of the subsidiary trial balance is loaded, then the equity elimination rule removes the intercompany cross-holding.</p>
+
+      <h3>Non-Controlling Interest (NCI)</h3>
+      <p>When a subsidiary is owned more than 50% but with outside minority shareholders, the NCI rules handle the minority share.</p>
+      <ul>
+        <li>Five separate NCI accounts are needed — one for each equity category:
+          <ul>
+            <li>Retained Earnings (minority)</li>
+            <li>Current Earnings (minority)</li>
+            <li>Capital (minority)</li>
+            <li>Dividends (minority)</li>
+            <li>CTA (minority)</li>
+          </ul>
+        </li>
+        <li>Out-of-the-box rules exist; link them via the consolidation attribute on each NCI account</li>
+        <li><strong>Best practice:</strong> Use separate accounts for each of the 5 NCI categories — more transparent and auditable than a single NCI bucket</li>
+        <li>Two approaches: (1) reclass both group and minority parts, or (2) reclass only the minority part</li>
+      </ul>
+
+      <h3>Equity Method (20–50% Ownership)</h3>
+      <p>For associates where the group has significant influence but not control. Only the net income remains in the consolidated output.</p>
+      <div class="two-col">
+        <div class="card">
+          <h3>Option A: Manual Journal</h3>
+          <ul>
+            <li>Post a manual journal for the net income amount</li>
+            <li>Simple but requires manual work each period</li>
+            <li>Subject to human error</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Option B: Special Event Rule (Recommended)</h3>
+          <ul>
+            <li>Use a consolidation rule with <strong>Special Events</strong> enabled</li>
+            <li>Eliminates the entire trial balance of the subsidiary</li>
+            <li>Posts one line: the net income amount</li>
+            <li>More automated and auditable</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Proportional Method (50% Ownership)</h3>
+      <p>For joint ventures owned exactly 50%. The rule backs out 50% of the trial balance from the consolidated output.</p>
+      <ul>
+        <li>Configure ownership at 50% in the Managed Ownership table</li>
+        <li>Configure consolidation rules with proportional repartition formulas</li>
+        <li>Run All and validate in the consolidated-by-audit report</li>
+      </ul>
+
+      <h2>Equity vs. Financial Investment Elimination</h2>
+      <p>This four-part rule eliminates the cross-holding between a parent's financial investment and the subsidiary's equity accounts. The key mechanism is the <strong>Financial Investment Link account</strong>, which moves the acquisition value from the parent entity to the subsidiary entity. At the consolidated level, this account nets to zero.</p>
+
+      <div class="step"><div class="step-badge">1</div><div class="step-content"><h3>Eliminate equity capital vs. retained earnings (group)</h3><p>The parent's financial investment is matched against the subsidiary's equity capital and retained earnings at the group level.</p></div></div>
+      <div class="step"><div class="step-badge">2</div><div class="step-content"><h3>Eliminate financial investments vs. retained earnings (M&amp;A)</h3><p>The historical acquisition cost is eliminated against retained earnings using the M&amp;A account, capturing goodwill or discount on acquisition.</p></div></div>
+      <div class="step"><div class="step-badge">3</div><div class="step-content"><h3>Reclass subsidiary equity accounts → Retained Earnings Group</h3><p>Subsidiary equity accounts are reclassified to the Retained Earnings Group account at the consolidated level.</p></div></div>
+      <div class="step"><div class="step-badge">4</div><div class="step-content"><h3>Populate NCI accounts</h3><p>The minority interest portion flows into the five NCI accounts based on ownership percentages from the Managed Ownership table.</p></div></div>
+
+      <h2>Intercompany Elimination — ARAP</h2>
+      <figure class="screenshot">
+        <img src="../img/screenshots/18-ic-matching-config.jpg" alt="Intercompany Matching configuration showing header and detail rows with tags column" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 18:</span> Intercompany Matching configuration — header rows + detail rows; tag column is free-text with no system validation</figcaption>
+      </figure>
+      <p>Accounts Receivable / Accounts Payable elimination is the most common intercompany elimination type. AR and AP balances between group entities must net to zero in the consolidated statements.</p>
+
+      <h3>Accounts Required</h3>
+      <div class="two-col">
+        <div class="card">
+          <h3>1. Offset Account</h3>
+          <ul>
+            <li>Receives the elimination entry</li>
+            <li>One offset account per elimination rule</li>
+            <li>Naming convention: <code>AccountCode_OFFSET</code> (e.g., ARAP_OFFSET)</li>
+            <li>Lives under the Accounts Payable hierarchy</li>
+            <li>Tagged with the IC matching tag (e.g., <code>#ICMATCHAR</code>)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>2. Auto-Booking Account</h3>
+          <ul>
+            <li>Separate from the offset account — must be a different account</li>
+            <li>Used to park IC differences that fall within an acceptable threshold</li>
+            <li>Must appear in both: (a) the Booking section AND (b) the Matching header with a minus sign</li>
+            <li>Missing the minus sign in the matching header will leave residual amounts</li>
+          </ul>
+        </div>
+      </div>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/19-ic-booking-config.jpg" alt="Intercompany elimination exercise showing ARAP setup steps" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 19:</span> Intercompany elimination — activate rule, configure matching header/detail, set auto-booking with No Intercompany on booking lines</figcaption>
+      </figure>
+
+      <h3>5-Step ARAP Elimination Setup</h3>
+      <div class="step"><div class="step-badge">1</div><div class="step-content"><h3>Assign consolidation rule to AR/AP accounts</h3><p>In the Account Dimension, assign the consolidation rule attribute to the AR and AP accounts. This links the accounts to the elimination rule.</p></div></div>
+      <div class="step"><div class="step-badge">2</div><div class="step-content"><h3>Configure the consolidation rule</h3><p>Go to <strong>Maintain → Consolidation Rules</strong>. Create or activate the ARAP elimination rule. Set Active = true. Define source accounts (AR/AP via tag) and target account (offset account). Set repartition rule.</p></div></div>
+      <div class="step"><div class="step-badge">3</div><div class="step-content"><h3>Configure Intercompany Matching</h3><p>Go to <strong>Maintain → Intercompany Matching</strong>. Create header rows for the AR and AP sides. Add detail rows referencing IC matching tags (<code>#ICMATCHAR</code>, <code>#ICAP</code>). Set sign: minus (–) for AP, plus (+) for AR.</p></div></div>
+      <div class="step"><div class="step-badge">4</div><div class="step-content"><h3>Configure Intercompany Auto-Booking</h3><p>In the Booking section of Maintain Intercompany, add two lines for the auto-booking account (debit and credit). Set the intercompany dimension to <strong>No Intercompany</strong> on booking entries — the booking happens post-elimination and should not carry IC detail. Also add the auto-booking account back into the matching header with a <strong>minus sign</strong>.</p></div></div>
+      <div class="step"><div class="step-badge">5</div><div class="step-content"><h3>Run consolidation and validate</h3><p>Run All for the period. Open the <strong>Consolidated Financials by Audit</strong> report and look for the IC Elimination audit column. Open the <strong>IC Matching Report</strong> to verify matched and unmatched intercompany balances between entities.</p></div></div>
+
+      <div class="callout-note">
+        <span class="callout-label">💡 Traceability Best Practice</span>
+        <p>Use <strong>one offset account per elimination rule</strong>. If you route multiple elimination rules through a single offset account, it becomes very difficult to trace which rule posted which amount during an audit. Naming convention: reuse the liability or expense account number and append <code>_OFFSET</code>.</p>
+      </div>
+
+      <div class="callout-note">
+        <span class="callout-label">ℹ Ownership Must Be Correct First</span>
+        <p>All consolidation rules depend on the percentages in the <strong>Managed Ownership table</strong>. If ownership is configured incorrectly, rules will apply to the wrong entities or calculate incorrect minority/group splits. Always verify the Managed Ownership table before running consolidation for the first time on a new entity relationship.</p>
+      </div>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./12-journals.html">← Previous</a>
+        <a class="prevnext-btn" href="./14-lab-d-consolidation-engine.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab B: Ownership Setup — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link active" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Lab B: Ownership Setup</h1>
+      <p class="subtitle">Configure consolidation methods, enter ownership percentages, and run the ultimate rate calculator</p>
+      <div class="badge-row"><span class="content-badge">Data Model &amp; Configuration</span><span class="content-badge">30 min</span></div>
+    </div>
+    <div class="content-body">
+
+      <div class="callout-note">
+        <span class="callout-label">🎯 Lab Objective</span>
+        <p>By the end of this lab, every entity in the workshop model will have ownership percentages configured, consolidation methods set up, and the Managed Ownership table auto-populated by the Ultimate Rate Calculator.</p>
+      </div>
+
+      <!-- MINI-LAB 1 -->
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">1</div>
+          <div class="mini-lab-title">Configure Consolidation Methods</div>
+          <div class="mini-lab-duration">5 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Set the ownership percentage ranges that determine which consolidation method is applied to each entity.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Navigate to <strong>Maintain → Consolidation → Methods</strong></li>
+            <li><span class="mini-lab-step-num">2</span> Locate the <strong>Global</strong> method → set range: <strong>&gt;50% to ≤100%</strong></li>
+            <li><span class="mini-lab-step-num">3</span> Locate the <strong>Proportional</strong> method → set range: <strong>= 50%</strong></li>
+            <li><span class="mini-lab-step-num">4</span> Locate the <strong>Equity</strong> method → set range: <strong>&gt;20% to &lt;50%</strong></li>
+            <li><span class="mini-lab-step-num">5</span> Click <strong>Save</strong></li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          All three consolidation methods are configured with the correct percentage ranges and the page saves without errors.
+        </div>
+      </div>
+
+      <!-- MINI-LAB 2 -->
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">2</div>
+          <div class="mini-lab-title">Verify Entity Dimension — Holding Flag &amp; Total Group Tag</div>
+          <div class="mini-lab-duration">5 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Confirm that the Entity dimension has the Holding Company flag and Total Group tag correctly configured — both are prerequisites for Direct Ownership to work correctly.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Navigate to <strong>Models module → Dimensions tab → Entity</strong></li>
+            <li><span class="mini-lab-step-num">2</span> Review the entity hierarchy — verify that each subgroup has <strong>at least one entity</strong> with <strong>Entity Type = Holding</strong></li>
+            <li><span class="mini-lab-step-num">3</span> Find the <strong>top-level hierarchy member</strong> (the root/parent of the entire entity structure) → verify it has the tag <code>Total Group</code></li>
+            <li><span class="mini-lab-step-num">4</span> Navigate to the <strong>Company</strong> dimension → find the top-level member → verify it also has the <code>Total Group</code> tag</li>
+            <li><span class="mini-lab-step-num">5</span> Navigate to the <strong>Group</strong> dimension → find the top-level member → verify <code>Total Group</code> tag is present here too</li>
+            <li><span class="mini-lab-step-num">6</span> If any tag is missing, add it now and click <strong>Save → Process</strong></li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          The Holding Company flag is confirmed on at least one entity per subgroup, and the <code>Total Group</code> tag exists on the top-level member in all three dimensions (Entity, Company, Group).
+        </div>
+      </div>
+
+      <!-- MINI-LAB 3 -->
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">3</div>
+          <div class="mini-lab-title">Enter Direct Ownership</div>
+          <div class="mini-lab-duration">15 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Enter all parent-child ownership percentages for the workshop model, using the Entities fill tab from the requirements workbook.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Navigate to <strong>Maintain → Ownership → Direct Ownership</strong></li>
+            <li><span class="mini-lab-step-num">2</span> Confirm the left panel shows <strong>Scenario</strong>, <strong>Entity</strong>, and <strong>Intercompany</strong> dimensions<br>
+              <em>If only one dimension shows: stop — return to Mini-Lab 2 and fix the missing Total Group tag before continuing.</em></li>
+            <li><span class="mini-lab-step-num">3</span> Using the <strong>Entities fill tab</strong> from the requirements workbook as your reference, enter a row for each parent-child ownership relationship:
+              <ul>
+                <li>Parent entity, child entity, ownership percentage</li>
+                <li>Start date (use the earliest period in scope, e.g., 2020 P01)</li>
+                <li>End date (leave blank unless there is an ownership change)</li>
+              </ul>
+            </li>
+            <li><span class="mini-lab-step-num">4</span> For any entity where <strong>ownership changed</strong> during the period covered by the model: add a second row for the same parent-child pair with a new start date and updated percentage; set an end date on the original row</li>
+            <li><span class="mini-lab-step-num">5</span> Review your entries — check that all leaf entities have at least one parent with an ownership percentage</li>
+            <li><span class="mini-lab-step-num">6</span> Click <strong>Save</strong></li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          All entities from the requirements workbook have ownership entries in the Direct Ownership table. Any ownership changes are represented as date-bounded rows (not overwrites). Save completes without errors.
+        </div>
+      </div>
+
+      <!-- MINI-LAB 4 -->
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">4</div>
+          <div class="mini-lab-title">Run the Ultimate Rate Calculator</div>
+          <div class="mini-lab-duration">5 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Calculate effective group-level ownership rates and verify that consolidation methods are automatically assigned to each entity.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Navigate to <strong>Maintain → Ownership → Ultimate Rate Calculator</strong></li>
+            <li><span class="mini-lab-step-num">2</span> Click <strong>Run</strong></li>
+            <li><span class="mini-lab-step-num">3</span> Navigate to <strong>Maintain → Ownership → Managed Ownership</strong></li>
+            <li><span class="mini-lab-step-num">4</span> Review the results — each entity should show:
+              <ul>
+                <li>Its calculated effective ownership percentage</li>
+                <li>An assigned consolidation method (Global, Proportional, or Equity)</li>
+              </ul>
+            </li>
+            <li><span class="mini-lab-step-num">5</span> Verify that the assigned methods match what you'd expect based on the ownership percentages</li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          The Managed Ownership table is populated with effective ownership percentages and consolidation methods are correctly assigned (Global / Proportional / Equity) based on the percentage ranges you configured in Mini-Lab 1.
+        </div>
+      </div>
+
+      <!-- COMPLETION CHECKLIST -->
+      <h2>Lab B Completion Checklist</h2>
+      <ul class="checklist">
+        <li>Consolidation methods configured: Global &gt;50%, Proportional =50%, Equity &gt;20–&lt;50%</li>
+        <li>Holding Company flag confirmed on at least one entity per subgroup</li>
+        <li>Total Group tag confirmed in Entity, Company, and Group dimensions</li>
+        <li>Direct Ownership table fully populated from requirements workbook</li>
+        <li>Date-bounded rows used for any ownership changes (not overwrites)</li>
+        <li>Ultimate Rate Calculator run successfully</li>
+        <li>Managed Ownership shows correct methods for all entities</li>
+      </ul>
+
+      <!-- COMMON ISSUES -->
+      <div class="callout-warning">
+        <span class="callout-label">🔧 Common Issues &amp; Fixes</span>
+        <dl>
+          <dt>Left panel in Direct Ownership shows only one dimension</dt>
+          <dd>The <code>Total Group</code> tag is missing from one of the three dimensions (Entity, Company, or Group). Navigate to the dimension with the missing tag, find the top-level hierarchy member, add <code>Total Group</code> to its tags, and Save → Process before returning to Direct Ownership.</dd>
+
+          <dt>Ultimate Rate Calculator runs but shows no results in Managed Ownership</dt>
+          <dd>Most likely cause: Direct Ownership entries were not saved before clicking Run. Go back to Direct Ownership, confirm entries are there, Save, then re-run the Ultimate Rate Calculator.</dd>
+
+          <dt>Method is not assigned correctly to an entity</dt>
+          <dd>Check the percentage ranges in the Methods configuration (Mini-Lab 1). The ranges must correctly cover the percentage in your Direct Ownership data. Also verify that the Direct Ownership percentage for that entity is correct.</dd>
+
+          <dt>Entity doesn't appear in Direct Ownership</dt>
+          <dd>The entity may not be a leaf-level member, or the entity dimension may not have been processed after the last import. Run Save → Process on the Entity dimension and try again.</dd>
+        </dl>
+      </div>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./07-ownership-methods.html">← Previous</a>
+        <a class="prevnext-btn" href="./09-data-integration.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

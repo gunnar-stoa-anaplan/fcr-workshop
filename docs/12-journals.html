@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journals — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link active" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Journals</h1>
+      <p class="subtitle">Enabling journals, configuration, and posting reclassification entries</p>
+      <div class="badge-row"><span class="content-badge">Consolidation Engine</span><span class="content-badge">25 min</span></div>
+    </div>
+    <div class="content-body">
+
+      <div class="tsd-banner">
+        <div class="tsd-step tsd-step-tell">
+          <span class="tsd-step-label">📖 Tell</span>
+          <span class="tsd-step-heading">What FCR Journals Do</span>
+          <span class="tsd-step-desc">How consolidation journals work, when to use them, and the feature flag requirement.</span>
+        </div>
+        <div class="tsd-step tsd-step-show">
+          <span class="tsd-step-label">👁 Show</span>
+          <span class="tsd-step-heading">Journal Configuration Demo</span>
+          <span class="tsd-step-desc">Live walkthrough: enable permissions, create a journal configuration, post a reclassification entry.</span>
+        </div>
+        <div class="tsd-step tsd-step-do">
+          <span class="tsd-step-label">✅ Do</span>
+          <span class="tsd-step-heading">Lab D — Consolidation Engine</span>
+          <span class="tsd-step-desc">Post a reclassification journal and validate it in the Consolidated Financials by Audit report (page 14).</span>
+        </div>
+      </div>
+
+      <div class="callout-warn">
+        <span class="callout-label">⚠️ Feature Flag Required — Check Before Project Kick-off</span>
+        <p>The Journals module requires a <strong>feature flag</strong> enabled at the tenant level. This flag is <strong>NOT available in the web UI settings</strong> — it must be activated via the <strong>Excel settings file</strong>. For new customers, this may require opening a support request with Anaplan. Verify whether the feature flag is already enabled early in the project — do not wait until the go-live sprint to discover it's missing.</p>
+        <p><strong>Additional note:</strong> Feature flags are not included in exported settings files, so they do not automatically transfer between environments (e.g., from UAT to production). Each environment needs the flag enabled separately.</p>
+      </div>
+
+      <h2>Step 1: Enable Journal Permissions</h2>
+      <p>After confirming the feature flag is enabled on the tenant, journal permissions must be turned on in the Security module. The Journals module will not appear in the left navigation until this step is complete.</p>
+
+      <div class="step"><div class="step-badge">1</div><div class="step-content"><h3>Navigate to Security → Role Authorizations</h3><p>Go to the <strong>Security</strong> module in the left navigation bar. Click the <strong>Role Authorizations</strong> tab (third tab in the Security module).</p></div></div>
+      <div class="step"><div class="step-badge">2</div><div class="step-content"><h3>Enable ALL Journal Permissions</h3><p>Find the Journals section within the Role Authorizations tab. Turn <strong>ALL journal permissions ON</strong> for the appropriate roles. This includes: create journals, edit journals, post journals, delete journals, and view journals.</p></div></div>
+      <div class="step"><div class="step-badge">3</div><div class="step-content"><h3>Save</h3><p>Click <strong>Save</strong>. After saving, the <strong>Journals</strong> module will appear in the left navigation menu. If it doesn't appear immediately, refresh the browser.</p></div></div>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/15-role-auth-journals.jpg" alt="Security Role Authorizations screen showing journal permissions all enabled for a role" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 15:</span> Role Authorizations (Security → Role Authorizations) — enable ALL journal sub-permissions before users can post journal entries</figcaption>
+      </figure>
+
+      <h2>Step 2: Create a Journal Configuration</h2>
+      <p>Before any journals can be posted, at least one journal configuration must exist. The configuration defines which dimension members are collected in the journal header (once per journal) versus the detail lines (once per journal line), and sets smart defaults to reduce user error.</p>
+
+      <p>Navigate to: <strong>Configure → General Configuration → Journal Configuration</strong> → click <strong>+</strong> to create a new configuration.</p>
+
+      <table>
+        <caption>Table 18: Journal Configuration Fields</caption>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Setting</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td>Descriptive name (e.g., "Reclassification Journal")</td>
+            <td>Appears in the journal entry form</td>
+          </tr>
+          <tr>
+            <td>Consolidation model</td>
+            <td>Select the applicable consolidation model</td>
+            <td>Usually one model per tenant</td>
+          </tr>
+          <tr>
+            <td>Data view</td>
+            <td><strong>Fixed value → Value</strong></td>
+            <td>Sets the data view without user input; Value = source data view</td>
+          </tr>
+          <tr>
+            <td>Audit — Default query value</td>
+            <td><strong>Manual Journal</strong> (parent member)</td>
+            <td>Limits available audit members to only children of Manual Journal</td>
+          </tr>
+          <tr>
+            <td>Audit — Default input value</td>
+            <td><strong>Reclassification</strong></td>
+            <td>Pre-selects the most common journal type; user can change</td>
+          </tr>
+          <tr>
+            <td>Date — Default input value</td>
+            <td><strong>Global Current Period</strong></td>
+            <td>Auto-populates to the current period (e.g., 2024 P12)</td>
+          </tr>
+          <tr>
+            <td>Header dimensions</td>
+            <td>Entity, Intercompany, Audit, Period/Date, Scenario</td>
+            <td>Captured once per journal entry</td>
+          </tr>
+          <tr>
+            <td>Detail dimensions</td>
+            <td>Account, Movement, Amount</td>
+            <td>Captured per line within the journal</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/16-journal-config.jpg" alt="Journal configuration screen showing dimensions mapped to Header/Detail/Fixed with default query and input values" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 16:</span> Journal configuration — dimensions assigned as Header (once per journal) or Detail (per line); default query restricts selectable audit members</figcaption>
+      </figure>
+
+      <div class="callout-note">
+        <span class="callout-label">💡 Why Set Manual Journal as the Default Query?</span>
+        <p>Setting a <strong>parent member</strong> as the default query for the Audit dimension acts as a filter — it limits which audit members users can select when creating a journal. By setting "Manual Journal" (parent), users can only post to its four children: <em>Reclassification</em>, <em>Interco Adjustment</em>, <em>Other Manual</em>, and <em>Manual Interco Adjustment</em>. This prevents accidental postings to Source GL, Proportional Method, Equity Method, or other audit members that should never have manual journal entries.</p>
+        <p><strong>Default query value</strong> = restricts the available list. <strong>Default input value</strong> = pre-selects a value but the user can change it. These are different controls.</p>
+      </div>
+
+      <div class="callout-warn">
+        <span class="callout-label">⚠️ Critical: Do Not Change Header/Detail Config After Go-Live</span>
+        <p>Once journal entries have been posted, <strong>do not change the Header/Detail flag configuration</strong> for any dimension. While the system technically allows this change, altering which dimensions are in the header vs. detail after journals exist can cause <strong>journal data loss or errors</strong>. Lock down the configuration before users begin posting journals and treat it as immutable.</p>
+      </div>
+
+      <h2>Step 3: Understanding the Journal Module Structure</h2>
+      <p>After setup, the Journals module works like a standard ledger entry system with FCR-specific controls built in.</p>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>📋 Header (Once Per Journal)</h3>
+          <ul>
+            <li><strong>Entity</strong> — which entity the journal applies to</li>
+            <li><strong>Intercompany</strong> — third-party or specific IC partner</li>
+            <li><strong>Audit</strong> — journal type (e.g., Reclassification)</li>
+            <li><strong>Period/Date</strong> — defaults to Global Current Period</li>
+            <li><strong>Scenario</strong> — typically Actuals</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>📄 Detail (Per Line)</h3>
+          <ul>
+            <li><strong>Account</strong> — the GL account being debited or credited</li>
+            <li><strong>Movement</strong> — movement dimension member (e.g., Closing, Increase)</li>
+            <li><strong>Amount</strong> — positive or negative value representing debit/credit</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Example: Reclassification Journal Entry</h2>
+      <p>The most common journal type in FCR is a reclassification — moving an amount from one account to another at the consolidated level without touching the source general ledger data.</p>
+
+      <div class="callout-do">
+        <span class="callout-label">✅ Sample Reclassification: Cost of Sales → Accounts Payable</span>
+        <p>This example reclassifies an amount from Cost of Sales to Accounts Payable, both as third-party (no intercompany counterpart).</p>
+      </div>
+
+      <table>
+        <caption>Table 19: Reclassification Journal Entry Example</caption>
+        <thead>
+          <tr>
+            <th>Line</th>
+            <th>Account</th>
+            <th>Intercompany</th>
+            <th>Movement</th>
+            <th>Entry</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Debit</td>
+            <td>Cost of Sales</td>
+            <td>3RD (third-party)</td>
+            <td>Closing</td>
+            <td>Positive amount</td>
+          </tr>
+          <tr>
+            <td>Credit</td>
+            <td>Accounts Payable</td>
+            <td>3RD (third-party)</td>
+            <td>Increase</td>
+            <td>Negative amount (same value)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Step 4: Validating the Journal Entry</h2>
+      <p>After posting, verify the journal entry appeared in the consolidated financials.</p>
+
+      <div class="step"><div class="step-badge">1</div><div class="step-content"><h3>Open Consolidated Financials by Audit</h3><p>Navigate to the <strong>Consolidated Financials by Audit</strong> report. This report shows the breakdown of consolidated amounts by audit dimension member.</p></div></div>
+      <div class="step"><div class="step-badge">2</div><div class="step-content"><h3>Drill into Contribution</h3><p>Expand or filter to the <strong>Contribution</strong> audit rollup member. This contains all entity-level contributions including eliminations and manual journals.</p></div></div>
+      <div class="step"><div class="step-badge">3</div><div class="step-content"><h3>Find the Reclassification Column</h3><p>Look for the <strong>Reclass</strong> (Reclassification) audit member column. The amounts from your journal entry should appear here for the Cost of Sales and Accounts Payable accounts.</p></div></div>
+
+      <div class="callout-note">
+        <span class="callout-label">ℹ Recurring Journals</span>
+        <p>Journals that should repeat every period (e.g., standing reclassifications) can be marked as <strong>recurring</strong>. As part of the period initialization process, there is a dedicated step — <strong>Copy Recurring Journal Entries</strong> — that rolls these journals forward to the new period automatically. This is covered on the Period Initialization page.</p>
+      </div>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./11-currency-conversion.html">← Previous</a>
+        <a class="prevnext-btn" href="./13-consolidation-rules.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

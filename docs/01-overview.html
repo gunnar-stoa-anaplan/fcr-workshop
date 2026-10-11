@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workshop Overview — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link active" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Workshop Overview</h1>
+      <p class="subtitle">Welcome, objectives, prerequisites, and how to use this guide</p>
+      <div class="badge-row">
+        <span class="content-badge">Getting Started</span>
+        <span class="content-badge">15 min</span>
+      </div>
+    </div>
+    <div class="content-body">
+
+      <div class="tsd-banner">
+        <div class="tsd-step tsd-step-tell">
+          <span class="tsd-step-label">📖 Tell</span>
+          <span class="tsd-step-heading">What This Workshop Is</span>
+          <span class="tsd-step-desc">Self-paced delivery partner training for Anaplan FCR — who it's for, what you'll be able to do, and how to get the most out of it.</span>
+        </div>
+        <div class="tsd-step tsd-step-show">
+          <span class="tsd-step-label">👁 Show</span>
+          <span class="tsd-step-heading">Read · Watch · Do</span>
+          <span class="tsd-step-desc">Each section explains a concept, shows the workflow in a tenant, then has you do it — at your own pace.</span>
+        </div>
+        <div class="tsd-step tsd-step-do">
+          <span class="tsd-step-label">✅ Do</span>
+          <span class="tsd-step-heading">No Hands-On Yet</span>
+          <span class="tsd-step-desc">Confirm tenant access is working. Read this page. The first lab starts in section 06.</span>
+        </div>
+      </div>
+
+      <h2>Welcome</h2>
+      <p>You're about to learn one of the most complex products in the Anaplan portfolio. FCR — Financial Consolidation and Reporting — is not a simple configuration exercise. It's a full statutory consolidation engine: multi-entity, multi-currency, intercompany elimination, journals, period management, and regulatory reporting. Getting it right requires understanding both the product and the underlying accounting concepts it represents.</p>
+
+      <h3>You're Not Alone</h3>
+      <p>Most people taking this workshop are implementing FCR for the first or second time. The learning curve is steep — steeper than most Anaplan products. FCR originated from Fluence Technologies (acquired by Anaplan in recent years), and it has its own vocabulary, its own logic, and its own failure modes that are different from what you'd expect coming from HFM, Cognos Controller, or OneStream.</p>
+      <p>That's exactly why this workshop exists. This self-paced, hands-on, live-tenant program compresses what would otherwise take months of trial and error into a structured learning path you work through on your own schedule.</p>
+
+      <!-- TODO: replace placeholder Slack channel name, archive URL, and email before launch -->
+      <div class="callout-tip">
+        <span class="callout-label">💬 You're Not Alone — Join the Workshop Slack</span>
+        <p>Our FCR product experts staff a dedicated Slack channel for workshop participants. Drop in any time during the workshop — ask questions, share what you're stuck on, see what other participants are asking.</p>
+        <p><strong>Slack channel:</strong> <a href="https://anaplan.enterprise.slack.com/archives/PLACEHOLDER" target="_blank">#PLACEHOLDER-fcr-workshop-slack</a></p>
+        <p><strong>No Slack access?</strong> Send your question by email to <a href="mailto:PLACEHOLDER@anaplan.org.slack.com">PLACEHOLDER@anaplan.org.slack.com</a> — it posts directly into the channel and an expert will respond there.</p>
+      </div>
+
+      <h3>Why This Matters</h3>
+      <p>FCR closes the loop on the Office of CFO story. Customers who already own IFP for planning need FCR for actuals — group consolidation, currency translation, intercompany elimination, and statutory financial statements. Partners who can deliver <em>both</em> IFP and FCR become indispensable to their clients and to Anaplan's go-to-market motion.</p>
+      <p>The combined FPC (Financial Planning and Consolidation) SKU is Anaplan's primary Office of CFO offering. If you can only deliver IFP, you're half the story. Mastering FCR makes you the complete story.</p>
+
+      <h3>What to Expect</h3>
+      <p>Self-paced, hands-on, live tenants, real exercises. By the end you'll be able to implement FCR independently — with Anaplan Professional Services support on your first project. That last part is not a caveat; it's intentional. FCR is complex enough that even experienced consultants benefit from Professional Services oversight on their first live engagement. This workshop gets you to the point where that support is a quality gate, not a learning crutch.</p>
+
+      <h2>Who It's For</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>👤 Audience</h3>
+          <ul>
+            <li>Partner delivery consultants implementing FCR</li>
+            <li>Consultants transitioning from IFP to FPC</li>
+            <li>Anaplan solution architects scoping FCR projects</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>📋 Prerequisites</h3>
+          <ul>
+            <li>Consolidation accounting knowledge — HFM, Cognos Controller, OneStream, or equivalent real-world consolidation experience</li>
+            <li>Anaplan workspace familiarity preferred but not required</li>
+            <li>No FCR experience assumed</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>What You'll Be Able to Do</h2>
+      <p>These are verifiable outcomes. When this workshop is complete, you will be able to:</p>
+      <div class="table-wrap">
+        <table>
+          <caption>Table 01: Learning Outcomes</caption>
+          <thead><tr><th>#</th><th>Outcome</th><th>Covered In</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Provision and configure an FCR tenant from scratch, including the correct tenant type decision</td><td>Pages 03, 05</td></tr>
+            <tr><td>2</td><td>Build the complete data model: dimensions, accounts, ownership structure, and currencies</td><td>Pages 05, 06, 07, 08</td></tr>
+            <tr><td>3</td><td>Configure data integration: staging tables, member mappings, import definitions, clear data settings</td><td>Pages 09, 10</td></tr>
+            <tr><td>4</td><td>Configure currency conversion, journals, consolidation rules, and intercompany elimination</td><td>Pages 11, 12, 13, 14</td></tr>
+            <tr><td>5</td><td>Initialize new periods and manage the month-end close cycle</td><td>Pages 15, 17</td></tr>
+            <tr><td>6</td><td>Configure balance sheet continuity and run a cash flow statement</td><td>Pages 16, 17</td></tr>
+            <tr><td>7</td><td>Set up security roles and data access</td><td>Page 18</td></tr>
+            <tr><td>8</td><td>Deliver FCR independently with Anaplan Professional Services support on the first engagement</td><td>All</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>How to Use This Guide</h2>
+      <p>This guide is organized by workflow, not by UI screen. Each section covers a self-contained topic and follows Tell → Show → Do in that order:</p>
+
+      <div class="tsd-banner">
+        <div class="tsd-step tsd-step-tell">
+          <span class="tsd-step-label">📖 Tell</span>
+          <span class="tsd-step-heading">Concepts</span>
+          <span class="tsd-step-desc">What the feature is, how it works, what the limits are. Factual and reference-focused.</span>
+        </div>
+        <div class="tsd-step tsd-step-show">
+          <span class="tsd-step-label">👁 Show</span>
+          <span class="tsd-step-heading">Demo Moments</span>
+          <span class="tsd-step-desc">Screenshots and step-by-step navigation of what you'll see in the product during the upcoming lab.</span>
+        </div>
+        <div class="tsd-step tsd-step-do">
+          <span class="tsd-step-label">✅ Do</span>
+          <span class="tsd-step-heading">Hands-On Labs</span>
+          <span class="tsd-step-desc">Numbered step-by-step instructions in your training tenant. Complete each lab in the tenant provided when you enrolled.</span>
+        </div>
+      </div>
+
+      <p>Lab sections (pages 06, 08, 10, 14, 17) contain <strong>Mini-Lab</strong> blocks with numbered steps, time estimates, and completion checklists. Complete them in order — each lab builds on the previous one.</p>
+
+      <div class="callout-warning">
+        <span class="callout-label">⚠ Training Tenant Access</span>
+        <p>Use your assigned training tenant only. Do not work in a customer tenant during workshop exercises. Credentials were sent when you enrolled — check the shared SharePoint folder if you don't have yours. Tenant access expires approximately 5 weeks after you start. Mac users require a Windows VM for Excel-based input forms.</p>
+      </div>
+
+      <h2>Workshop Structure</h2>
+      <p>Work through the sections in order using the sidebar — each builds on the one before, so resist the urge to skip ahead. There's no fixed schedule; go at your own pace. Most participants spend an hour or two a day.</p>
+      <div class="table-wrap">
+        <table class="agenda-table">
+          <caption>Table 02: Workshop Structure</caption>
+          <thead><tr><th>Module</th><th>Topics</th><th>Pages</th></tr></thead>
+          <tbody>
+            <tr><td>Getting Started</td><td>Product landscape, FCR overview, implementation methodology, the Anaplan Way</td><td>01–04</td></tr>
+            <tr><td>Data Model &amp; Configuration</td><td>Data model, dimensions, account configuration, ownership, consolidation methods, data integration, trial balance load</td><td>05–10</td></tr>
+            <tr><td>Consolidation Engine</td><td>Currency conversion, journals, consolidation rules, intercompany elimination, NCI, equity method</td><td>11–14</td></tr>
+            <tr><td>Period Management</td><td>Period initialization, balance sheet continuity, cash flow configuration</td><td>15–17</td></tr>
+            <tr><td>Advanced Topics</td><td>Security, narrative reporting</td><td>18–19</td></tr>
+            <tr><td>Reference</td><td>Q&amp;A, best practices, roadmap, partner collaboration, facilitator guide</td><td>20–21</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="prevnext-nav">
+        <span></span>
+        <a class="prevnext-btn" href="./02-fcr-overview.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

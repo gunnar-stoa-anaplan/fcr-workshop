@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FCR Overview — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link active" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>FCR Overview</h1>
+      <p class="subtitle">What FCR is, where it fits in the Anaplan Finance suite, and why it exists</p>
+      <div class="badge-row">
+        <span class="content-badge">Getting Started</span>
+        <span class="content-badge">20 min</span>
+      </div>
+    </div>
+    <div class="content-body">
+
+      <div class="tsd-banner">
+        <div class="tsd-step tsd-step-tell">
+          <span class="tsd-step-label">📖 Tell</span>
+          <span class="tsd-step-heading">FCR Product Landscape</span>
+          <span class="tsd-step-desc">What FCR is, where it came from, and where it sits in the Anaplan Finance suite.</span>
+        </div>
+        <div class="tsd-step tsd-step-show">
+          <span class="tsd-step-label">👁 Show</span>
+          <span class="tsd-step-heading">Live Tenant Overview</span>
+          <span class="tsd-step-desc">Facilitator navigates a provisioned FCR tenant and points out the key modules before any configuration begins.</span>
+        </div>
+        <div class="tsd-step tsd-step-do">
+          <span class="tsd-step-label">✅ Do</span>
+          <span class="tsd-step-heading">No Hands-On This Section</span>
+          <span class="tsd-step-desc">Orientation only. First lab is in section 06 after the data model is fully explained.</span>
+        </div>
+      </div>
+
+      <h2>What FCR Is</h2>
+      <p><strong>FCR</strong> stands for Financial Consolidation and Reporting. It is Anaplan's statutory consolidation engine — the product used for group financial reporting, multi-entity currency translation, intercompany elimination, journal entries, and period-end close management.</p>
+      <p>FCR originated from <strong>Fluence Technologies</strong>, a consolidation software company that Anaplan acquired. It runs on Microsoft's cloud SQL Server stack, stores data in SQL staging tables, and uses a rule-based calculation engine to perform consolidations. The user interface was recently updated to match Anaplan's standard UX, but the underlying product architecture is Fluence's.</p>
+
+      <div class="callout-note">
+        <span class="callout-label">ℹ New UX</span>
+        <p>FCR released a new Anaplan-style user interface the week of the London workshop (April 2026). Participants' tenants show the new UI. Workshop slides may show the older interface — functionality is identical, the visual appearance is updated.</p>
+      </div>
+
+      <h2>The Anaplan Finance Suite</h2>
+      <p>FCR is one product in a broader Anaplan Finance offering. Understanding the full suite helps you position FCR correctly with customers and spot expansion opportunities.</p>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Table 03: The Anaplan Finance Suite</caption>
+          <thead><tr><th>Product</th><th>What It Does</th><th>Audience</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>FCR</strong><br><em>Financial Consolidation and Reporting</em></td>
+              <td>Group statutory consolidation, intercompany elimination, currency translation, journals, cash flow, period management</td>
+              <td>Group/Corporate Finance, Controller, CFO office</td>
+            </tr>
+            <tr>
+              <td><strong>IFP</strong><br><em>Integrated Financial Planning</em></td>
+              <td>Pre-built financial planning application (P&amp;L, balance sheet, headcount, capex); built on the Anaplan Application Framework</td>
+              <td>FP&amp;A, Business Finance</td>
+            </tr>
+            <tr>
+              <td><strong>FPC</strong><br><em>Financial Planning and Consolidation</em></td>
+              <td>Combined SKU: FCR + IFP in one purchase; Anaplan's primary Office of CFO offering; includes ADO integration tooling</td>
+              <td>Full Finance organisation</td>
+            </tr>
+            <tr>
+              <td><strong>AXL / Anaplan Excel</strong></td>
+              <td>Excel add-in reporting tool; connects directly to FCR and Anaplan planning models; used for board packs, management reports</td>
+              <td>Finance teams comfortable in Excel</td>
+            </tr>
+            <tr>
+              <td><strong>Narrative Reporting</strong><br><em>(Disclosure Management)</em></td>
+              <td>Last-mile reporting — Word and PowerPoint documents connected to live financial data; multi-user workflow-based approval; direct Workiva competitor</td>
+              <td>Corporate reporting, Investor Relations</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Anaplan visualises these applications as a "honeycomb" — a grid of dark blue hexagons, each representing a Finance application. FCR, IFP, Narrative Reporting, and AXL are the four primary Finance hexagons in this model.</p>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/01-honeycomb-finance-suite.jpg" alt="Anaplan Finance Suite — platform architecture diagram showing FCR, IFP, and related applications" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 01:</span> Anaplan Finance Suite — platform architecture showing Financial Consolidation & Reporting alongside IFP and other applications</figcaption>
+      </figure>
+
+      <h2>Where FCR Fits — The Office of CFO Story</h2>
+      <p>The CFO office needs two things: <strong>a plan</strong> (IFP) and <strong>actuals</strong> (FCR). IFP handles forward-looking financial planning — budgets, forecasts, driver-based models, scenario analysis. FCR handles the consolidation of what actually happened — loading trial balances from every entity's GL, eliminating intercompany balances, translating currencies, and producing statutory group financial statements.</p>
+
+      <div class="callout-tip">
+        <span class="callout-label">💡 Why This Matters for Partners</span>
+        <p>Partners who can deliver only IFP are covering half the CFO's problem. Partners who can deliver both IFP and FCR cover the entire Office of CFO story — planning and reporting in one integrated platform. This is a significant competitive differentiator in the market.</p>
+      </div>
+
+      <h2>What FCR Does</h2>
+      <ul>
+        <li><strong>Group consolidation</strong> — loads trial balances from multiple entities, applies consolidation rules, produces consolidated financial statements</li>
+        <li><strong>Currency translation</strong> — triangulation-based multi-currency conversion with configurable rate types per account (end rate, average rate, historical)</li>
+        <li><strong>Intercompany elimination</strong> — automated ARAP elimination, intercompany matching with auto-booking for differences below threshold</li>
+        <li><strong>Journal entries</strong> — reclassification and adjustment journals with audit trail separation</li>
+        <li><strong>Non-Controlling Interest (NCI)</strong> — automated NCI entries for majority-owned subsidiaries</li>
+        <li><strong>Equity method accounting</strong> — for 20–50% owned associates</li>
+        <li><strong>Balance sheet continuity and cash flow</strong> — movement-based cash flow statement generation</li>
+        <li><strong>Period management</strong> — structured month-end close cycle with validation reports</li>
+        <li><strong>Workflow automation</strong> — visual process builder for data collection, consolidation runs, and approvals</li>
+        <li><strong>Statutory reporting</strong> — output to Narrative Reporting / Disclosure Management for board packs and annual reports</li>
+      </ul>
+
+      <h2>FCR vs. Competitors</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>Table 04: FCR vs. Competitors</caption>
+          <thead><tr><th>Dimension</th><th>FCR</th><th>HFM (Oracle)</th><th>Cognos Controller (IBM)</th><th>OneStream</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Technology stack</strong></td><td>Microsoft cloud (SQL Server, Azure)</td><td>Oracle cloud / on-premise</td><td>IBM cloud / on-premise</td><td>Cloud-native (XF platform)</td></tr>
+            <tr><td><strong>Reporting tool</strong></td><td>AXL (Excel add-in), Narrative Reporting (Word/PPT)</td><td>SmartView (Excel), FDM</td><td>Excel, Cognos Analytics</td><td>Excel, built-in reports</td></tr>
+            <tr><td><strong>Key differentiator</strong></td><td>Microsoft tools, Anaplan Planning integration (IFP/FPC), modern UX</td><td>Mature, widely deployed; complex admin</td><td>Well-regarded in mid-market; aging platform</td><td>Modern architecture; growing market share</td></tr>
+            <tr><td><strong>Consolidation approach</strong></td>
+              <td>Tag-based rules; reusable across implementations</td>
+              <td>Method-based; HFM-specific scripting</td>
+              <td>Account-based rules</td>
+              <td>Rules-based; XF scripting</td></tr>
+            <tr><td><strong>Planning integration</strong></td><td>Native (FPC SKU = FCR + IFP)</td><td>Requires Oracle EPM Cloud</td><td>Requires separate IBM products</td><td>OneStream XF planning add-on</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/11-maintain-menu-tiles.jpg" alt="FCR Consolidation Maintenance menu — tile overview of all configuration areas" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 11:</span> FCR Consolidation Maintenance — tile-based navigation showing Administration, Consolidation, Conversion, Ownership and other configuration areas</figcaption>
+      </figure>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./01-overview.html">← Previous</a>
+        <a class="prevnext-btn" href="./03-implementation-methodology.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

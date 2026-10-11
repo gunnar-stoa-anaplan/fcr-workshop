@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./docs/01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./docs/02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./docs/03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./docs/04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./docs/05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./docs/06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./docs/07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./docs/08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./docs/09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./docs/10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./docs/11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./docs/12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./docs/13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./docs/14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./docs/15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./docs/16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./docs/17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./docs/18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./docs/19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./docs/20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./docs/21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="index-hero">
+      <h1>FCR Delivery Partner Workshop</h1>
+      <p>Financial Consolidation and Reporting — self-paced delivery training for Anaplan implementation partners</p>
+    </div>
+    <div class="content-body">
+
+      <h2>About This Workshop</h2>
+      <p>This lab guide is your reference companion for the FCR Delivery Partner Workshop. It covers everything you need to implement Anaplan's Financial Consolidation and Reporting (FCR) product from scratch — from tenant provisioning through period management, consolidation rules, and security configuration.</p>
+      <p>FCR is one of the most complex products in the Anaplan portfolio. This guide is designed so you can return to any section after the workshop and use it as a reference during your first live implementation.</p>
+
+      <div class="callout-note">
+        <span class="callout-label">ℹ Training Tenants</span>
+        <p>Your FCR training tenant credentials were provided when you enrolled. Tenants remain active for approximately <strong>5 weeks</strong> after you start. PC users have full access including Excel-based input forms. Mac users require a Windows VM for Excel add-in features.</p>
+      </div>
+
+      <h2>Who This Is For</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>✅ Intended Audience</h3>
+          <ul>
+            <li>Partner delivery consultants implementing FCR for customers</li>
+            <li>Consultants with consolidation accounting background (HFM, OneStream, Cognos Controller, or similar)</li>
+            <li>Anaplan workspace experience preferred but not required</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>🎯 What You'll Be Able to Do</h3>
+          <ul>
+            <li>Provision and configure an FCR tenant from scratch</li>
+            <li>Build the complete data model: dimensions, accounts, ownership</li>
+            <li>Configure currency conversion, journals, and consolidation rules</li>
+            <li>Initialize new periods and manage month-end close</li>
+            <li>Deliver FCR independently (with Anaplan Professional Services support on the first engagement)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Workshop Modules</h2>
+      <h3>Getting Started</h3>
+      <div class="index-nav-grid">
+        <a class="index-nav-card" href="./docs/01-overview.html">
+          <div class="inc-num">01</div>
+          <div class="inc-title">Workshop Overview</div>
+          <div class="inc-desc">Welcome, objectives, prerequisites, and how to use this guide</div>
+        </a>
+        <a class="index-nav-card" href="./docs/02-fcr-overview.html">
+          <div class="inc-num">02</div>
+          <div class="inc-title">FCR Overview</div>
+          <div class="inc-desc">What FCR is, where it fits in the Anaplan Finance suite, and why it exists</div>
+        </a>
+        <a class="index-nav-card" href="./docs/03-implementation-methodology.html">
+          <div class="inc-num">03</div>
+          <div class="inc-title">Implementation Methodology</div>
+          <div class="inc-desc">The 6-step FCR delivery approach and first-engagement guidance</div>
+        </a>
+        <a class="index-nav-card" href="./docs/04-anaplan-way.html">
+          <div class="inc-num">04</div>
+          <div class="inc-title">Anaplan Way for Applications</div>
+          <div class="inc-desc">The six-phase delivery methodology used across all Anaplan apps</div>
+        </a>
+      </div>
+
+      <h3>Data Model &amp; Configuration</h3>
+      <div class="index-nav-grid">
+        <a class="index-nav-card" href="./docs/05-data-model.html">
+          <div class="inc-num">05</div>
+          <div class="inc-title">Data Model</div>
+          <div class="inc-desc">FCR's 11 pre-defined dimensions, tenant types, and account configuration</div>
+        </a>
+        <a class="index-nav-card" href="./docs/06-lab-a-data-model.html">
+          <div class="inc-num">06</div>
+          <div class="inc-title">Lab A: Data Model Setup</div>
+          <div class="inc-desc">Build dimensions, import accounts, currencies, and verify the model</div>
+        </a>
+        <a class="index-nav-card" href="./docs/07-ownership-methods.html">
+          <div class="inc-num">07</div>
+          <div class="inc-title">Ownership &amp; Consolidation Methods</div>
+          <div class="inc-desc">Entity hierarchy, direct ownership, ultimate rate calculator, and methods</div>
+        </a>
+        <a class="index-nav-card" href="./docs/08-lab-b-ownership.html">
+          <div class="inc-num">08</div>
+          <div class="inc-title">Lab B: Ownership Setup</div>
+          <div class="inc-desc">Configure consolidation methods and enter ownership percentages</div>
+        </a>
+        <a class="index-nav-card" href="./docs/09-data-integration.html">
+          <div class="inc-num">09</div>
+          <div class="inc-title">Data Integration</div>
+          <div class="inc-desc">Staging tables, member mappings, import definitions, and clear data settings</div>
+        </a>
+        <a class="index-nav-card" href="./docs/10-lab-c-trial-balance.html">
+          <div class="inc-num">10</div>
+          <div class="inc-title">Lab C: Load Trial Balance</div>
+          <div class="inc-desc">Create staging tables, configure mappings, and validate loaded data</div>
+        </a>
+      </div>
+
+      <h3>Consolidation Engine</h3>
+      <div class="index-nav-grid">
+        <a class="index-nav-card" href="./docs/11-currency-conversion.html">
+          <div class="inc-num">11</div>
+          <div class="inc-title">Currency Conversion</div>
+          <div class="inc-desc">Triangulation, P_conversion, FX rate entry, and troubleshooting</div>
+        </a>
+        <a class="index-nav-card" href="./docs/12-journals.html">
+          <div class="inc-num">12</div>
+          <div class="inc-title">Journals</div>
+          <div class="inc-desc">Enabling journals, configuration, and posting reclassification entries</div>
+        </a>
+        <a class="index-nav-card" href="./docs/13-consolidation-rules.html">
+          <div class="inc-num">13</div>
+          <div class="inc-title">Consolidation Rules &amp; Intercompany</div>
+          <div class="inc-desc">Rule structure, repartition, NCI, equity method, ARAP, and IC matching</div>
+        </a>
+        <a class="index-nav-card" href="./docs/14-lab-d-consolidation-engine.html">
+          <div class="inc-num">14</div>
+          <div class="inc-title">Lab D: Consolidation Engine</div>
+          <div class="inc-desc">Currency conversion, journals, ARAP elimination in one integrated lab</div>
+        </a>
+      </div>
+
+      <h3>Period Management</h3>
+      <div class="index-nav-grid">
+        <a class="index-nav-card" href="./docs/15-period-initialization.html">
+          <div class="inc-num">15</div>
+          <div class="inc-title">Period Initialization</div>
+          <div class="inc-desc">Opening a new period — global variables, exchange rates, copy opening, rollover</div>
+        </a>
+        <a class="index-nav-card" href="./docs/16-balance-sheet-cashflow.html">
+          <div class="inc-num">16</div>
+          <div class="inc-title">Balance Sheet &amp; Cash Flow</div>
+          <div class="inc-desc">Movement classifications, BS continuity schedule, cash flow hierarchy and rules</div>
+        </a>
+        <a class="index-nav-card" href="./docs/17-lab-e-new-period.html">
+          <div class="inc-num">17</div>
+          <div class="inc-title">Lab E: New Period + Cash Flow</div>
+          <div class="inc-desc">Initialize 2025 P1, enter FX rates, run copy opening, configure cash flow</div>
+        </a>
+      </div>
+
+      <h3>Advanced Topics &amp; Reference</h3>
+      <div class="index-nav-grid">
+        <a class="index-nav-card" href="./docs/18-security.html">
+          <div class="inc-num">18</div>
+          <div class="inc-title">Security</div>
+          <div class="inc-desc">5-layer security model: roles, folder, model, homepage, and workflow security</div>
+        </a>
+        <a class="index-nav-card" href="./docs/19-narrative-reporting.html">
+          <div class="inc-num">19</div>
+          <div class="inc-title">Narrative Reporting</div>
+          <div class="inc-desc">Anaplan's disclosure management tool — Workiva competitor built on Word + PowerPoint</div>
+        </a>
+        <a class="index-nav-card" href="./docs/20-qanda-best-practices.html">
+          <div class="inc-num">20</div>
+          <div class="inc-title">Q&amp;A &amp; Best Practices</div>
+          <div class="inc-desc">Real questions from the London workshop with authoritative answers</div>
+        </a>
+        <a class="index-nav-card" href="./docs/21-facilitator-guide.html">
+          <div class="inc-num">21</div>
+          <div class="inc-title">Facilitator Guide</div>
+          <div class="inc-desc">Complete delivery script, timing, setup checklist, and debrief answer keys</div>
+        </a>
+      </div>
+
+    </div>
+  </main>
+  <script src="./js/nav.js"></script>
+</body>
+</html>

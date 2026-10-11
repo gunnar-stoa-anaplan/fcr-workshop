@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab A: Data Model Setup — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link active" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Lab A: Data Model Setup</h1>
+      <p class="subtitle">Build the foundation — dimensions, accounts, currencies</p>
+      <div class="badge-row"><span class="content-badge">Data Model &amp; Configuration</span><span class="content-badge">45 min</span></div>
+    </div>
+    <div class="content-body">
+
+      <div class="callout-note">
+        <span class="callout-label">🎯 Lab Objective</span>
+        <p>By the end of this lab, you will have a fully configured FCR data model ready for data loading. You will create custom dimensions, import entity and account hierarchies, configure currencies, and link everything into the Consolidation model.</p>
+      </div>
+
+      <div class="callout-note">
+        <span class="callout-label">✅ Prerequisites</span>
+        <ul>
+          <li>Your FCR tenant credentials are confirmed and you can log in</li>
+          <li>Workshop exercise files are downloaded from the shared folder (Data Model Basics Solution folder)</li>
+          <li>You have reviewed the Data Model theory page</li>
+        </ul>
+      </div>
+
+      <!-- MINI-LAB 1 -->
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">1</div>
+          <div class="mini-lab-title">Create Custom Dimensions</div>
+          <div class="mini-lab-duration">15 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Add Cost Center and Product as custom dimensions, populate them, and link them into the Consolidation model.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Navigate to <strong>Models module → Dimensions tab</strong></li>
+            <li><span class="mini-lab-step-num">2</span> Click the blue <strong>+</strong> button → set Type = <strong>Other</strong> → enter Name: <code>Cost Center</code> → Save</li>
+            <li><span class="mini-lab-step-num">3</span> Click the blue <strong>+</strong> button again → Type = <strong>Other</strong> → Name: <code>Product</code> → Save</li>
+            <li><span class="mini-lab-step-num">4</span> Select the <strong>Cost Center</strong> dimension → click the cloud+up (import) icon → choose <strong>Append</strong> mode → upload the Cost Center elements file from your exercise folder</li>
+            <li><span class="mini-lab-step-num">5</span> Repeat step 4 for the <strong>Product</strong> dimension</li>
+            <li><span class="mini-lab-step-num">6</span> For <strong>Cost Center</strong>: set <strong>Default Reporting Member</strong> to the Total element (parent of the hierarchy) → set <strong>Default Input Member</strong> to any leaf-level element</li>
+            <li><span class="mini-lab-step-num">7</span> Repeat step 6 for <strong>Product</strong></li>
+            <li><span class="mini-lab-step-num">8</span> Navigate to <strong>Models module → Model tab</strong> → single-click the <strong>Consolidation</strong> model → click the <strong>+</strong> button in the dimensions panel → select <strong>Cost Center</strong> → click Add</li>
+            <li><span class="mini-lab-step-num">9</span> Repeat step 8 to add the <strong>Product</strong> dimension to the model</li>
+            <li><span class="mini-lab-step-num">10</span> Click <strong>Save</strong> (💾) → then <strong>Process</strong> (⚙️⚙️)</li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          Processing completes with no errors, and both Cost Center and Product appear in the Consolidation model's dimension list.
+        </div>
+      </div>
+
+      <!-- MINI-LAB 2 -->
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">2</div>
+          <div class="mini-lab-title">Import Entity and Account Dimensions</div>
+          <div class="mini-lab-duration">15 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Load the entity hierarchy and account dimension from the requirements workbook files, then configure the three workshop currencies.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> In the <strong>Dimensions tab</strong>, click on the <strong>Entity</strong> dimension</li>
+            <li><span class="mini-lab-step-num">2</span> Click the cloud+up (import) icon → select <strong>Replace</strong> mode → upload the Entity dimension file from your exercise folder</li>
+            <li><span class="mini-lab-step-num">3</span> Verify the hierarchy loaded correctly — you should see subgroups and leaf-level entities in the hierarchy view</li>
+            <li><span class="mini-lab-step-num">4</span> Click on the <strong>Account</strong> dimension → import icon → <strong>Replace</strong> mode → upload the Account dimension file</li>
+            <li><span class="mini-lab-step-num">5</span> Navigate to the <strong>Currencies</strong> section (within the same Dimensions tab or Currency sub-menu)</li>
+            <li><span class="mini-lab-step-num">6</span> Locate the Canadian Dollar entry → rename it to <strong>GBP</strong></li>
+            <li><span class="mini-lab-step-num">7</span> Verify the three currencies now present are: <strong>USD</strong>, <strong>EUR</strong>, <strong>GBP</strong></li>
+            <li><span class="mini-lab-step-num">8</span> After each import: click <strong>Save</strong> → then <strong>Process</strong></li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          The entity hierarchy displays correctly (subgroups visible with leaf entities beneath them), the account dimension is loaded, and the currency list shows exactly three currencies: USD, EUR, and GBP.
+        </div>
+      </div>
+
+      <!-- MINI-LAB 3 -->
+      <div class="mini-lab">
+        <div class="mini-lab-header">
+          <div class="mini-lab-number">3</div>
+          <div class="mini-lab-title">Verify Model Configuration</div>
+          <div class="mini-lab-duration">5 min</div>
+        </div>
+        <div class="mini-lab-body">
+          <div class="mini-lab-objective">
+            <strong>Objective</strong>
+            Confirm the Consolidation model is correctly configured and a default report opens without errors.
+          </div>
+          <ol class="mini-lab-steps">
+            <li><span class="mini-lab-step-num">1</span> Navigate to <strong>Models module → Model tab</strong></li>
+            <li><span class="mini-lab-step-num">2</span> Click the <strong>Consolidation</strong> model to open its configuration</li>
+            <li><span class="mini-lab-step-num">3</span> Confirm that <strong>Cost Center</strong> and <strong>Product</strong> appear in the model's dimension list</li>
+            <li><span class="mini-lab-step-num">4</span> Navigate to the <strong>Reports</strong> module (or Consolidated Financials) → open any default report</li>
+            <li><span class="mini-lab-step-num">5</span> Confirm the report opens without any error messages about missing dimension members or configuration</li>
+          </ol>
+        </div>
+        <div class="mini-lab-completion">
+          <div class="mini-lab-completion-label">✅ You're done when...</div>
+          The default report opens cleanly without errors. (No data yet — that's expected. Just no errors.)
+        </div>
+      </div>
+
+      <!-- COMPLETION CHECKLIST -->
+      <h2>Lab A Completion Checklist</h2>
+      <ul class="checklist">
+        <li>Custom dimension <strong>Cost Center</strong> created (Type: Other)</li>
+        <li>Custom dimension <strong>Product</strong> created (Type: Other)</li>
+        <li>Default Reporting Member set for Cost Center and Product</li>
+        <li>Default Input Member set for Cost Center and Product</li>
+        <li>Both dimensions added to the Consolidation model</li>
+        <li>Entity dimension imported successfully</li>
+        <li>Account dimension imported successfully</li>
+        <li>Currencies configured: USD, EUR, GBP</li>
+        <li>Save → Process completed with no errors</li>
+        <li>Default report opens without errors</li>
+      </ul>
+
+      <!-- COMMON ISSUES -->
+      <div class="callout-warning">
+        <span class="callout-label">🔧 Common Issues &amp; Fixes</span>
+        <dl>
+          <dt>Save → Process completes but shows an error</dt>
+          <dd>Most likely cause: Default Reporting Member or Default Input Member not set on one of your custom dimensions. Go back to the Dimensions tab, select the dimension, and set both defaults.</dd>
+
+          <dt>Custom dimension doesn't appear in reports</dt>
+          <dd>You created the dimension but forgot to add it to the Consolidation model. Navigate to Models → Model tab → click Consolidation model → click + → add the dimension.</dd>
+
+          <dt>Import fails with a column error</dt>
+          <dd>Column names in the file must exactly match the staging table column names — including case. Check the file headers against what FCR expects. VARCHAR columns for dimension text values, FLOAT for numeric amounts.</dd>
+
+          <dt>Entity hierarchy looks flat (no parent-child nesting)</dt>
+          <dd>Check the <code>isLeaf</code> column in the import file — it must correctly indicate parent vs. leaf elements. Also verify the Parent column is populated for non-root elements.</dd>
+        </dl>
+      </div>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./05-data-model.html">← Previous</a>
+        <a class="prevnext-btn" href="./07-ownership-methods.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

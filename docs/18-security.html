@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link active" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Security</h1>
+      <p class="subtitle">User roles, folder security, model security, workflow security, and SSO</p>
+      <div class="badge-row"><span class="content-badge">Advanced Topics</span><span class="content-badge">25 min</span></div>
+    </div>
+    <div class="content-body">
+
+      <!-- TSD Banner -->
+      <div class="tsd-banner">
+        <div class="tsd-item tsd-tell">
+          <div class="tsd-label">Tell</div>
+          <div class="tsd-text">FCR's multi-layer security model and why it differs from typical Anaplan models</div>
+        </div>
+        <div class="tsd-item tsd-show">
+          <div class="tsd-label">Show</div>
+          <div class="tsd-text">Walkthrough of the Security module: roles, permissions tabs, and folder security</div>
+        </div>
+        <div class="tsd-item tsd-do">
+          <div class="tsd-label">Do</div>
+          <div class="tsd-text">Reference only — security configuration assigned as post-workshop activity using 5-week tenant access</div>
+        </div>
+      </div>
+
+      <!-- Overview callout -->
+      <div class="callout callout-warning">
+        <strong>⚠️ Security is More Complex Than a Typical Anaplan Model</strong>
+        <p>FCR has multiple security layers that interact with each other. Misconfigured security doesn't just block users — it can silently remove features. For example, if Consolidation permissions are not set to <strong>"All,"</strong> the <strong>+ button in the FX Rate Override form disappears entirely</strong>. Always configure and test security in a non-production environment first.</p>
+      </div>
+
+      <!-- Security Overview -->
+      <h2>Security Model Overview</h2>
+      <p>FCR security is applied at five distinct layers. Each layer is independent but they combine to define what a user can see and do. A gap in any layer can prevent users from accessing features or data they should have.</p>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <div class="concept-icon">🏢</div>
+          <div class="concept-title">Layer 1: Workspace Security</div>
+          <div class="concept-desc">Standard Anaplan workspace roles (Full Access, Read Only, etc.). This is a prerequisite — users must be at the workspace level before any FCR-level security takes effect.</div>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">📁</div>
+          <div class="concept-title">Layer 2: Folder Security</div>
+          <div class="concept-desc">Applied at the folder level in FCR Explorer. Controls whether users can see a folder's contents, add objects, or edit objects. Configured via the three-dots menu → Security on any folder.</div>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">🗄️</div>
+          <div class="concept-title">Layer 3: Model Security</div>
+          <div class="concept-desc">Data-level security restricting what entities (or other dimension members) a user can see and write. Read profiles and write profiles are created at the model level and assigned to roles.</div>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">🏠</div>
+          <div class="concept-title">Layer 4: Homepage Security</div>
+          <div class="concept-desc">Homepages can be assigned per user or per role. CFO or VP Finance scenarios — personalized dashboards on login showing key KPIs relevant to their scope.</div>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">⚙️</div>
+          <div class="concept-title">Layer 5: Workflow Security</div>
+          <div class="concept-desc">Three-role model (Owner / Supervisor / Contributor) governing workflow task visibility and what actions each role can perform. Users outside all three roles cannot see the workflow at all.</div>
+        </div>
+      </div>
+
+      <!-- FCR Security Module -->
+      <h2>FCR Security Module Structure</h2>
+      <p>The Security module in FCR has three main tabs:</p>
+      <ul>
+        <li><strong>Tab 1 — Users:</strong> Lists all users in the FCR environment</li>
+        <li><strong>Tab 2 — Roles:</strong> Define named roles (e.g., CONSOLIDATION_ADMIN, ENTITY_OWNER, READ_ONLY)</li>
+        <li><strong>Tab 3 — Role Authorizations:</strong> Assign granular permissions to each role, organized by module</li>
+      </ul>
+
+      <p>The Role Authorizations tab is the most important configuration screen. Key permission areas:</p>
+
+      <table class="data-table">
+        <caption>Table 25: FCR Security Module Structure</caption>
+        <thead>
+          <tr>
+            <th>Permission Area</th>
+            <th>What It Controls</th>
+            <th>Key Setting</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>General</strong></td>
+            <td>Which models/applications the user can access</td>
+            <td>Assign the consolidation model to every role that needs it</td>
+          </tr>
+          <tr>
+            <td><strong>Journals</strong></td>
+            <td>Access to the Journals module and the ability to post journal entries</td>
+            <td>Enable <strong>ALL</strong> journal sub-permissions for users who post journals — missing any one will prevent journals from working</td>
+          </tr>
+          <tr>
+            <td><strong>Consolidation</strong></td>
+            <td>Data view access and consolidation process permissions, including FX Rate Override entry</td>
+            <td>Set to <strong>"All"</strong> to enable the + button in the FX Rate Override form; set to <strong>"None"</strong> for read-only users</td>
+          </tr>
+          <tr>
+            <td><strong>Workflow</strong></td>
+            <td>Which workflow role (Owner / Supervisor / Contributor) is assigned per entity</td>
+            <td>Match to the user's organizational role; users with no workflow role cannot see the workflow</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/26-security-module.jpg" alt="FCR Security module showing the three-tab structure: Users, Roles, and Access Rights by module" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 26:</span> Security module (Security → Role Authorizations) — three tabs: General, Journals, Consolidation; toggle permissions per role</figcaption>
+      </figure>
+
+      <!-- Workflow Security -->
+      <h2>Workflow Security — Three Roles</h2>
+      <p>Every FCR workflow uses a three-role security model. These roles are distinct — a user not assigned to any role <strong>cannot even see the workflow exists</strong>.</p>
+
+      <table class="data-table">
+        <caption>Table 26: Workflow Security Roles</caption>
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>Can Do</th>
+            <th>Cannot Do</th>
+            <th>Assign To</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Owner</strong></td>
+            <td>Create workflows, edit task details, run consolidation processes, do everything a Contributor can do</td>
+            <td>Approve/reject (that's the Supervisor's job)</td>
+            <td>Implementation team, key finance power users</td>
+          </tr>
+          <tr>
+            <td><strong>Supervisor</strong></td>
+            <td>Approve or reject workflow tasks submitted by Contributors</td>
+            <td>Create, edit, or complete workflow tasks directly</td>
+            <td>Finance controllers, Group Finance managers</td>
+          </tr>
+          <tr>
+            <td><strong>Contributor</strong></td>
+            <td>Access assigned tasks, enter data, set percentage complete, submit for approval</td>
+            <td>Approve/reject; run consolidation; modify workflow design</td>
+            <td>Entity finance teams entering local data</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Folder Security -->
+      <h2>Folder Security</h2>
+      <p>Folder security controls what users can see in FCR's Explorer navigation:</p>
+      <ol>
+        <li>Right-click any folder in Explorer → select the <strong>three-dots (…) menu</strong></li>
+        <li>Choose <strong>Security</strong></li>
+        <li>Assign roles to the folder — set permissions for: viewing contents, adding objects, editing objects</li>
+      </ol>
+      <p>Folder security is particularly important for controlling access to reports, input forms, and processes. A user who cannot see a folder will not know it exists.</p>
+
+      <!-- SSO -->
+      <h2>SSO / SAML Integration</h2>
+      <p>FCR supports <strong>SAML 2</strong> for Single Sign-On integration with customer identity systems (Azure AD, Okta, etc.). Key points:</p>
+      <ul>
+        <li>SSO is configured at the workspace level — same as any other Anaplan workspace</li>
+        <li>FCR users are standard Anaplan users — no separate identity management is needed</li>
+        <li>Once SSO is configured, FCR inherits it automatically</li>
+        <li>No special FCR-specific SSO configuration is required beyond the workspace setup</li>
+      </ul>
+
+      <!-- Naming Conventions -->
+      <h2>Naming Conventions Recommendation</h2>
+      <p>Clear role naming makes ongoing support and maintenance significantly easier. Recommended convention:</p>
+      <ul>
+        <li><code>CONSOLIDATION_ADMIN</code> — Full access, runs processes, manages configuration</li>
+        <li><code>ENTITY_OWNER</code> — Entity-level workflow owner for specific subsidiary teams</li>
+        <li><code>GROUP_CONTROLLER</code> — Supervisor role for group finance review and approval</li>
+        <li><code>READ_ONLY</code> — View-only access, no data entry or process execution</li>
+        <li>For entity-restricted roles, include the entity hierarchy reference: e.g., <code>EMEA_CONTRIBUTOR</code></li>
+      </ul>
+
+      <!-- Common Issues -->
+      <div class="callout callout-danger">
+        <strong>🚨 Common Security Issues &amp; Fixes</strong>
+        <table class="data-table" style="margin-top: 0.75rem;">
+          <caption>Table 27: Security Troubleshooting</caption>
+          <thead>
+            <tr><th>Symptom</th><th>Root Cause</th><th>Fix</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FX Rate Override + button is missing</td>
+              <td>Consolidation permission is not set to "All"</td>
+              <td>Security → Role Authorizations → Consolidation → set to All → Save</td>
+            </tr>
+            <tr>
+              <td>Journals module not visible in left nav</td>
+              <td>Journal permissions not fully enabled</td>
+              <td>Enable ALL journal sub-permissions in Role Authorizations → Save (module reappears)</td>
+            </tr>
+            <tr>
+              <td>User can't see entity data</td>
+              <td>Missing Workflow Contributor role assignment for that entity</td>
+              <td>Role Authorizations → Workflow tab → assign Contributor role to the relevant entity</td>
+            </tr>
+            <tr>
+              <td>Workflow not visible to user at all</td>
+              <td>User has no Owner, Supervisor, or Contributor role assigned</td>
+              <td>Assign at least one workflow role in Role Authorizations</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./17-lab-e-new-period.html">← Previous</a>
+        <a class="prevnext-btn" href="./19-narrative-reporting.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Period Initialization — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link active" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Period Initialization</h1>
+      <p class="subtitle">Opening a new fiscal period: global variables, open periods, FX rates, Copy Opening, and validation</p>
+      <div class="badge-row"><span class="content-badge">Period Management</span><span class="content-badge">20 min</span></div>
+    </div>
+    <div class="content-body">
+
+      <div class="tsd-banner">
+        <div class="tsd-step tsd-step-tell">
+          <span class="tsd-step-label">📖 Tell</span>
+          <span class="tsd-step-heading">The Period Initialization Sequence</span>
+          <span class="tsd-step-desc">The ordered steps to open a new fiscal period: variables, open periods, rates, Copy Opening, and recurring journals.</span>
+        </div>
+        <div class="tsd-step tsd-step-show">
+          <span class="tsd-step-label">👁 Show</span>
+          <span class="tsd-step-heading">Opening 2025 P1</span>
+          <span class="tsd-step-desc">Live demo of opening 2025 P1 from 2024 P12, entering new rates, running Copy Opening, and reviewing validation reports.</span>
+        </div>
+        <div class="tsd-step tsd-step-do">
+          <span class="tsd-step-label">✅ Do</span>
+          <span class="tsd-step-heading">Lab E — New Period + Cash Flow</span>
+          <span class="tsd-step-desc">Initialize 2025 P1 and P2, load new trial balances, run consolidation, and configure cash flow (page 17).</span>
+        </div>
+      </div>
+
+      <h2>The Period Initialization Sequence</h2>
+      <p>Every new fiscal period — whether a month-end, quarter-end, or year-end — requires a specific sequence of steps before data can be loaded and the consolidation run. Skipping or reordering steps will produce errors or incorrect results.</p>
+
+      <div class="callout-warn">
+        <span class="callout-label">⚠️ Do Not Run Copy Opening Mid-Process</span>
+        <p><strong>Copy Opening</strong> must only be run at the very start of the cash flow process (period initialization). Running it after balance sheet continuity data has been entered will <strong>replace all movement data</strong> — wiping any entries already made. This is a one-way destructive operation. Run it once at the beginning; never mid-cycle.</p>
+      </div>
+
+      <h3>Complete Period Initialization Sequence</h3>
+
+      <div class="step"><div class="step-badge">1</div><div class="step-content">
+        <h3>Update Global Variables</h3>
+        <p>Navigate to <strong>Configure → Global Variables</strong>. Update the <strong>Current Year</strong> and <strong>Current Period</strong> to the new period (e.g., Year = 2025, Period = P1).</p>
+        <p>Global Variables drive the defaults used throughout FCR — report filters, journal date defaults, and process selectors all reference this setting. Update this first before any other step.</p>
+        <figure class="screenshot">
+          <img src="../img/screenshots/20-global-variables.jpg" alt="Period initialization workflow showing Global Variables, Configure Open Periods, FX Rates, Copy Opening steps" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+          <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 20:</span> Period initialization sequence — Global Variables → Open Periods → FX Rates → Copy Opening → Validate → Load Data</figcaption>
+        </figure>
+      </div></div>
+
+      <div class="step"><div class="step-badge">2</div><div class="step-content">
+        <h3>Configure Open Periods</h3>
+        <p>Navigate to <strong>Configure → Open Periods</strong>. Add a new row for each period you want to open (e.g., 2025P1 and 2025P2). Click the <strong>+</strong> button or duplicate an existing row.</p>
+        <p>Only periods listed in the Open Periods table accept data loads. If a period is not open, import definitions will fail or silently discard data. <strong>The new period must be added to this table before Copy Opening can write to it.</strong></p>
+        <figure class="screenshot">
+          <img src="../img/screenshots/21-open-periods.jpg" alt="Configure Open Periods table showing periods added with active toggles" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+          <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 21:</span> Configure Open Periods — add new periods here before loading data; multiple periods can be open simultaneously</figcaption>
+        </figure>
+        <p>To close a period at year-end, simply delete its row from the table. Multiple periods can be open simultaneously — this is expected and normal during reporting cycles.</p>
+      </div></div>
+
+      <div class="step"><div class="step-badge">3</div><div class="step-content">
+        <h3>Enter Exchange Rates for New Periods</h3>
+        <p>Navigate to <strong>Maintain → Foreign Exchange Global Rates</strong>. Enter End Rate and Average Rate for the new period(s) for all non-base reporting currencies.</p>
+        <p>For FX rate overrides at the account/entity level (e.g., specific accounts that use a negotiated rate), use the <strong>Override Rates</strong> web form.</p>
+      </div></div>
+
+      <div class="step"><div class="step-badge">4</div><div class="step-content">
+        <h3>FX Rate Overrides (If Required)</h3>
+        <figure class="screenshot">
+          <img src="../img/screenshots/22-fx-rate-override.jpg" alt="FX Rate Override web form showing entity-level rate entry with security requirement" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+          <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 22:</span> FX Rate Override web form — requires Security → Consolidation = All for the + button to appear</figcaption>
+        </figure>
+        <p>If any entities or accounts require non-standard exchange rates (e.g., hedged rates for specific balance sheet items), enter them via the <strong>Override Rates</strong> web form in Maintain.</p>
+        <div class="callout-warn" style="margin-top:0.75rem;">
+          <span class="callout-label">⚠️ Security Setting Required for Override Rates</span>
+          <p>To see the <strong>+</strong> (Add) button in the Override Rates web form, you must first go to <strong>Security settings</strong> and set <strong>Consolidation → All</strong>. Without this setting, the form opens in read-only mode with no visible add button. This is a new behavior in the current release.</p>
+          <p>When entering override rates: fill in Entity, Date, Scenario (Actuals), Account, and Rate. Leave Cost Center, Audit, and Product fields empty.</p>
+        </div>
+      </div></div>
+
+      <div class="step"><div class="step-badge">5</div><div class="step-content">
+        <h3>Run Copy Opening</h3>
+        <p>Navigate to <strong>Consolidation → Processes</strong>. Run the <strong>Copy Opening</strong> calculation rule. This process copies the closing balances from the prior period (2024 P12) into the opening balances of the new period (2025 P1).</p>
+        <p>Copy Opening is driven by the <strong>Rollover Rules</strong> — pre-configured (and customizable) rules that govern how period-end balances roll forward. These rules are exportable, importable, and duplicatable like all other FCR configuration objects.</p>
+      </div></div>
+
+      <div class="step"><div class="step-badge">6</div><div class="step-content">
+        <h3>Run Copy Recurring Journal Entries</h3>
+        <p>If any journals were flagged as <strong>recurring</strong> in prior periods, run the <strong>Copy Recurring Journal Entries</strong> process. This rolls standing reclassifications and adjustments forward to the new period automatically.</p>
+        <p>Review the copied journals before posting — confirm they are still appropriate for the new period.</p>
+      </div></div>
+
+      <div class="step"><div class="step-badge">7</div><div class="step-content">
+        <h3>Load Trial Balance Data</h3>
+        <p>Load the new period's trial balance for all entities via the data integration workflow (same as prior periods — see the Data Integration page). Entities with new 2025 P1 data (e.g., London and Paris in the workshop model) will have source files ready in the exercise folder.</p>
+        <p>You do not need to create a new workflow for each period — reuse the existing import definitions with the updated period reference from the source file's date column.</p>
+      </div></div>
+
+      <div class="step"><div class="step-badge">8</div><div class="step-content">
+        <h3>Run All (Consolidation)</h3>
+        <p>Navigate to <strong>Consolidation → Processes</strong> and run <strong>Run All</strong> for the new period. This executes currency conversion, consolidation rules, eliminations, and all calculation processes in the correct sequence.</p>
+      </div></div>
+
+      <div class="step"><div class="step-badge">9</div><div class="step-content">
+        <h3>Run Validation Reports</h3>
+        <p>After consolidation, run both validation reports to confirm data integrity:</p>
+        <ul>
+          <li><strong>Validations Open Period Report</strong> — checks opening balances for the new period. Green checkmarks = all opening balances carried forward correctly. Red X = an opening balance discrepancy requires investigation.</li>
+          <li><strong>Movement Validations Report</strong> — checks balance sheet movement integrity. Some red X's on a first run are expected if movements are incomplete; investigate and resolve before close.</li>
+        </ul>
+        <p>Green checkmarks on both reports indicate the period is ready for processing. Red X's must be investigated — they indicate data quality issues that will compound in future periods if left unresolved.</p>
+      </div></div>
+
+      <h2>Rollover Rules</h2>
+      <p>Rollover rules define exactly how prior period closing balances map to opening balances in the new period. FCR includes pre-configured rollover rules out-of-the-box. You can add custom rules for non-standard treatment.</p>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>⚙️ Rule Capabilities</h3>
+          <ul>
+            <li>Export, import, and duplicate — same as all FCR rules</li>
+            <li>Custom rollover rules can be added via the Maintain menu</li>
+            <li>Rules can roll different account types with different behaviors</li>
+            <li>Edit → Run Copy Opening → validates the rollover</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>📋 Typical Rollover Behavior</h3>
+          <ul>
+            <li>Balance sheet accounts: closing → opening in new period</li>
+            <li>P&amp;L accounts: reset to zero (new period starts fresh)</li>
+            <li>Retained earnings: prior year net income rolls to retained earnings</li>
+            <li>Cash flow accounts: handled separately via cash flow configuration</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Period Naming Convention</h2>
+      <p>FCR uses a consistent period naming format across all configurations and reports:</p>
+
+      <table>
+        <caption>Table 22: Period Naming Convention</caption>
+        <thead>
+          <tr>
+            <th>Format</th>
+            <th>Example</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>YYYY P##</code></td>
+            <td>2024 P12</td>
+            <td>Actuals, year 2024, period 12 (December)</td>
+          </tr>
+          <tr>
+            <td><code>YYYY P01</code></td>
+            <td>2025 P01</td>
+            <td>Actuals, year 2025, period 1 (January)</td>
+          </tr>
+          <tr>
+            <td><code>YYYY B##</code></td>
+            <td>2025 B12</td>
+            <td>Budget, year 2025, period 12</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout-note">
+        <span class="callout-label">💡 Year-End vs. Month-End Initialization</span>
+        <p>Year-end initialization follows the same steps as a regular month-end, with one addition: the <strong>Global Variables</strong> year must be incremented. P&amp;L accounts reset to zero automatically via the rollover rules — no manual intervention is needed. The first period of the new year should show zero P&amp;L opening balances and correct balance sheet opening balances from the prior year closing.</p>
+      </div>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./14-lab-d-consolidation-engine.html">← Previous</a>
+        <a class="prevnext-btn" href="./16-balance-sheet-cashflow.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

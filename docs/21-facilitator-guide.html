@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facilitator Guide — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link active" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Facilitator Guide</h1>
+      <p class="subtitle">Setup checklist, lab answer keys, known issues, and how to support a self-paced cohort</p>
+      <div class="badge-row"><span class="content-badge">Reference</span><span class="content-badge">Facilitator Only</span></div>
+    </div>
+    <div class="content-body">
+
+      <div class="callout callout-info">
+        <strong>🎓 For Workshop Facilitators Only</strong>
+        <p>This page is for whoever administers and supports the self-paced workshop. It covers setup, lab answer keys, known product issues, and resources to share. Keep this link to the support team — do not include it in participant welcome emails.</p>
+      </div>
+
+      <!-- Pre-Workshop Checklist -->
+      <h2>Pre-Workshop Checklist</h2>
+      <p>Complete these before enrolling participants. Items marked <strong>[3–5 days]</strong> need a longer lead time.</p>
+
+      <ul class="checklist">
+        <li>
+          <label><input type="checkbox"> <strong>[3–5 days]</strong> Submit tenant provisioning requests for all participants via the standard Salesforce process. Confirm participant count and tenant type (11-dimension Group model for European workshops) before submitting.</label>
+        </li>
+        <li>
+          <label><input type="checkbox"> Confirm all participants have received training tenant credentials. Send a test login email and request acknowledgment. Participants with corporate IT security blocks on FCR tenant URLs need IT tickets raised before they start.</label>
+        </li>
+        <li>
+          <label><input type="checkbox"> Upload exercise files to the shared SharePoint folder. Subfolders required: <em>Supporting Templates</em> (requirements workbook, BRD, project plan), <em>Slides</em> (full deck + exercises-only deck), <em>Files to Share</em> (Data Model Basics Solution, Data Integration, Currency Conversion rates, Initialize New Period, Helpful Stuff for Workshop).</label>
+        </li>
+        <li>
+          <label><input type="checkbox"> Send the SharePoint link to participants when they enroll.</label>
+        </li>
+        <li>
+          <label><input type="checkbox"> Test a training tenant: verify Save → Process works correctly, the Journals feature flag is enabled, open periods are configured for the workshop periods (2024 P12 minimum), and the trial balance data loads cleanly.</label>
+        </li>
+        <li>
+          <label><input type="checkbox"> Verify that the <strong>Journals feature flag</strong> is enabled on all participant tenants. This is NOT self-service — it requires activation via the Excel settings file or a support ticket for brand-new tenants. Do not assume it is on by default.</label>
+        </li>
+        <li>
+          <label><input type="checkbox"> Review the slide deck for any product changes since the last delivery. The new Anaplan UX was released the week of the April 2026 London workshop — check whether participant tenants have the new or old UI and update screenshots accordingly.</label>
+        </li>
+        <li>
+          <label><input type="checkbox"> <strong>[3–5 days]</strong> If demonstrating Narrative Reporting: verify a separate Narrative Reporting tenant is provisioned. Narrative Reporting is provisioned separately from the FCR consolidation tenant and may have a different lead time.</label>
+        </li>
+        <li>
+          <label><input type="checkbox"> Maintain a participant roster with tenant assignment (username/URL per participant).</label>
+        </li>
+        <li>
+          <label><input type="checkbox"> Confirm the support team is briefed on the lab answer keys and known issues before participants start.</label>
+        </li>
+      </ul>
+
+      <!-- Pacing & Effort -->
+      <h2>Pacing &amp; Effort Guidance</h2>
+      <p>The workshop is self-paced — there is no fixed schedule. Use the estimates below to help participants plan their time and to spot when someone is stuck. Most participants spend an hour or two a day and finish over a couple of weeks. Effort includes reading, watching the walkthroughs, and completing the labs.</p>
+
+      <table class="data-table">
+        <caption>Table 30: Pacing &amp; Effort Guidance</caption>
+        <thead>
+          <tr>
+            <th>Module</th>
+            <th>Pages</th>
+            <th>Estimated Effort</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Getting Started</strong></td>
+            <td>01–04</td>
+            <td>~1–2 hours</td>
+            <td>Mostly reading. Make sure tenant access is confirmed before participants reach the first lab.</td>
+          </tr>
+          <tr>
+            <td><strong>Data Model &amp; Configuration</strong></td>
+            <td>05–10</td>
+            <td>~5–6 hours</td>
+            <td>Labs A–C. The heaviest module. Clear Data Settings (Lab C) is the most critical concept — flag it in your support channel.</td>
+          </tr>
+          <tr>
+            <td><strong>Consolidation Engine</strong></td>
+            <td>11–14</td>
+            <td>~5 hours</td>
+            <td>Lab D spans most of this. Covers currency conversion, journals, consolidation rules, and intercompany elimination.</td>
+          </tr>
+          <tr>
+            <td><strong>Period Management</strong></td>
+            <td>15–17</td>
+            <td>~2–3 hours</td>
+            <td>Lab E. The FX Rate Override security gotcha and the Mac/Excel add-in limitation come up here.</td>
+          </tr>
+          <tr>
+            <td><strong>Advanced Topics</strong></td>
+            <td>18–19</td>
+            <td>~1–1.5 hours</td>
+            <td>Security is conceptual; Narrative Reporting is a short walkthrough on a separate tenant.</td>
+          </tr>
+          <tr>
+            <td><strong>Reference</strong></td>
+            <td>20–21</td>
+            <td>~45 min</td>
+            <td>Q&amp;A, best practices, roadmap, and partner collaboration. Worth revisiting during a first live implementation.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Lab Answer Keys -->
+      <h2>Lab Answer Keys</h2>
+      <p>Use these expected outcomes to verify participant progress during and after each lab. These are the observable results a participant should be able to confirm before moving on.</p>
+
+      <h3>Lab A — Data Model Setup</h3>
+      <ul>
+        <li>✅ Two custom dimensions created: <strong>Cost Center</strong> (Type: Other) and <strong>Product</strong> (Type: Other)</li>
+        <li>✅ Both dimensions added to the Consolidation Model (Models → Model → plus sign)</li>
+        <li>✅ Default Reporting Member and Default Input Member set on both custom dimensions</li>
+        <li>✅ Entity hierarchy imported; Company/Intercompany/Group dimensions auto-populated after Save → Process</li>
+        <li>✅ Currencies configured: USD, EUR, GBP (min. 3)</li>
+        <li>✅ Account dimension imported with correct attributes (Name, Caption, Tags, Classification, Operator, P_conversion)</li>
+        <li>✅ No errors when running a default report</li>
+        <li>✅ Save → Process completed after every metadata change — participant can demonstrate this habit</li>
+      </ul>
+
+      <h3>Lab B — Ownership Setup</h3>
+      <ul>
+        <li>✅ Consolidation Methods configured: Global (&gt;50% to ≤100%), Proportional (=50%), Equity (20–50%)</li>
+        <li>✅ All entities have ownership percentages entered in the Direct Ownership table</li>
+        <li>✅ Ultimate Rate Calculator run — Managed Ownership table populated</li>
+        <li>✅ Each entity's consolidation method automatically assigned based on ownership %</li>
+        <li>✅ Entity dimension has Holding Company flag set for appropriate entities in each subgroup</li>
+        <li>✅ Total Group tag present in Entity, Company, AND Group dimensions (verify by checking Direct Ownership table — all three left-hand dimensions visible)</li>
+      </ul>
+
+      <h3>Lab C — Load Trial Balance</h3>
+      <ul>
+        <li>✅ Two staging tables created (one for each GL source file)</li>
+        <li>✅ Mapping table created for CAM (Central American) entities — different chart of accounts</li>
+        <li>✅ Two import definitions created with correct field mappings: Scenario = Fixed → Actuals; DataView = Fixed → Value; Entity = Match Name; Period = Match Name; Account = Map</li>
+        <li>✅ Clear Data Settings configured on each import definition (not left at default additive)</li>
+        <li>✅ Required periods opened in Configure Open Periods table before data load</li>
+        <li>✅ Workflow created and run to execute both imports</li>
+        <li>✅ Trial balance visible in a default report — entity data loads cleanly, no doubled amounts</li>
+      </ul>
+
+      <h3>Lab D — Consolidation Engine</h3>
+      <ul>
+        <li>✅ GBP set as additional reporting currency (reporting = true, triangulate = true, rate operator = divide)</li>
+        <li>✅ FX rates entered for 2024 P12 (EUR and GBP; USD = 1 as base)</li>
+        <li>✅ Run All executed for 2024 P12</li>
+        <li>✅ E13 Berlin shows EUR ~190 and USD ~224 for the cash line in Consolidated Financials by Entity</li>
+        <li>✅ Journal entry posted: Debit Cost of Sales (IC=3RD, Movement=Closing), Credit Accounts Payable (IC=3RD, Movement=Increase)</li>
+        <li>✅ Journal visible in Consolidated Financials by Audit → Contribution → Reclass column</li>
+        <li>✅ ARAP intercompany elimination rule configured, Active = true</li>
+        <li>✅ IC balances eliminated — visible in Consolidated Financials by Audit report under IC Elimination audit column</li>
+      </ul>
+
+      <h3>Lab E — New Period + Cash Flow</h3>
+      <ul>
+        <li>✅ Global Variables updated: Current Year = 2025, Current Period = P1</li>
+        <li>✅ 2025 P1 (and optionally P2) added to Configure Open Periods</li>
+        <li>✅ Exchange rates entered for new periods</li>
+        <li>✅ FX Rate Overrides entered for London accounts (Security → Consolidation = All required first)</li>
+        <li>✅ Copy Opening run — prior period closing balances carried forward as opening balances</li>
+        <li>✅ Trial balance loaded for 2025 P1 (London and Paris entities)</li>
+        <li>✅ Consolidation run; Validations Open Period report shows green checkmarks</li>
+        <li>✅ Movement Classifications created (Current BS, GPE/depreciation minimum) and assigned to balance sheet accounts</li>
+        <li>✅ Cash flow calculation rules configured (header + detail rows) for key cash flow lines</li>
+        <li>✅ Cash flow statement visible in reporting with populated values after running the calculation</li>
+      </ul>
+
+      <!-- Known Issues -->
+      <h2>Known Product Issues &amp; Workarounds</h2>
+      <p>Issues documented from the April 2026 London workshop and prior deliveries. Check Anipedia release notes before each workshop to see if any of these are resolved in the current version.</p>
+
+      <table class="data-table">
+        <caption>Table 31: Known Product Issues &amp; Workarounds</caption>
+        <thead>
+          <tr>
+            <th>Issue</th>
+            <th>Symptom</th>
+            <th>Workaround</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Journals feature flag not self-service</strong></td>
+            <td>Journals module does not appear after enabling journal permissions in Security</td>
+            <td>Feature flag must be enabled in the Excel settings file. For brand-new tenants, may require a support ticket to Anaplan. Pre-enable on all participant tenants before participants start.</td>
+          </tr>
+          <tr>
+            <td><strong>FX Rate Override + button missing</strong></td>
+            <td>The + (add) button does not appear in the FX Rate Override web form</td>
+            <td>Security → Role Authorizations → Consolidation → set to "All" → Save. Button appears immediately after save.</td>
+          </tr>
+          <tr>
+            <td><strong>Total Group tag missing</strong></td>
+            <td>Entity, Scenario, and Intercompany dimensions not visible in Direct Ownership table left panel; reports fail</td>
+            <td>Verify Total Group tag exists in <em>all three</em> of: Entity dimension, Company dimension, AND Group dimension. Run Save → Process after adding missing tag.</td>
+          </tr>
+          <tr>
+            <td><strong>Clear Data Settings left at default</strong></td>
+            <td>Data doubles or triples after multiple trial balance imports</td>
+            <td>Always configure Clear Data Settings on every import definition before the first load. "Staging Unique Values" scoped to the period dimension is the standard setting for trial balance imports.</td>
+          </tr>
+          <tr>
+            <td><strong>IC Matching report bug (April 2026 version)</strong></td>
+            <td>Intercompany Matching report shows unexpected or incorrect results after running matching</td>
+            <td>Treat completing the matching configuration as the exercise goal. Facilitator should demo the expected correct report output from a pre-configured tenant. Expected to be fixed in a future release — check current release notes.</td>
+          </tr>
+          <tr>
+            <td><strong>Conversion troubleshooting — 7 common causes</strong></td>
+            <td>Currency conversion results not appearing or incorrect after Run All</td>
+            <td>Walk through the 7-step checklist: (1) rates entered, (2) reporting currency flag set, (3) P_conversion attribute on accounts, (4) conversion rules active, (5) new movement added to conversion rule, (6) historical conversion type, (7) YTD balances. This checklist covers ~90% of conversion issues.</td>
+          </tr>
+          <tr>
+            <td><strong>Period must be opened before data load</strong></td>
+            <td>Data load fails silently or returns error; data not appearing in reports after import</td>
+            <td>Add the period to Configure Open Periods table before running any data import. This is opposite to most consolidation systems — warn participants explicitly at the start of the Data Integration module.</td>
+          </tr>
+          <tr>
+            <td><strong>Save → Process not run after metadata changes</strong></td>
+            <td>Changes to dimensions or model settings appear not to take effect; auto-generated dimensions (Intercompany, Group) not updated</td>
+            <td>Run Save → Process after every metadata change. Build this as a habit from Lab A onward. If participants see unexpected behavior, the first troubleshooting step is always: "Did you Save → Process?"</td>
+          </tr>
+          <tr>
+            <td><strong>Mac users cannot use Excel add-in</strong></td>
+            <td>Balance sheet continuity schedule, cash flow adjustment forms, and FX Rate Override (older versions) not accessible</td>
+            <td>Mac users must use a Windows VM. Identify Mac users during enrollment and set expectations. The 5-week post-workshop tenant access allows PC-based completion of deferred exercises.</td>
+          </tr>
+          <tr>
+            <td><strong>Month-end rollover wipes movement data</strong></td>
+            <td>Balance sheet continuity movements from current period disappear after running rollover</td>
+            <td>Rollover must only be run at the very start of the cash flow process — never mid-process. Emphasize this during the Balance Sheet &amp; Cash Flow module before participants run any rollover steps.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Common Participant Questions -->
+      <h2>Common Participant Questions</h2>
+      <p>These come up at virtually every delivery. Have crisp, confident answers ready.</p>
+
+      <div class="qa-item">
+        <div class="question">Q: "Is the tenant type really irreversible? Can't we just add the Group dimension later?"</div>
+        <div class="answer">Yes, it is completely irreversible. The Group dimension is not an add-on — it changes the fundamental architecture of how intercompany eliminations are structured. You cannot add it to an existing 10-dimension tenant. Emphasize this strongly, especially for participants who are about to start their first FCR project. Get client sign-off on the decision before provisioning.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: "Can I add a new dimension after go-live?"</div>
+        <div class="answer">Technically yes, but it is significant work. Every existing report, input form, consolidation rule, and import definition that touches the model will need to be reviewed and potentially updated. The new dimension also needs default members set, data loaded, and all historical data may need to be re-processed. Best practice: get the dimension design right before any data is loaded. If a client asks late in the project, push back hard on scope.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: "Should I work with Anaplan Professional Services on my first FCR engagement?"</div>
+        <div class="answer">Strongly recommended. FCR has many subtle configuration dependencies — tags, consolidation rules, account dimension setup — that are easy to get wrong without experience. Anaplan Professional Services support during the sales cycle and early delivery is free of charge. The goal is not permanent Professional Services involvement; it is to accelerate the partner's path to self-sufficiency. Weekly stand-ups during the project are the most effective model. Call Alliances (Mauro's team) to connect.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: "We have a typo in a tag in a live system — how do we find all affected rules?"</div>
+        <div class="answer">Export the full chart of accounts with all tags to Excel (from the Accounts dimension). Then export all consolidation rules. Cross-reference the two exports to find any rules that reference tags not present in the chart of accounts. This is the manual process — there is no built-in tag validation in the current version. A tag manager feature is on Anaplan's foreseen roadmap.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="question">Q: "How do we handle matrix consolidation (cross-ownership structures)?"</div>
+        <div class="answer">Matrix consolidation (where Entity A owns a percentage of Entity B which also owns a percentage back, or multi-tier cross-holdings) is not yet available as a built-in feature. It is on the roadmap — expected to be in customers' hands by end of 2026, likely via two "Other" type dimensions with mirroring behavior. For current projects, complex ownership structures need to be discussed with Anaplan Professional Services to find the appropriate approach within existing functionality.</div>
+      </div>
+
+      <!-- Post-Workshop Resources -->
+      <h2>Post-Workshop Resources</h2>
+
+      <div class="callout callout-info">
+        <strong>📚 Resources to Share with Participants</strong>
+        <ul>
+          <li><strong>Tenant access:</strong> Training tenants remain accessible for approximately <strong>5 weeks</strong> after a participant starts. Encourage participants to complete deferred exercises (security configuration, Excel add-in activities for PC users) during this window.</li>
+          <li><strong>Anipedia:</strong> Anaplan's official FCR documentation platform (migrated from Zendesk). Technical documentation for all FCR modules, configuration options, and release notes. Point participants here first for reference questions.</li>
+          <li><strong>Anaplan Community (NLP Community):</strong> Blog posts and community content. The post by Gregory ("Mr. Documentation") on the run-all process architecture is specifically recommended for understanding decoupled process behavior.</li>
+          <li><strong>Seismic:</strong> Partner-facing materials, competitive intelligence, and sales assets. Access via your partner portal.</li>
+          <li><strong>Professional Services on first engagement:</strong> Encourage participants to connect with Anaplan Professional Services (Matteo's team) before starting their first FCR customer project. Weekly stand-ups during delivery are the recommended engagement model.</li>
+          <li><strong>Knowledge check (certification quiz):</strong> Distributed via Anaplan Academy. Confirm with your Alliances contact (Mauro) that the quiz form is set up.</li>
+          <li><strong>Workshop evaluation form:</strong> A separate feedback form should be sent to participants when they complete the workshop. Results feed into workshop improvement cycles.</li>
+        </ul>
+      </div>
+
+      <div class="prevnext-nav"><a class="prevnext-btn" href="./20-qanda-best-practices.html">← Previous</a><span></span></div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

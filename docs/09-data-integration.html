@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Integration — FCR Delivery Partner Workshop</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <button id="hamburger">☰</button>
+    <span>FCR Delivery Partner Workshop</span>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">FCR Delivery Partner Workshop</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-section-title">Getting Started</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./01-overview.html">Workshop Overview</a></li>
+        <li><a class="nav-link" href="./02-fcr-overview.html">FCR Overview</a></li>
+        <li><a class="nav-link" href="./03-implementation-methodology.html">Implementation Methodology</a></li>
+        <li><a class="nav-link" href="./04-anaplan-way.html">Anaplan Way for Applications</a></li>
+      </ul>
+      <li class="nav-section-title">Data Model &amp; Configuration</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./05-data-model.html">Data Model</a></li>
+        <li><a class="nav-link" href="./06-lab-a-data-model.html">Lab A: Data Model Setup</a></li>
+        <li><a class="nav-link" href="./07-ownership-methods.html">Ownership &amp; Consolidation Methods</a></li>
+        <li><a class="nav-link" href="./08-lab-b-ownership.html">Lab B: Ownership Setup</a></li>
+        <li><a class="nav-link active" href="./09-data-integration.html">Data Integration</a></li>
+        <li><a class="nav-link" href="./10-lab-c-trial-balance.html">Lab C: Load Trial Balance</a></li>
+      </ul>
+      <li class="nav-section-title">Consolidation Engine</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./11-currency-conversion.html">Currency Conversion</a></li>
+        <li><a class="nav-link" href="./12-journals.html">Journals</a></li>
+        <li><a class="nav-link" href="./13-consolidation-rules.html">Consolidation Rules &amp; Intercompany</a></li>
+        <li><a class="nav-link" href="./14-lab-d-consolidation-engine.html">Lab D: Consolidation Engine</a></li>
+      </ul>
+      <li class="nav-section-title">Period Management</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./15-period-initialization.html">Period Initialization</a></li>
+        <li><a class="nav-link" href="./16-balance-sheet-cashflow.html">Balance Sheet &amp; Cash Flow</a></li>
+        <li><a class="nav-link" href="./17-lab-e-new-period.html">Lab E: New Period + Cash Flow</a></li>
+      </ul>
+      <li class="nav-section-title">Advanced Topics</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./18-security.html">Security</a></li>
+        <li><a class="nav-link" href="./19-narrative-reporting.html">Narrative Reporting</a></li>
+      </ul>
+      <li class="nav-section-title">Reference</li>
+      <ul class="nav-submenu">
+        <li><a class="nav-link" href="./20-qanda-best-practices.html">Q&amp;A &amp; Best Practices</a></li>
+        <li><a class="nav-link" href="./21-facilitator-guide.html">Facilitator Guide</a></li>
+      </ul>
+    </ul>
+    <div class="lang-switcher">
+      <span class="lang-switcher-label">🌐 Language</span>
+      <select id="lang-select" class="lang-select">
+        <option value="en">🇺🇸 English</option>
+      </select>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="content-header">
+      <h1>Data Integration</h1>
+      <p class="subtitle">Staging tables, member mappings, import definitions, clear data settings, and open periods</p>
+      <div class="badge-row"><span class="content-badge">Data Model &amp; Configuration</span><span class="content-badge">30 min</span></div>
+    </div>
+    <div class="content-body">
+
+      <div class="tsd-banner">
+        <div class="tsd-step tsd-step-tell">
+          <span class="tsd-step-label">📖 Tell</span>
+          <span class="tsd-step-heading">The 4-Step Data Flow</span>
+          <span class="tsd-step-desc">How data moves from source GL systems into FCR: Open Periods → Staging Tables → Member Mappings → Import Definitions.</span>
+        </div>
+        <div class="tsd-step tsd-step-show">
+          <span class="tsd-step-label">👁 Show</span>
+          <span class="tsd-step-heading">Integration Module Walkthrough</span>
+          <span class="tsd-step-desc">A short walkthrough demonstrates creating a staging table, building a member mapping, configuring an import definition, and setting Clear Data options.</span>
+        </div>
+        <div class="tsd-step tsd-step-do">
+          <span class="tsd-step-label">✅ Do</span>
+          <span class="tsd-step-heading">Lab C: Load Trial Balance</span>
+          <span class="tsd-step-desc">You'll build the full integration pipeline for two GL sources and load the workshop trial balance data.</span>
+        </div>
+      </div>
+
+      <!-- 4-STEP PROCESS -->
+      <h2>The 4-Step Data Integration Process</h2>
+
+      <div class="step">
+        <div class="step-badge">1</div>
+        <div class="step-content">
+          <h3>Open Periods</h3>
+          <p>Before any data can be loaded, the target period must be added to the <strong>Open Periods</strong> table (Maintain → General Configuration → Open Periods). FCR works the opposite of most consolidation systems — periods start <em>closed</em> and must be explicitly opened. Removing a period from the table closes it.</p>
+          <div class="callout-note">
+            <span class="callout-label">💡 Best Practice</span>
+            <p>Open the period first, before building your integration pipeline. Nothing in the integration setup will fail if the period is closed, but your test runs will produce "no data loaded" errors until the period is open.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-badge">2</div>
+        <div class="step-content">
+          <h3>Create Staging Tables</h3>
+          <p>Staging tables are SQL tables inside FCR that act as a temporary landing zone for incoming data. Each staging table corresponds to a source GL system (best practice: one table per source).</p>
+          <p><strong>Column naming rules:</strong></p>
+          <ul>
+            <li>Column names must <strong>exactly match</strong> the source file headers — including case</li>
+            <li>Dimension columns: use <strong>VARCHAR</strong> data type</li>
+            <li>Amount/value columns: use <strong>FLOAT</strong> data type</li>
+            <li>A mismatch between the file header and staging table column name = import failure</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-badge">3</div>
+        <div class="step-content">
+          <h3>Configure Member Mappings</h3>
+          <p>Member mappings translate source system values (e.g., GL account codes from an ERP) into FCR dimension member names. Not all sources require mappings — if the source values already match FCR member names exactly, you can use Match Name instead.</p>
+          <p>Mapping types available:</p>
+          <table>
+            <caption>Table 12: Member Mapping Types</caption>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>How It Works</th>
+                <th>Use Case</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Exact</strong></td>
+                <td>Source value matches target exactly</td>
+                <td>Simple direct account-to-account mapping</td>
+              </tr>
+              <tr>
+                <td><strong>Wildcard</strong></td>
+                <td>Pattern matching (e.g., <code>1*</code> maps all accounts starting with 1)</td>
+                <td>Whole account ranges using a prefix</td>
+              </tr>
+              <tr>
+                <td><strong>N (Non-sequential)</strong></td>
+                <td>Multiple individual source values → single target member</td>
+                <td>Consolidate multiple GL codes into one FCR account</td>
+              </tr>
+              <tr>
+                <td><strong>Range</strong></td>
+                <td>Numeric range (e.g., 1000–1099 → Account X)</td>
+                <td>Map a consecutive range of GL codes to one FCR account</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="callout-note">
+            <span class="callout-label">🔮 Coming Soon</span>
+            <p>AI-powered mapping suggestions are on the FCR roadmap. The system will analyse source values and recommend mappings by comparing them to target dimension members. This will significantly reduce the time needed to build mapping tables on first implementations.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-badge">4</div>
+        <div class="step-content">
+          <h3>Configure Import Definitions</h3>
+          <p>Import definitions tie everything together: they link a staging table to the FCR data model and define how each column in the staging table maps to a dimension member. Each column in the import definition has a field mapping type:</p>
+          <table>
+            <caption>Table 13: Import Definition Mappings</caption>
+            <thead>
+              <tr>
+                <th>Mapping Type</th>
+                <th>How It Works</th>
+                <th>Typical Use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Fixed</strong></td>
+                <td>Always maps to the same member, regardless of data content</td>
+                <td>Scenario = Actuals, DataView = Value, Audit = Source GL</td>
+              </tr>
+              <tr>
+                <td><strong>Match Name</strong></td>
+                <td>Maps by matching the source value to the dimension member's Name (ID)</td>
+                <td>Entity, Period (when source format matches), Intercompany</td>
+              </tr>
+              <tr>
+                <td><strong>Map</strong></td>
+                <td>Uses a member mapping table to transform source values to target members</td>
+                <td>Account dimension when chart of accounts differs from FCR; sign flips</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/09-workflow-canvas.jpg" alt="FCR workflow canvas showing the data load process with Start, ForEach, and Data Input tasks connected in sequence" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 09:</span> FCR workflow canvas — data load process with ForEach bursting and Data Input tasks; the recommended approach over ad-hoc imports</figcaption>
+      </figure>
+
+      <!-- CLEAR DATA SETTINGS - CRITICAL -->
+      <h2>Clear Data Settings — Critical Configuration</h2>
+
+      <div class="callout-warning">
+        <span class="callout-label">⚠️ Default Behaviour = Additive. This Will Double Your Data.</span>
+        <p>By default, import definitions are <strong>additive</strong> — when data is re-loaded, the new values are added on top of existing values. This means re-running an import without Clear Data configured will <em>double</em> your trial balance figures. This is one of the most common errors on a first FCR implementation.</p>
+        <p><strong>Always configure Clear Data Settings in every import definition before you run it for the first time.</strong></p>
+      </div>
+
+      <p>Six Clear Data options are available:</p>
+      <table>
+        <caption>Table 14: Clear Data Settings</caption>
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>What It Clears</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Descendants Of</strong></td>
+            <td>Clears all data for descendants of a specified dimension member</td>
+          </tr>
+          <tr>
+            <td><strong>Everything</strong></td>
+            <td>Clears all data in the model (use with extreme caution)</td>
+          </tr>
+          <tr>
+            <td><strong>Fixed Range</strong></td>
+            <td>Clears data for a specified fixed set of dimension members</td>
+          </tr>
+          <tr>
+            <td><strong>Staging Range</strong></td>
+            <td>Clears data for the range of values present in the staging table</td>
+          </tr>
+          <tr>
+            <td><strong>Staging Source Values</strong></td>
+            <td>Clears data matching the exact source values in the staging table</td>
+          </tr>
+          <tr>
+            <td><strong>Staging Unique Values</strong></td>
+            <td>Clears data for the unique combination of dimension values found in the staging table — most common production setting</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout-note">
+        <span class="callout-label">✅ Recommended Setting</span>
+        <p><strong>Staging Unique Values</strong> using the Audit and Period dimensions is the most common production setting. This ensures that re-loading a period's trial balance for the same audit member (e.g., Source GL) first clears the existing data for that period/audit combination before loading the new data — preventing accumulation across re-runs.</p>
+      </div>
+
+      <figure class="screenshot">
+        <img src="../img/screenshots/10-clear-data-settings.jpg" alt="Clear Data Settings dropdown in import definition showing all 6 options — Staging Unique Values is the recommended setting" style="width:100%;border-radius:6px;border:1px solid #e2e8f0;">
+        <figcaption style="font-size:0.8rem;color:#6b7280;margin-top:0.4rem;text-align:center;"><span class="asset-num">Image 10:</span> Clear Data Settings — must configure to avoid data doubling on re-runs; 'Staging Unique Values' is the most common production setting</figcaption>
+      </figure>
+
+      <!-- OPEN PERIODS NOTE -->
+      <h2>Open Periods — The Opposite of What You Expect</h2>
+      <p>FCR's period management works differently from most consolidation systems. The key points:</p>
+      <ul>
+        <li><strong>Periods start closed</strong> — no data can be loaded until you explicitly open a period</li>
+        <li><strong>Opening a period</strong> = adding a row to the Open Periods table (Maintain → General Configuration → Open Periods)</li>
+        <li><strong>Closing a period</strong> = removing that row from the table</li>
+        <li>Multiple periods can be open simultaneously — this is normal during historical data loads</li>
+        <li>You can have many periods open at once; adding periods is safe and does not trigger any calculations</li>
+      </ul>
+
+      <!-- AUTOMATION -->
+      <h2>Automation Options</h2>
+      <p>For production deployments, trial balance loading should be automated rather than run manually. FCR supports several integration approaches:</p>
+      <table>
+        <caption>Table 15: Automation Options</caption>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Best For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ADO (Anaplan Data Operations)</strong></td>
+            <td>Preferred method for FPC (combined IFP + FCR) customers — included in FPC licensing. Tightest workflow integration.</td>
+          </tr>
+          <tr>
+            <td><strong>Flat files + Workflow</strong></td>
+            <td>Simple file-drop approach; data file is dropped in a monitored location and a workflow picks it up automatically.</td>
+          </tr>
+          <tr>
+            <td><strong>REST API</strong></td>
+            <td>Programmatic integration with any source system; works with data lake architectures (S3, Azure Data Lake, etc.).</td>
+          </tr>
+          <tr>
+            <td><strong>FTPS</strong></td>
+            <td>Secure file transfer; drop file to FTPS endpoint, FCR picks it up on a schedule.</td>
+          </tr>
+          <tr>
+            <td><strong>Azure data integration tools</strong></td>
+            <td>Azure Data Factory and similar tools can orchestrate the full data pipeline into FCR.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout-note">
+        <span class="callout-label">💡 Best Practice: Use a Workflow for Data Loads</span>
+        <p>Rather than running import definitions manually (ad-hoc), build a reusable workflow process for each data load. The workflow can include: Open Period check, run import, run validation report, send notification. This ensures a consistent, auditable process every period-end — and means finance users don't need to understand the integration layer at all.</p>
+      </div>
+
+      <div class="prevnext-nav">
+        <a class="prevnext-btn" href="./08-lab-b-ownership.html">← Previous</a>
+        <a class="prevnext-btn" href="./10-lab-c-trial-balance.html">Next →</a>
+      </div>
+    </div>
+  </main>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
